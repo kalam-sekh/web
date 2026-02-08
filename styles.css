@@ -16,6 +16,11 @@
     --success-color: #10b981;
     --warning-color: #f59e0b;
     --danger-color: #ef4444;
+    --tech-primary: #00d2ff;
+    --tech-secondary: #3a7bd5;
+    --tech-gradient: linear-gradient(135deg, #00d2ff 0%, #3a7bd5 100%);
+    --glass-bg: rgba(255, 255, 255, 0.1);
+    --glass-border: rgba(255, 255, 255, 0.2);
     --gradient-1: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
     --gradient-2: linear-gradient(135deg, #2563eb 0%, #1e40af 100%);
     --shadow-sm: 0 1px 2px 0 rgba(0, 0, 0, 0.05);
@@ -189,7 +194,7 @@ a {
     left: 0;
     width: 100%;
     height: 100%;
-    background: 
+    background:
         linear-gradient(135deg, rgba(99, 102, 241, 0.2) 0%, transparent 50%),
         linear-gradient(225deg, rgba(139, 92, 246, 0.2) 0%, transparent 50%);
     z-index: 0;
@@ -203,18 +208,21 @@ a {
     transform: translate(-50%, -50%);
     width: 1000px;
     height: 1000px;
-    background: 
+    background:
         radial-gradient(circle, rgba(99, 102, 241, 0.15) 0%, transparent 70%);
     animation: heroPulse 8s ease-in-out infinite;
     z-index: 0;
 }
 
 @keyframes heroPulse {
-    0%, 100% { 
+
+    0%,
+    100% {
         transform: translate(-50%, -50%) scale(1);
         opacity: 0.5;
     }
-    50% { 
+
+    50% {
         transform: translate(-50%, -50%) scale(1.2);
         opacity: 0.8;
     }
@@ -287,6 +295,7 @@ a {
         opacity: 0;
         transform: translateY(30px);
     }
+
     to {
         opacity: 1;
         transform: translateY(0);
@@ -638,6 +647,7 @@ a {
     from {
         opacity: 0;
     }
+
     to {
         opacity: 1;
     }
@@ -659,4 +669,137 @@ a {
 
 ::-webkit-scrollbar-thumb:hover {
     background: var(--secondary-color);
+}
+
+/* ===== TECH SOLUTIONS SECTION ===== */
+.tech-solutions {
+    padding: 100px 0;
+    background: #0f172a;
+    color: white;
+    position: relative;
+    overflow: hidden;
+}
+
+.tech-solutions::before {
+    content: '';
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    top: 0;
+    left: 0;
+    background: radial-gradient(circle at 10% 20%, rgba(0, 210, 255, 0.1) 0%, transparent 40%),
+        radial-gradient(circle at 90% 80%, rgba(58, 123, 213, 0.1) 0%, transparent 40%);
+    pointer-events: none;
+}
+
+.tech-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 30px;
+    margin-top: 50px;
+}
+
+.tech-card {
+    background: var(--glass-bg);
+    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);
+    border: 1px solid var(--glass-border);
+    padding: 40px;
+    border-radius: 20px;
+    transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+    text-align: left;
+}
+
+.tech-card:hover {
+    transform: translateY(-15px) scale(1.02);
+    background: rgba(255, 255, 255, 0.15);
+    border-color: var(--tech-primary);
+    box-shadow: 0 20px 40px rgba(0, 0, 0, 0.3), 0 0 20px rgba(0, 210, 255, 0.2);
+}
+
+.tech-card i {
+    font-size: 2.5rem;
+    background: var(--tech-gradient);
+    -webkit-background-clip: text;
+    background-clip: text;
+    -webkit-text-fill-color: transparent;
+    margin-bottom: 1.5rem;
+    display: inline-block;
+}
+
+.tech-card h3 {
+    font-size: 1.5rem;
+    margin-bottom: 1rem;
+    font-weight: 700;
+}
+
+.tech-card p {
+    opacity: 0.8;
+    font-size: 1rem;
+    line-height: 1.6;
+}
+
+.tech-badge {
+    display: inline-block;
+    padding: 5px 15px;
+    background: var(--tech-gradient);
+    border-radius: 20px;
+    font-size: 0.8rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    margin-bottom: 1rem;
+    letter-spacing: 1px;
+}
+
+.tech-it-brand {
+    font-family: 'Inter', sans-serif;
+    font-weight: 800;
+    background: var(--tech-gradient);
+    -webkit-background-clip: text;
+    background-clip: text;
+    -webkit-text-fill-color: transparent;
+}
+
+/* Glassmorphism Utilities */
+.glass-effect {
+    background: var(--glass-bg);
+    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);
+    border: 1px solid var(--glass-border);
+}
+
+.text-gradient {
+    background: var(--tech-gradient);
+    -webkit-background-clip: text;
+    background-clip: text;
+    -webkit-text-fill-color: transparent;
+}
+
+/* Animations */
+@keyframes float {
+    0% {
+        transform: translateY(0px);
+    }
+
+    50% {
+        transform: translateY(-10px);
+    }
+
+    100% {
+        transform: translateY(0px);
+    }
+}
+
+.floating {
+    animation: float 3s ease-in-out infinite;
+}
+
+@media (max-width: 768px) {
+    .tech-solutions {
+        padding: 60px 0;
+    }
+
+    .tech-card {
+        padding: 30px;
+    }
 }

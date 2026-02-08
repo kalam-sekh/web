@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -11,10 +12,12 @@
     <link rel="apple-touch-icon" href="logo.png?v=20251110">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap"
+        rel="stylesheet">
     <link rel="stylesheet" href="styles.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
 </head>
+
 <body>
     <!-- Navigation -->
     <nav class="navbar">
@@ -29,7 +32,7 @@
                 <li><a href="#services">Services</a></li>
                 <li><a href="#gallery">Gallery</a></li>
                 <li><a href="#contact">Contact</a></li>
-                <li><a href="https://tech.akint.co.in/" target="_blank">AKI Tech</a></li>
+                <li><a href="https://tech.akint.co.in/" target="_blank" class="tech-it-brand">AKI Tech</a></li>
                 <li><a href="leather-products.html">Leather Products</a></li>
             </ul>
             <div class="hamburger">
@@ -44,8 +47,9 @@
     <section class="hero">
         <div class="hero-content">
             <h1 class="hero-title">Welcome to <span class="highlight">AK International</span></h1>
-            <p class="hero-subtitle">Your Trusted Partner in Global Trade</p>
-            <p class="hero-description">Connecting businesses worldwide with seamless import & export solutions — handcrafted service, global reach.</p>
+            <p class="hero-subtitle">Import & Export Solutions & <span class="tech-it-brand">Tech IT</span> Services</p>
+            <p class="hero-description">Connecting businesses worldwide with seamless trade operations and cutting-edge
+                tech innovations.</p>
             <div class="hero-buttons">
                 <a href="#services" class="btn btn-primary">Our Services</a>
                 <a href="#contact" class="btn btn-white">Get in Touch</a>
@@ -90,18 +94,61 @@
                 <div class="service-card">
                     <i class="fas fa-truck-loading service-icon"></i>
                     <h3>Import Solutions</h3>
-                    <p>We handle all aspects of importing, from sourcing to delivery, ensuring compliance and efficiency every step of the way.</p>
+                    <p>We handle all aspects of importing, from sourcing to delivery, ensuring compliance and efficiency
+                        every step of the way.</p>
                 </div>
                 <div class="service-card">
                     <i class="fas fa-ship service-icon"></i>
                     <h3>Export Solutions</h3>
-                    <p>Expand your reach with our export expertise, from documentation to logistics, making global markets accessible and profitable.</p>
+                    <p>Expand your reach with our export expertise, from documentation to logistics, making global
+                        markets accessible and profitable.</p>
                 </div>
                 <div class="service-card">
                     <i class="fas fa-clipboard-check service-icon"></i>
                     <h3>Consulting & Compliance</h3>
-                    <p>Our experts guide you through international regulations, risk management, and market entry strategies for smooth operations.</p>
+                    <p>Our experts guide you through international regulations, risk management, and market entry
+                        strategies for smooth operations.</p>
                 </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Tech Solutions Section -->
+    <section id="tech" class="tech-solutions">
+        <div class="container">
+            <h2 class="section-title" style="color: white; border-bottom-color: var(--tech-primary);">Our Tech Business:
+                <span class="tech-it-brand">Tech IT</span>
+            </h2>
+            <p class="text-center" style="max-width: 800px; margin: -2rem auto 3rem; opacity: 0.8;">Beyond trade, we
+                specialize in high-end technological solutions to drive your digital transformation.</p>
+
+            <div class="tech-grid">
+                <div class="tech-card">
+                    <div class="tech-badge">Development</div>
+                    <i class="fas fa-code"></i>
+                    <h3>Web & App Development</h3>
+                    <p>Custom-built, high-performance web applications and mobile solutions tailored to your unique
+                        business needs.</p>
+                </div>
+                <div class="tech-card">
+                    <div class="tech-badge">E-Commerce</div>
+                    <i class="fas fa-shopping-cart"></i>
+                    <h3>Digital Commerce</h3>
+                    <p>Scale your business with our robust e-commerce platforms, including inventory management and
+                        secure payment gateways.</p>
+                </div>
+                <div class="tech-card">
+                    <div class="tech-badge">Automation</div>
+                    <i class="fas fa-robot"></i>
+                    <h3>Business Automation</h3>
+                    <p>Streamline your operations with intelligent automation tools designed to increase efficiency and
+                        reduce costs.</p>
+                </div>
+            </div>
+
+            <div class="text-center" style="margin-top: 50px;">
+                <a href="https://tech.akint.co.in/" target="_blank" class="btn"
+                    style="background: var(--tech-gradient); color: white;">Visit Tech IT</a>
             </div>
         </div>
     </section>
@@ -136,17 +183,20 @@
             <h2 class="section-title">Our Products Gallery</h2>
             <div class="features-grid">
                 <div class="feature-card">
-                    <img src="leather.jpg" class="gallery-img" alt="Leather Product" style="width: 100%; height: 200px; object-fit: cover; border-radius: 10px; margin-bottom: 1rem;">
+                    <img src="leather.jpg" class="gallery-img" alt="Leather Product"
+                        style="width: 100%; height: 200px; object-fit: cover; border-radius: 10px; margin-bottom: 1rem;">
                     <h3>Premium Leather</h3>
                     <p>High-quality leather products sourced from trusted manufacturers.</p>
                 </div>
                 <div class="feature-card">
-                    <img src="parts.jpg" class="gallery-img" alt="Vehicle Parts" style="width: 100%; height: 200px; object-fit: cover; border-radius: 10px; margin-bottom: 1rem;">
+                    <img src="parts.jpg" class="gallery-img" alt="Vehicle Parts"
+                        style="width: 100%; height: 200px; object-fit: cover; border-radius: 10px; margin-bottom: 1rem;">
                     <h3>Vehicle Parts</h3>
                     <p>Automotive components and spare parts for various vehicle models.</p>
                 </div>
                 <div class="feature-card">
-                    <img src="bag.jpg" class="gallery-img" alt="Leather Bags" style="width: 100%; height: 200px; object-fit: cover; border-radius: 10px; margin-bottom: 1rem;">
+                    <img src="bag.jpg" class="gallery-img" alt="Leather Bags"
+                        style="width: 100%; height: 200px; object-fit: cover; border-radius: 10px; margin-bottom: 1rem;">
                     <h3>Leather Accessories</h3>
                     <p>Handcrafted leather bags and accessories for global markets.</p>
                 </div>
@@ -163,7 +213,7 @@
                     <i class="fas fa-phone feature-icon"></i>
                     <h3>Call Us</h3>
                     <p><strong>KSA:</strong> <a href="tel:+966564118034">+966 564118034</a></p>
-                    <p><strong>India:</strong> <a href="tel:+919674304008">+91 9674304008</a></p>
+                    <p><strong>India:</strong> <a href="tel:+919051867095">+91 90518 67095</a></p>
                 </div>
                 <div class="feature-card">
                     <i class="fas fa-envelope feature-icon"></i>
@@ -199,7 +249,8 @@
                         <img src="company-logo.png" alt="AK International Logo" class="logo-img">
                         <h3>AK International</h3>
                     </div>
-                    <p>Your trusted partner in global import & export solutions. Connecting businesses worldwide with seamless logistics and market expertise.</p>
+                    <p>Your trusted partner in global import & export solutions. Connecting businesses worldwide with
+                        seamless logistics and market expertise.</p>
                     <div class="social-links">
                         <a href="#"><i class="fab fa-facebook"></i></a>
                         <a href="#"><i class="fab fa-twitter"></i></a>
@@ -222,7 +273,7 @@
                         <li><a href="#services">Import Solutions</a></li>
                         <li><a href="#services">Export Solutions</a></li>
                         <li><a href="#services">Consulting</a></li>
-                        <li><a href="https://tech.akint.co.in/" target="_blank">AKI Tech</a></li>
+                        <li><a href="https://tech.akint.co.in/" target="_blank" class="tech-it-brand">AKI Tech</a></li>
                     </ul>
                 </div>
                 <div class="footer-col">
@@ -230,7 +281,7 @@
                     <ul>
                         <li><i class="fas fa-map-marker-alt"></i> Kolkata, India</li>
                         <li><i class="fas fa-envelope"></i> info@akint.co.in</li>
-                        <li><i class="fas fa-phone"></i> +91 9674304008</li>
+                        <li><i class="fas fa-phone"></i> +91 90518 67095</li>
                     </ul>
                 </div>
             </div>
@@ -243,4 +294,5 @@
 
     <script src="script.js"></script>
 </body>
+
 </html>

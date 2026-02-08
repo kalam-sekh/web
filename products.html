@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="utf-8">
     <title>Our Products | AKI Tech - AK International</title>
@@ -18,25 +19,30 @@
             padding-bottom: 10px;
             border-bottom: 1px solid #222;
         }
+
         .footer-logo img {
             max-width: 140px;
             height: auto;
         }
+
         .footer-nav {
             flex: 1;
             text-align: center;
         }
+
         .footer-nav .nav {
             justify-content: center;
             flex-wrap: wrap;
             gap: 16px;
         }
+
         .footer-copyright {
             width: 100%;
             text-align: center;
             margin-top: 10px;
             color: #bbb;
         }
+
         .product-feature {
             background: #f8f9fa;
             border-radius: 8px;
@@ -44,30 +50,32 @@
             margin-bottom: 1rem;
             border-left: 4px solid #003366;
         }
+
         .tech-stack {
             background: #e3f2fd;
             border-radius: 8px;
             padding: 1rem;
             margin: 1rem 0;
         }
-        
+
         /* Override list styling for navbar and footer */
         .navbar ul li::before,
         .footer ul li::before {
             display: none !important;
         }
+
         .navbar ul li,
         .footer ul li {
             padding-left: 0 !important;
         }
-        
+
         /* Liquid ripple effect for navbar items */
         .navbar .nav-link {
             position: relative;
             overflow: hidden;
             transition: all 0.3s ease;
         }
-        
+
         .navbar .nav-link::before {
             content: '';
             position: absolute;
@@ -81,17 +89,17 @@
             transition: width 0.6s ease, height 0.6s ease;
             z-index: 0;
         }
-        
+
         .navbar .nav-link:hover::before {
             width: 300px;
             height: 300px;
         }
-        
+
         .navbar .nav-link span {
             position: relative;
             z-index: 1;
         }
-        
+
         /* Additional liquid effect */
         .navbar .nav-link::after {
             content: '';
@@ -103,19 +111,21 @@
             background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.1), transparent);
             transition: left 0.5s;
         }
-        
+
         .navbar .nav-link:hover::after {
             left: 100%;
         }
     </style>
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.5/font/bootstrap-icons.css">
 </head>
+
 <body>
     <!-- Navbar -->
     <nav class="navbar navbar-expand-lg navbar-dark">
         <div class="container">
             <a class="navbar-brand" href="index.html">AK International</a>
-            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav"
+                aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
                 <span class="navbar-toggler-icon"></span>
             </button>
             <div class="collapse navbar-collapse" id="navbarNav">
@@ -123,7 +133,8 @@
                     <li class="nav-item"><a class="nav-link" href="index.html#about"><span>About</span></a></li>
                     <li class="nav-item"><a class="nav-link" href="index.html#services"><span>Services</span></a></li>
                     <li class="nav-item"><a class="nav-link" href="index.html#contact"><span>Contact</span></a></li>
-                    <li class="nav-item"><a class="nav-link" href="aki_tech.html"><span>AKI Tech</span></a></li>
+                    <li class="nav-item"><a class="nav-link tech-it-brand" href="https://tech.akint.co.in/"
+                            target="_blank"><span>AKI Tech</span></a></li>
                     <li class="nav-item"><a class="nav-link active" href="products.html"><span>Products</span></a></li>
                 </ul>
             </div>
@@ -135,7 +146,8 @@
         <div class="hero-inner text-center">
             <img src="company-logo.png" alt="AK International Logo" class="company-logo mb-3">
             <h1>Our Digital Products</h1>
-            <p class="lead">Professional web applications designed to streamline your business operations and boost productivity.</p>
+            <p class="lead">Professional web applications designed to streamline your business operations and boost
+                productivity.</p>
             <a href="#products" class="btn btn-primary btn-lg mt-3">Explore Products</a>
         </div>
     </section>
@@ -150,7 +162,8 @@
                         <div class="card-body">
                             <div class="text-center mb-3"><i class="bi bi-cart3 fs-1 text-primary"></i></div>
                             <h4 class="card-title">Simple E-commerce Platform</h4>
-                            <p class="card-text">A comprehensive e-commerce solution perfect for small to medium businesses looking to establish their online presence.</p>
+                            <p class="card-text">A comprehensive e-commerce solution perfect for small to medium
+                                businesses looking to establish their online presence.</p>
                             <a href="#ecommerce" class="btn btn-primary">View Details</a>
                         </div>
                     </div>
@@ -160,7 +173,8 @@
                         <div class="card-body">
                             <div class="text-center mb-3"><i class="bi bi-boxes fs-1 text-primary"></i></div>
                             <h4 class="card-title">Inventory Management System</h4>
-                            <p class="card-text">Advanced inventory tracking and management system to optimize your stock levels and reduce operational costs.</p>
+                            <p class="card-text">Advanced inventory tracking and management system to optimize your
+                                stock levels and reduce operational costs.</p>
                             <a href="#inventory" class="btn btn-primary">View Details</a>
                         </div>
                     </div>
@@ -175,21 +189,25 @@
             <div class="row align-items-center">
                 <div class="col-md-6">
                     <h2 class="section-title">Simple E-commerce Web Application</h2>
-                    <p class="lead">Transform your business with our user-friendly e-commerce platform designed specifically for small to medium enterprises.</p>
-                    
+                    <p class="lead">Transform your business with our user-friendly e-commerce platform designed
+                        specifically for small to medium enterprises.</p>
+
                     <div class="product-feature">
                         <h5><i class="bi bi-shop me-2 text-primary"></i>Product Management</h5>
-                        <p>Easy-to-use admin panel for adding, editing, and organizing your product catalog with images, descriptions, and pricing.</p>
+                        <p>Easy-to-use admin panel for adding, editing, and organizing your product catalog with images,
+                            descriptions, and pricing.</p>
                     </div>
-                    
+
                     <div class="product-feature">
                         <h5><i class="bi bi-cart-check me-2 text-primary"></i>Shopping Cart & Checkout</h5>
-                        <p>Seamless shopping experience with cart functionality, guest checkout options, and multiple payment methods.</p>
+                        <p>Seamless shopping experience with cart functionality, guest checkout options, and multiple
+                            payment methods.</p>
                     </div>
-                    
+
                     <div class="product-feature">
                         <h5><i class="bi bi-truck me-2 text-primary"></i>Order Management</h5>
-                        <p>Complete order tracking system from placement to delivery with automated email notifications.</p>
+                        <p>Complete order tracking system from placement to delivery with automated email notifications.
+                        </p>
                     </div>
 
                     <div class="tech-stack">
@@ -202,7 +220,8 @@
                     </div>
                 </div>
                 <div class="col-md-6">
-                    <img src="https://images.unsplash.com/photo-1556742049-0cfed4f6a45d?auto=format&fit=crop&w=800&q=80" class="img-fluid rounded shadow" alt="E-commerce Platform">
+                    <img src="https://images.unsplash.com/photo-1556742049-0cfed4f6a45d?auto=format&fit=crop&w=800&q=80"
+                        class="img-fluid rounded shadow" alt="E-commerce Platform">
                 </div>
             </div>
         </div>
@@ -213,25 +232,30 @@
         <div class="container">
             <div class="row align-items-center">
                 <div class="col-md-6">
-                    <img src="https://images.unsplash.com/photo-1586528116311-ad8dd3c8310d?auto=format&fit=crop&w=800&q=80" class="img-fluid rounded shadow" alt="Inventory Management">
+                    <img src="https://images.unsplash.com/photo-1586528116311-ad8dd3c8310d?auto=format&fit=crop&w=800&q=80"
+                        class="img-fluid rounded shadow" alt="Inventory Management">
                 </div>
                 <div class="col-md-6">
                     <h2 class="section-title">Inventory Management System</h2>
-                    <p class="lead">Comprehensive inventory solution that helps you maintain optimal stock levels and streamline your supply chain operations.</p>
-                    
+                    <p class="lead">Comprehensive inventory solution that helps you maintain optimal stock levels and
+                        streamline your supply chain operations.</p>
+
                     <div class="product-feature">
                         <h5><i class="bi bi-graph-up me-2 text-primary"></i>Real-time Stock Tracking</h5>
-                        <p>Monitor inventory levels in real-time with automatic alerts for low stock and reorder points.</p>
+                        <p>Monitor inventory levels in real-time with automatic alerts for low stock and reorder points.
+                        </p>
                     </div>
-                    
+
                     <div class="product-feature">
                         <h5><i class="bi bi-people me-2 text-primary"></i>Supplier Management</h5>
-                        <p>Maintain detailed supplier information, track purchase orders, and manage vendor relationships.</p>
+                        <p>Maintain detailed supplier information, track purchase orders, and manage vendor
+                            relationships.</p>
                     </div>
-                    
+
                     <div class="product-feature">
                         <h5><i class="bi bi-bar-chart me-2 text-primary"></i>Analytics & Reporting</h5>
-                        <p>Generate comprehensive reports on inventory turnover, sales trends, and stock performance.</p>
+                        <p>Generate comprehensive reports on inventory turnover, sales trends, and stock performance.
+                        </p>
                     </div>
 
                     <div class="tech-stack">
@@ -256,21 +280,24 @@
                     <div class="text-center">
                         <i class="bi bi-shield-check fs-1 text-primary mb-3"></i>
                         <h4>Reliable & Secure</h4>
-                        <p>Built with security best practices and robust architecture to ensure your data is always protected.</p>
+                        <p>Built with security best practices and robust architecture to ensure your data is always
+                            protected.</p>
                     </div>
                 </div>
                 <div class="col-md-4 mb-4">
                     <div class="text-center">
                         <i class="bi bi-headset fs-1 text-primary mb-3"></i>
                         <h4>24/7 Support</h4>
-                        <p>Our dedicated support team is available round the clock to help you with any technical issues.</p>
+                        <p>Our dedicated support team is available round the clock to help you with any technical
+                            issues.</p>
                     </div>
                 </div>
                 <div class="col-md-4 mb-4">
                     <div class="text-center">
                         <i class="bi bi-lightning fs-1 text-primary mb-3"></i>
                         <h4>Fast Deployment</h4>
-                        <p>Quick setup and deployment process to get your business online and operational in minimal time.</p>
+                        <p>Quick setup and deployment process to get your business online and operational in minimal
+                            time.</p>
                     </div>
                 </div>
             </div>
@@ -281,15 +308,20 @@
     <section class="section bg-light">
         <div class="container text-center">
             <h2 class="section-title">Ready to Transform Your Business?</h2>
-            <p class="lead mb-4">Contact us today to discuss your requirements and get a customized solution for your business needs.</p>
+            <p class="lead mb-4">Contact us today to discuss your requirements and get a customized solution for your
+                business needs.</p>
             <div class="row justify-content-center">
                 <div class="col-md-6">
                     <div class="card p-4">
                         <h5 class="mb-3">Get in Touch</h5>
-                        <div class="mb-2"><i class="bi bi-telephone text-primary me-2"></i><strong>Phone:</strong> <a href="tel:+919674304008">+91 9674304008</a></div>
-                        <div class="mb-2"><i class="bi bi-envelope text-primary me-2"></i><strong>Email:</strong> <a href="mailto:info@akint.co.in">info@akint.co.in</a></div>
-                        <div class="mb-3"><i class="bi bi-geo-alt text-primary me-2"></i><strong>Location:</strong> Kolkata, India</div>
-                        <a href="mailto:info@akint.co.in?subject=Product Inquiry" class="btn btn-primary btn-lg">Send Inquiry</a>
+                        <div class="mb-2"><i class="bi bi-telephone text-primary me-2"></i><strong>Phone:</strong> <a
+                                href="tel:+9190518 67095">+91 90518 67095</a></div>
+                        <div class="mb-2"><i class="bi bi-envelope text-primary me-2"></i><strong>Email:</strong> <a
+                                href="mailto:info@akint.co.in">info@akint.co.in</a></div>
+                        <div class="mb-3"><i class="bi bi-geo-alt text-primary me-2"></i><strong>Location:</strong>
+                            Kolkata, India</div>
+                        <a href="mailto:info@akint.co.in?subject=Product Inquiry" class="btn btn-primary btn-lg">Send
+                            Inquiry</a>
                     </div>
                 </div>
             </div>
@@ -306,11 +338,16 @@
                 <div class="footer-nav">
                     <ul class="nav">
                         <li class="nav-item"><a class="nav-link text-white px-2" href="index.html#about">About</a></li>
-                        <li class="nav-item"><a class="nav-link text-white px-2" href="index.html#services">Services</a></li>
-                        <li class="nav-item"><a class="nav-link text-white px-2" href="index.html#contact">Contact</a></li>
-                        <li class="nav-item"><a class="nav-link text-white px-2" href="aki_tech.html">AKI Tech</a></li>
-                        <li class="nav-item"><a class="nav-link text-white active px-2" href="products.html">Products</a></li>
-                        <li class="nav-item"><a class="nav-link text-white px-2" href="leather-products.html">Leather Products</a></li>
+                        <li class="nav-item"><a class="nav-link text-white px-2" href="index.html#services">Services</a>
+                        </li>
+                        <li class="nav-item"><a class="nav-link text-white px-2" href="index.html#contact">Contact</a>
+                        </li>
+                        <li class="nav-item"><a class="nav-link text-white tech-it-brand px-2"
+                                href="https://tech.akint.co.in/" target="_blank">AKI Tech</a></li>
+                        <li class="nav-item"><a class="nav-link text-white active px-2"
+                                href="products.html">Products</a></li>
+                        <li class="nav-item"><a class="nav-link text-white px-2" href="leather-products.html">Leather
+                                Products</a></li>
                     </ul>
                 </div>
             </div>
@@ -322,40 +359,41 @@
 
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
     <script>
-    // Scroll reveal animations
-    const reveals = document.querySelectorAll('.section, .card, .product-feature');
-    function revealOnScroll() {
-        reveals.forEach(element => {
-            const elementTop = element.getBoundingClientRect().top;
-            const windowHeight = window.innerHeight;
-            if (elementTop < windowHeight - 100) {
-                element.classList.add('active');
-            }
-        });
-    }
-    window.addEventListener('scroll', revealOnScroll);
-    revealOnScroll();
-    
-    // Card mouse tracking
-    document.querySelectorAll('.card').forEach(card => {
-        card.addEventListener('mousemove', (e) => {
-            const rect = card.getBoundingClientRect();
-            const x = ((e.clientX - rect.left) / rect.width) * 100;
-            const y = ((e.clientY - rect.top) / rect.height) * 100;
-            card.style.setProperty('--mouse-x', x + '%');
-            card.style.setProperty('--mouse-y', y + '%');
-        });
-    });
+        // Scroll reveal animations
+        const reveals = document.querySelectorAll('.section, .card, .product-feature');
+        function revealOnScroll() {
+            reveals.forEach(element => {
+                const elementTop = element.getBoundingClientRect().top;
+                const windowHeight = window.innerHeight;
+                if (elementTop < windowHeight - 100) {
+                    element.classList.add('active');
+                }
+            });
+        }
+        window.addEventListener('scroll', revealOnScroll);
+        revealOnScroll();
 
-    // Smooth scrolling for anchor links
-    document.querySelectorAll('a[href^="#"]').forEach(anchor => {
-        anchor.addEventListener('click', function (e) {
-            e.preventDefault();
-            document.querySelector(this.getAttribute('href')).scrollIntoView({
-                behavior: 'smooth'
+        // Card mouse tracking
+        document.querySelectorAll('.card').forEach(card => {
+            card.addEventListener('mousemove', (e) => {
+                const rect = card.getBoundingClientRect();
+                const x = ((e.clientX - rect.left) / rect.width) * 100;
+                const y = ((e.clientY - rect.top) / rect.height) * 100;
+                card.style.setProperty('--mouse-x', x + '%');
+                card.style.setProperty('--mouse-y', y + '%');
             });
         });
-    });
+
+        // Smooth scrolling for anchor links
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                document.querySelector(this.getAttribute('href')).scrollIntoView({
+                    behavior: 'smooth'
+                });
+            });
+        });
     </script>
 </body>
+
 </html>
