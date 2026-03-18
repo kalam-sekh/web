@@ -356,7 +356,7 @@ backToTopButton.style.cssText = `
     right: 30px;
     width: 50px;
     height: 50px;
-    background: linear-gradient(135deg, #2563eb 0%, #1e40af 100%);
+    background: linear-gradient(135deg, #6366f1 0%, #a855f7 100%);
     color: white;
     border: none;
     border-radius: 50%;
@@ -365,7 +365,8 @@ backToTopButton.style.cssText = `
     align-items: center;
     justify-content: center;
     font-size: 1.2rem;
-    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    box-shadow: 0 4px 20px rgba(99, 102, 241, 0.4);
+    -webkit-transition: all 0.3s ease;
     transition: all 0.3s ease;
     z-index: 999;
 `;
@@ -398,13 +399,7 @@ backToTopButton.addEventListener('mouseleave', function() {
 });
 
 // ===== LOADING ANIMATION =====
-window.addEventListener('load', () => {
-    document.body.style.opacity = '0';
-    setTimeout(() => {
-        document.body.style.transition = 'opacity 0.3s ease';
-        document.body.style.opacity = '1';
-    }, 100);
-});
+// No-op: removed body opacity flash that causes blank screen in Safari
 
 // ===== ACTIVE LINK HIGHLIGHT =====
 const currentLocation = location.pathname.split('/').pop() || 'index.html';
@@ -429,65 +424,4 @@ serviceCards.forEach(card => {
 });
 
 // ===== CONSOLE MESSAGE =====
-console.log('%c🚀 Welcome to AkTech! ', 'background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); color: white; font-size: 20px; padding: 10px; border-radius: 5px;');
-console.log('%cWebsite built with ❤️ by AkTech Development Team', 'color: #2563eb; font-size: 14px;');
-
-// ===== CUSTOM CURSOR TRAIL EFFECT =====
-document.addEventListener('DOMContentLoaded', function() {
-    // Create cursor elements
-    const cursorDot = document.createElement('div');
-    const cursorOutline = document.createElement('div');
-    
-    cursorDot.className = 'cursor-dot';
-    cursorOutline.className = 'cursor-outline';
-    
-    document.body.appendChild(cursorDot);
-    document.body.appendChild(cursorOutline);
-    
-    let mouseX = 0, mouseY = 0;
-    let outlineX = 0, outlineY = 0;
-    
-    // Track mouse position
-    document.addEventListener('mousemove', (e) => {
-        mouseX = e.clientX;
-        mouseY = e.clientY;
-        
-        cursorDot.style.left = mouseX + 'px';
-        cursorDot.style.top = mouseY + 'px';
-    });
-    
-    // Smooth follow effect for outline
-    function animateCursor() {
-        outlineX += (mouseX - outlineX) * 0.15;
-        outlineY += (mouseY - outlineY) * 0.15;
-        
-        cursorOutline.style.left = outlineX + 'px';
-        cursorOutline.style.top = outlineY + 'px';
-        
-        requestAnimationFrame(animateCursor);
-    }
-    animateCursor();
-    
-    // Add hover effect on interactive elements
-    const interactiveElements = document.querySelectorAll('a, button, .btn, input, textarea, select');
-    
-    interactiveElements.forEach(el => {
-        el.addEventListener('mouseenter', () => {
-            cursorDot.style.transform = 'translate(-50%, -50%) scale(2)';
-            cursorOutline.style.transform = 'translate(-50%, -50%) scale(1.5)';
-        });
-        
-        el.addEventListener('mouseleave', () => {
-            cursorDot.style.transform = 'translate(-50%, -50%) scale(1)';
-            cursorOutline.style.transform = 'translate(-50%, -50%) scale(1)';
-        });
-    });
-    
-    // Hide default cursor on desktop
-    if (window.innerWidth > 768) {
-        document.body.style.cursor = 'none';
-        document.querySelectorAll('a, button, .btn, input, textarea, select').forEach(el => {
-            el.style.cursor = 'none';
-        });
-    }
-});
+console.log('%c🚀 Welcome to AK International! ', 'background: linear-gradient(135deg, #6366f1 0%, #a855f7 100%); color: white; font-size: 20px; padding: 10px; border-radius: 5px;');
