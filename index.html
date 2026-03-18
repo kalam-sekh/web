@@ -4,48 +4,53 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="description" content="AK International - Import & Export Solutions">
-    <title>AK International - Home</title>
+    <meta name="description" content="AK International - Next-Gen Technology Solutions | Web, App, AI & Cloud">
+    <title>AK International - Technology Solutions</title>
     <link rel="shortcut icon" type="image/png" href="logo.png?v=20251110">
     <link rel="icon" type="image/png" sizes="32x32" href="logo.png?v=20251110">
     <link rel="icon" type="image/png" sizes="16x16" href="logo.png?v=20251110">
     <link rel="apple-touch-icon" href="logo.png?v=20251110">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap"
-        rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=JetBrains+Mono:wght@400;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="styles.css">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
     <meta name="google-site-verification" content="V1P7aZ0JMxQGUBhl6dix0LruMbCjodkPA53dPlZEHMw" />
     <!-- Google tag (gtag.js) -->
-<script async src="https://www.googletagmanager.com/gtag/js?id=G-WEW70GGLH3"></script>
-<script>
-  window.dataLayer = window.dataLayer || [];
-  function gtag(){dataLayer.push(arguments);}
-  gtag('js', new Date());
-
-  gtag('config', 'G-WEW70GGLH3');
-</script>
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-WEW70GGLH3"></script>
+    <script>
+        window.dataLayer = window.dataLayer || [];
+        function gtag(){dataLayer.push(arguments);}
+        gtag('js', new Date());
+        gtag('config', 'G-WEW70GGLH3');
+    </script>
 </head>
 
 <body>
+    <!-- Particle Canvas -->
+    <canvas id="particleCanvas"></canvas>
+
+    <!-- Custom Cursor -->
+    <div class="cursor-dot" id="cursorDot"></div>
+    <div class="cursor-ring" id="cursorRing"></div>
+
     <!-- Navigation -->
-    <nav class="navbar">
+    <nav class="navbar" id="navbar">
         <div class="container">
-            <div class="logo">
+            <a href="index.html" class="logo">
                 <img src="company-logo.png" alt="AK International Logo" class="logo-img">
-                <h1>AK International</h1>
-            </div>
-            <ul class="nav-menu">
-                <li><a href="index.html" class="active">Home</a></li>
-                <li><a href="#about">About</a></li>
-                <li><a href="#services">Services</a></li>
-                <li><a href="#gallery">Gallery</a></li>
-                <li><a href="#contact">Contact</a></li>
-                <li><a href="https://tech.akint.co.in/" target="_blank" class="tech-it-brand">AKI Tech</a></li>
-                <li><a href="leather-products.html">Leather Products</a></li>
+                <span class="logo-text">AK<span class="logo-accent">Int</span></span>
+            </a>
+            <ul class="nav-menu" id="navMenu">
+                <li><a href="index.html" class="nav-link active" data-text="Home">Home</a></li>
+                <li><a href="#about" class="nav-link" data-text="About">About</a></li>
+                <li><a href="#services" class="nav-link" data-text="Services">Services</a></li>
+                <li><a href="#portfolio" class="nav-link" data-text="Portfolio">Portfolio</a></li>
+                <li><a href="#contact" class="nav-link" data-text="Contact">Contact</a></li>
+                <li><a href="leather-products.html" class="nav-link nav-link--tech" data-text="AKI Import Export">AKI Import Export</a></li>
+                <li><a href="#contact" class="nav-link nav-link--cta">Get a Quote</a></li>
             </ul>
-            <div class="hamburger">
+            <div class="hamburger" id="hamburger">
                 <span></span>
                 <span></span>
                 <span></span>
@@ -54,188 +59,373 @@
     </nav>
 
     <!-- Hero Section -->
-    <section class="hero">
+    <section class="hero" id="hero">
+        <div class="hero-grid-bg"></div>
+        <div class="hero-glow hero-glow--1"></div>
+        <div class="hero-glow hero-glow--2"></div>
+        <div class="hero-glow hero-glow--3"></div>
         <div class="hero-content">
-            <h1 class="hero-title">Welcome to <span class="highlight">AK International</span></h1>
-            <p class="hero-subtitle">Import & Export Solutions & <span class="tech-it-brand">Tech IT</span> Services</p>
-            <p class="hero-description">Connecting businesses worldwide with seamless trade operations and cutting-edge
-                tech innovations.</p>
-            <div class="hero-buttons">
-                <a href="#services" class="btn btn-primary">Our Services</a>
-                <a href="#contact" class="btn btn-white">Get in Touch</a>
+            <div class="hero-badge reveal">
+                <span class="hero-badge__dot"></span>
+                Next-Gen Technology Solutions
             </div>
+            <h1 class="hero-title reveal">
+                <span class="hero-line">We Build</span>
+                <span class="hero-line hero-line--gradient">Digital</span>
+                <span class="hero-line">Experiences</span>
+            </h1>
+            <p class="hero-subtitle reveal">Web Development &bull; Mobile Apps &bull; AI Solutions &bull; <span class="text-gradient">Cloud & DevOps</span></p>
+            <div class="hero-buttons reveal">
+                <a href="#services" class="btn btn--primary">
+                    <span>Explore Services</span>
+                    <i class="fas fa-arrow-right"></i>
+                </a>
+                <a href="#contact" class="btn btn--outline">
+                    <span>Start a Project</span>
+                    <i class="fas fa-rocket"></i>
+                </a>
+            </div>
+            <div class="hero-stats reveal">
+                <div class="hero-stat">
+                    <span class="hero-stat__number" data-count="150">0</span><span class="hero-stat__plus">+</span>
+                    <span class="hero-stat__label">Projects</span>
+                </div>
+                <div class="hero-stat__divider"></div>
+                <div class="hero-stat">
+                    <span class="hero-stat__number" data-count="50">0</span><span class="hero-stat__plus">+</span>
+                    <span class="hero-stat__label">Clients</span>
+                </div>
+                <div class="hero-stat__divider"></div>
+                <div class="hero-stat">
+                    <span class="hero-stat__number" data-count="99">0</span><span class="hero-stat__plus">%</span>
+                    <span class="hero-stat__label">Uptime</span>
+                </div>
+            </div>
+        </div>
+        <div class="hero-scroll">
+            <span>Scroll</span>
+            <div class="hero-scroll__line"></div>
         </div>
     </section>
 
-    <!-- Features Section -->
-    <section id="about" class="features">
+    <!-- About / Features Section -->
+    <section id="about" class="section section--dark">
         <div class="container">
-            <h2 class="section-title">Why Choose AK International?</h2>
+            <div class="section-header reveal">
+                <span class="section-tag"><i class="fas fa-star"></i> Why Choose Us</span>
+                <h2 class="section-title">Built for <span class="text-gradient">Innovation</span></h2>
+                <p class="section-desc">We engineer high-performance digital products using the latest technologies, frameworks, and cloud infrastructure.</p>
+            </div>
             <div class="features-grid">
-                <div class="feature-card">
-                    <i class="fas fa-globe feature-icon"></i>
-                    <h3>Global Network</h3>
-                    <p>Worldwide network of trusted partners ensuring seamless international trade operations.</p>
+                <div class="feature-card reveal" data-tilt>
+                    <div class="feature-card__glow"></div>
+                    <div class="feature-card__icon">
+                        <i class="fas fa-bolt"></i>
+                    </div>
+                    <h3>Blazing Fast</h3>
+                    <p>Optimized, high-performance applications with sub-second load times and 99.9% uptime guarantee.</p>
+                    <div class="feature-card__number">01</div>
                 </div>
-                <div class="feature-card">
-                    <i class="fas fa-shield-alt feature-icon"></i>
-                    <h3>Secure & Compliant</h3>
-                    <p>Full compliance with international regulations and secure logistics for your peace of mind.</p>
+                <div class="feature-card reveal" data-tilt>
+                    <div class="feature-card__glow"></div>
+                    <div class="feature-card__icon">
+                        <i class="fas fa-shield-halved"></i>
+                    </div>
+                    <h3>Secure by Design</h3>
+                    <p>Enterprise-grade security with end-to-end encryption, OWASP compliance, and continuous vulnerability scanning.</p>
+                    <div class="feature-card__number">02</div>
                 </div>
-                <div class="feature-card">
-                    <i class="fas fa-handshake feature-icon"></i>
-                    <h3>Trusted Expertise</h3>
-                    <p>Years of experience in international trade with deep market knowledge and industry expertise.</p>
+                <div class="feature-card reveal" data-tilt>
+                    <div class="feature-card__glow"></div>
+                    <div class="feature-card__icon">
+                        <i class="fas fa-layer-group"></i>
+                    </div>
+                    <h3>Scalable Architecture</h3>
+                    <p>Cloud-native solutions built on microservices and serverless architecture that scale with your growth.</p>
+                    <div class="feature-card__number">03</div>
                 </div>
-                <div class="feature-card">
-                    <i class="fas fa-headset feature-icon"></i>
+                <div class="feature-card reveal" data-tilt>
+                    <div class="feature-card__glow"></div>
+                    <div class="feature-card__icon">
+                        <i class="fas fa-headset"></i>
+                    </div>
                     <h3>24/7 Support</h3>
-                    <p>Round-the-clock customer support to ensure your operations run smoothly at all times.</p>
+                    <p>Dedicated technical support team with real-time monitoring and proactive issue resolution around the clock.</p>
+                    <div class="feature-card__number">04</div>
                 </div>
             </div>
         </div>
     </section>
 
     <!-- Services Section -->
-    <section id="services" class="services-preview">
+    <section id="services" class="section">
         <div class="container">
-            <h2 class="section-title">Our Core Services</h2>
+            <div class="section-header reveal">
+                <span class="section-tag"><i class="fas fa-code"></i> What We Do</span>
+                <h2 class="section-title">Our <span class="text-gradient">Services</span></h2>
+                <p class="section-desc">Full-stack technology solutions — from concept to deployment and beyond.</p>
+            </div>
             <div class="services-grid">
-                <div class="service-card">
-                    <i class="fas fa-truck-loading service-icon"></i>
-                    <h3>Import Solutions</h3>
-                    <p>We handle all aspects of importing, from sourcing to delivery, ensuring compliance and efficiency
-                        every step of the way.</p>
+                <div class="service-card reveal" data-tilt>
+                    <div class="service-card__bg"></div>
+                    <div class="service-card__content">
+                        <div class="service-card__icon-wrap">
+                            <i class="fas fa-laptop-code"></i>
+                        </div>
+                        <h3>Web Development</h3>
+                        <p>Pixel-perfect, responsive websites and complex web applications using React, Next.js, Node.js, and modern stacks.</p>
+                        <div class="service-card__tags">
+                            <span>React</span>
+                            <span>Next.js</span>
+                            <span>Node.js</span>
+                        </div>
+                    </div>
+                    <div class="service-card__border"></div>
                 </div>
-                <div class="service-card">
-                    <i class="fas fa-ship service-icon"></i>
-                    <h3>Export Solutions</h3>
-                    <p>Expand your reach with our export expertise, from documentation to logistics, making global
-                        markets accessible and profitable.</p>
+                <div class="service-card reveal" data-tilt>
+                    <div class="service-card__bg"></div>
+                    <div class="service-card__content">
+                        <div class="service-card__icon-wrap">
+                            <i class="fas fa-mobile-screen-button"></i>
+                        </div>
+                        <h3>Mobile Apps</h3>
+                        <p>Native and cross-platform mobile applications for iOS & Android with smooth UX and offline-first capabilities.</p>
+                        <div class="service-card__tags">
+                            <span>Flutter</span>
+                            <span>React Native</span>
+                            <span>Swift</span>
+                        </div>
+                    </div>
+                    <div class="service-card__border"></div>
                 </div>
-                <div class="service-card">
-                    <i class="fas fa-clipboard-check service-icon"></i>
-                    <h3>Consulting & Compliance</h3>
-                    <p>Our experts guide you through international regulations, risk management, and market entry
-                        strategies for smooth operations.</p>
+                <div class="service-card reveal" data-tilt>
+                    <div class="service-card__bg"></div>
+                    <div class="service-card__content">
+                        <div class="service-card__icon-wrap">
+                            <i class="fas fa-brain"></i>
+                        </div>
+                        <h3>AI & ML Solutions</h3>
+                        <p>Intelligent systems powered by machine learning, NLP, and computer vision to automate and optimize your business.</p>
+                        <div class="service-card__tags">
+                            <span>Python</span>
+                            <span>TensorFlow</span>
+                            <span>GPT</span>
+                        </div>
+                    </div>
+                    <div class="service-card__border"></div>
                 </div>
             </div>
         </div>
     </section>
 
-    <!-- Tech Solutions Section -->
-    <section id="tech" class="tech-solutions">
+    <!-- More Tech Services -->
+    <section class="section section--tech">
+        <div class="tech-bg-grid"></div>
         <div class="container">
-            <h2 class="section-title" style="color: white; border-bottom-color: var(--tech-primary);">Our Tech Business:
-                <span class="tech-it-brand">Tech IT</span>
-            </h2>
-            <p class="text-center" style="max-width: 800px; margin: -2rem auto 3rem; opacity: 0.8;">Beyond trade, we
-                specialize in high-end technological solutions to drive your digital transformation.</p>
-
+            <div class="section-header reveal">
+                <span class="section-tag section-tag--tech"><i class="fas fa-microchip"></i> Advanced Solutions</span>
+                <h2 class="section-title section-title--light">Enterprise-Grade <span class="text-gradient-cyan">Technology</span></h2>
+                <p class="section-desc section-desc--light">We engineer robust, scalable solutions for startups and enterprises alike.</p>
+            </div>
             <div class="tech-grid">
-                <div class="tech-card">
-                    <div class="tech-badge">Development</div>
-                    <i class="fas fa-code"></i>
-                    <h3>Web & App Development</h3>
-                    <p>Custom-built, high-performance web applications and mobile solutions tailored to your unique
-                        business needs.</p>
+                <div class="tech-card reveal" data-tilt>
+                    <div class="tech-card__shimmer"></div>
+                    <div class="tech-card__badge">Cloud</div>
+                    <div class="tech-card__icon">
+                        <i class="fas fa-cloud"></i>
+                    </div>
+                    <h3>Cloud & DevOps</h3>
+                    <p>End-to-end cloud infrastructure on AWS, GCP & Azure with CI/CD pipelines, containerization, and auto-scaling.</p>
+                    <div class="tech-card__line"></div>
                 </div>
-                <div class="tech-card">
-                    <div class="tech-badge">E-Commerce</div>
-                    <i class="fas fa-shopping-cart"></i>
+                <div class="tech-card reveal" data-tilt>
+                    <div class="tech-card__shimmer"></div>
+                    <div class="tech-card__badge">E-Commerce</div>
+                    <div class="tech-card__icon">
+                        <i class="fas fa-cart-shopping"></i>
+                    </div>
                     <h3>Digital Commerce</h3>
-                    <p>Scale your business with our robust e-commerce platforms, including inventory management and
-                        secure payment gateways.</p>
+                    <p>Full-featured e-commerce platforms with inventory management, payment gateways, and analytics dashboards.</p>
+                    <div class="tech-card__line"></div>
                 </div>
-                <div class="tech-card">
-                    <div class="tech-badge">Automation</div>
-                    <i class="fas fa-robot"></i>
+                <div class="tech-card reveal" data-tilt>
+                    <div class="tech-card__shimmer"></div>
+                    <div class="tech-card__badge">Automation</div>
+                    <div class="tech-card__icon">
+                        <i class="fas fa-robot"></i>
+                    </div>
                     <h3>Business Automation</h3>
-                    <p>Streamline your operations with intelligent automation tools designed to increase efficiency and
-                        reduce costs.</p>
-                </div>
-            </div>
-
-            <div class="text-center" style="margin-top: 50px;">
-                <a href="https://tech.akint.co.in/" target="_blank" class="btn"
-                    style="background: var(--tech-gradient); color: white;">Visit Tech IT</a>
-            </div>
-        </div>
-    </section>
-
-    <!-- Stats Section -->
-    <section class="stats">
-        <div class="container">
-            <div class="stats-grid">
-                <div class="stat-item">
-                    <h3 class="stat-number">500+</h3>
-                    <p>Successful Shipments</p>
-                </div>
-                <div class="stat-item">
-                    <h3 class="stat-number">200+</h3>
-                    <p>Happy Clients</p>
-                </div>
-                <div class="stat-item">
-                    <h3 class="stat-number">50+</h3>
-                    <p>Countries Served</p>
-                </div>
-                <div class="stat-item">
-                    <h3 class="stat-number">10+</h3>
-                    <p>Years Experience</p>
+                    <p>Intelligent workflow automation, CRM integrations, and custom ERP systems to streamline your operations.</p>
+                    <div class="tech-card__line"></div>
                 </div>
             </div>
         </div>
     </section>
 
-    <!-- Gallery Section -->
-    <section id="gallery" class="features">
+    <!-- Stats Marquee -->
+    <section class="stats-marquee">
+        <div class="stats-marquee__track">
+            <div class="stats-marquee__content">
+                <div class="marquee-stat">
+                    <span class="marquee-stat__number">150+</span>
+                    <span class="marquee-stat__label">Projects</span>
+                </div>
+                <div class="marquee-stat__sep">&mdash;</div>
+                <div class="marquee-stat">
+                    <span class="marquee-stat__number">50+</span>
+                    <span class="marquee-stat__label">Clients</span>
+                </div>
+                <div class="marquee-stat__sep">&mdash;</div>
+                <div class="marquee-stat">
+                    <span class="marquee-stat__number">99%</span>
+                    <span class="marquee-stat__label">Uptime</span>
+                </div>
+                <div class="marquee-stat__sep">&mdash;</div>
+                <div class="marquee-stat">
+                    <span class="marquee-stat__number">10+</span>
+                    <span class="marquee-stat__label">Years</span>
+                </div>
+                <div class="marquee-stat__sep">&mdash;</div>
+                <div class="marquee-stat">
+                    <span class="marquee-stat__number">24/7</span>
+                    <span class="marquee-stat__label">Support</span>
+                </div>
+                <div class="marquee-stat__sep">&mdash;</div>
+                <div class="marquee-stat">
+                    <span class="marquee-stat__number">150+</span>
+                    <span class="marquee-stat__label">Projects</span>
+                </div>
+                <div class="marquee-stat__sep">&mdash;</div>
+                <div class="marquee-stat">
+                    <span class="marquee-stat__number">50+</span>
+                    <span class="marquee-stat__label">Clients</span>
+                </div>
+                <div class="marquee-stat__sep">&mdash;</div>
+                <div class="marquee-stat">
+                    <span class="marquee-stat__number">99%</span>
+                    <span class="marquee-stat__label">Uptime</span>
+                </div>
+                <div class="marquee-stat__sep">&mdash;</div>
+                <div class="marquee-stat">
+                    <span class="marquee-stat__number">10+</span>
+                    <span class="marquee-stat__label">Years</span>
+                </div>
+                <div class="marquee-stat__sep">&mdash;</div>
+                <div class="marquee-stat">
+                    <span class="marquee-stat__number">24/7</span>
+                    <span class="marquee-stat__label">Support</span>
+                </div>
+                <div class="marquee-stat__sep">&mdash;</div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Tech Stack / Portfolio Section -->
+    <section id="portfolio" class="section section--dark">
         <div class="container">
-            <h2 class="section-title">Our Products Gallery</h2>
-            <div class="features-grid">
-                <div class="feature-card">
-                    <img src="leather.jpg" class="gallery-img" alt="Leather Product"
-                        style="width: 100%; height: 200px; object-fit: cover; border-radius: 10px; margin-bottom: 1rem;">
-                    <h3>Premium Leather</h3>
-                    <p>High-quality leather products sourced from trusted manufacturers.</p>
+            <div class="section-header reveal">
+                <span class="section-tag"><i class="fas fa-layer-group"></i> Tech Stack</span>
+                <h2 class="section-title">Technologies We <span class="text-gradient">Master</span></h2>
+                <p class="section-desc">We stay ahead of the curve with the most powerful tools in the industry.</p>
+            </div>
+            <div class="gallery-grid">
+                <div class="gallery-card reveal" data-tilt>
+                    <div class="gallery-card__img-wrap gallery-card__img-wrap--icon">
+                        <div class="tech-stack-icons">
+                            <i class="fab fa-react"></i>
+                            <i class="fab fa-node-js"></i>
+                            <i class="fab fa-python"></i>
+                        </div>
+                    </div>
+                    <div class="gallery-card__info">
+                        <h3>Frontend & Backend</h3>
+                        <p>React, Next.js, Vue, Node.js, Python, Django, Express — full-stack mastery.</p>
+                    </div>
                 </div>
-                <div class="feature-card">
-                    <img src="parts.jpg" class="gallery-img" alt="Vehicle Parts"
-                        style="width: 100%; height: 200px; object-fit: cover; border-radius: 10px; margin-bottom: 1rem;">
-                    <h3>Vehicle Parts</h3>
-                    <p>Automotive components and spare parts for various vehicle models.</p>
+                <div class="gallery-card reveal" data-tilt>
+                    <div class="gallery-card__img-wrap gallery-card__img-wrap--icon">
+                        <div class="tech-stack-icons">
+                            <i class="fab fa-aws"></i>
+                            <i class="fab fa-docker"></i>
+                            <i class="fab fa-google"></i>
+                        </div>
+                    </div>
+                    <div class="gallery-card__info">
+                        <h3>Cloud & DevOps</h3>
+                        <p>AWS, GCP, Azure, Docker, Kubernetes, CI/CD — production-ready infrastructure.</p>
+                    </div>
                 </div>
-                <div class="feature-card">
-                    <img src="bag.jpg" class="gallery-img" alt="Leather Bags"
-                        style="width: 100%; height: 200px; object-fit: cover; border-radius: 10px; margin-bottom: 1rem;">
-                    <h3>Leather Accessories</h3>
-                    <p>Handcrafted leather bags and accessories for global markets.</p>
+                <div class="gallery-card reveal" data-tilt>
+                    <div class="gallery-card__img-wrap gallery-card__img-wrap--icon">
+                        <div class="tech-stack-icons">
+                            <i class="fab fa-apple"></i>
+                            <i class="fab fa-android"></i>
+                            <i class="fas fa-wand-magic-sparkles"></i>
+                        </div>
+                    </div>
+                    <div class="gallery-card__info">
+                        <h3>Mobile & AI</h3>
+                        <p>Flutter, React Native, Swift, TensorFlow, OpenAI — intelligent cross-platform apps.</p>
+                    </div>
                 </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Import Export Mention Banner -->
+    <section class="import-export-banner">
+        <div class="container">
+            <div class="ie-banner reveal">
+                <div class="ie-banner__icon">
+                    <i class="fas fa-ship"></i>
+                </div>
+                <div class="ie-banner__content">
+                    <h3>We also operate in <span class="text-gradient">Import & Export</span></h3>
+                    <p>AK International has a dedicated import/export division — <strong>AKI Import Export</strong> — handling global trade in leather goods, automotive parts, and more.</p>
+                </div>
+                <a href="leather-products.html" class="btn btn--outline ie-banner__btn">
+                    <span>Explore AKI Import Export</span>
+                    <i class="fas fa-arrow-right"></i>
+                </a>
             </div>
         </div>
     </section>
 
     <!-- Contact Section -->
-    <section id="contact" class="features">
+    <section id="contact" class="section">
         <div class="container">
-            <h2 class="section-title">Contact Us</h2>
-            <div class="features-grid">
-                <div class="feature-card">
-                    <i class="fas fa-phone feature-icon"></i>
+            <div class="section-header reveal">
+                <span class="section-tag"><i class="fas fa-envelope"></i> Get In Touch</span>
+                <h2 class="section-title">Contact <span class="text-gradient">Us</span></h2>
+                <p class="section-desc">Have a project in mind? Let's build something amazing together.</p>
+            </div>
+            <div class="contact-grid">
+                <div class="contact-card reveal" data-tilt>
+                    <div class="contact-card__icon">
+                        <i class="fas fa-phone-volume"></i>
+                    </div>
                     <h3>Call Us</h3>
                     <p><strong>KSA:</strong> <a href="tel:+966564118034">+966 564118034</a></p>
                     <p><strong>India:</strong> <a href="tel:+919051867095">+91 90518 67095</a></p>
+                    <div class="contact-card__ring"></div>
                 </div>
-                <div class="feature-card">
-                    <i class="fas fa-envelope feature-icon"></i>
+                <div class="contact-card reveal" data-tilt>
+                    <div class="contact-card__icon">
+                        <i class="fas fa-at"></i>
+                    </div>
                     <h3>Email Us</h3>
                     <p><a href="mailto:info@akint.co.in">info@akint.co.in</a></p>
                     <p>We'll respond within 24 hours</p>
+                    <div class="contact-card__ring"></div>
                 </div>
-                <div class="feature-card">
-                    <i class="fas fa-map-marker-alt feature-icon"></i>
+                <div class="contact-card reveal" data-tilt>
+                    <div class="contact-card__icon">
+                        <i class="fas fa-location-dot"></i>
+                    </div>
                     <h3>Visit Us</h3>
                     <p>Kolkata, India</p>
                     <p>Open for business meetings</p>
+                    <div class="contact-card__ring"></div>
                 </div>
             </div>
         </div>
@@ -243,29 +433,35 @@
 
     <!-- CTA Section -->
     <section class="cta">
+        <div class="cta__bg"></div>
         <div class="container">
-            <h2>Ready to Expand Your Global Reach?</h2>
-            <p>Let's discuss how AK International can help you achieve your import/export goals.</p>
-            <a href="#contact" class="btn btn-white">Contact Us Today</a>
+            <div class="cta__content reveal">
+                <h2>Ready to Build Your <span class="text-gradient">Next Project</span>?</h2>
+                <p>Let's discuss how AK International can bring your digital vision to life.</p>
+                <a href="#contact" class="btn btn--white">
+                    <span>Contact Us Today</span>
+                    <i class="fas fa-arrow-right"></i>
+                </a>
+            </div>
         </div>
     </section>
 
     <!-- Footer -->
     <footer class="footer">
+        <div class="footer__glow"></div>
         <div class="container">
             <div class="footer-grid">
-                <div class="footer-col">
+                <div class="footer-col footer-col--brand">
                     <div class="footer-logo">
                         <img src="company-logo.png" alt="AK International Logo" class="logo-img">
-                        <h3>AK International</h3>
+                        <span class="logo-text">AK<span class="logo-accent">Int</span></span>
                     </div>
-                    <p>Your trusted partner in global import & export solutions. Connecting businesses worldwide with
-                        seamless logistics and market expertise.</p>
+                    <p>Next-gen technology solutions — web, mobile, AI, cloud, and beyond. Empowering businesses with cutting-edge digital products.</p>
                     <div class="social-links">
-                        <a href="#"><i class="fab fa-facebook"></i></a>
-                        <a href="#"><i class="fab fa-twitter"></i></a>
-                        <a href="#"><i class="fab fa-linkedin"></i></a>
-                        <a href="#"><i class="fab fa-instagram"></i></a>
+                        <a href="#" aria-label="Facebook"><i class="fab fa-facebook-f"></i></a>
+                        <a href="#" aria-label="Twitter"><i class="fab fa-x-twitter"></i></a>
+                        <a href="#" aria-label="LinkedIn"><i class="fab fa-linkedin-in"></i></a>
+                        <a href="#" aria-label="Instagram"><i class="fab fa-instagram"></i></a>
                     </div>
                 </div>
                 <div class="footer-col">
@@ -280,16 +476,16 @@
                 <div class="footer-col">
                     <h4>Services</h4>
                     <ul>
-                        <li><a href="#services">Import Solutions</a></li>
-                        <li><a href="#services">Export Solutions</a></li>
-                        <li><a href="#services">Consulting</a></li>
-                        <li><a href="https://tech.akint.co.in/" target="_blank" class="tech-it-brand">AKI Tech</a></li>
+                        <li><a href="#services">Web Development</a></li>
+                        <li><a href="#services">Mobile Apps</a></li>
+                        <li><a href="#services">AI & ML Solutions</a></li>
+                        <li><a href="leather-products.html" class="text-gradient-cyan">AKI Import Export</a></li>
                     </ul>
                 </div>
                 <div class="footer-col">
                     <h4>Contact Info</h4>
                     <ul>
-                        <li><i class="fas fa-map-marker-alt"></i> Kolkata, India</li>
+                        <li><i class="fas fa-location-dot"></i> Kolkata, India</li>
                         <li><i class="fas fa-envelope"></i> info@akint.co.in</li>
                         <li><i class="fas fa-phone"></i> +91 90518 67095</li>
                     </ul>
@@ -297,10 +493,10 @@
             </div>
             <div class="footer-bottom">
                 <p>&copy; 2025 AK International. All rights reserved.</p>
+                <p class="footer-bottom__tech">Crafted with <i class="fas fa-heart" style="color: #ef4444;"></i> by AKI Tech</p>
             </div>
         </div>
     </footer>
-    <!-- AKI Tech section removed, now links to aki_tech.html -->
 
     <script src="script.js"></script>
 </body>
