@@ -1,0 +1,490 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Odoo Solutions | Custom Apps & Addons - AK International</title>
+    <meta name="description" content="AK International Odoo Solutions — custom modules, apps, and addons for Odoo 16, 17, 18 & 19. We build, customize, and support your Odoo ERP.">
+    <link rel="shortcut icon" type="image/png" href="logo.png?v=20251110">
+    <link rel="icon" type="image/png" sizes="32x32" href="logo.png?v=20251110">
+    <link rel="icon" type="image/png" sizes="16x16" href="logo.png?v=20251110">
+    <link rel="apple-touch-icon" href="logo.png?v=20251110">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=JetBrains+Mono:wght@400;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+    <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="odoo.css">
+    <!-- Google tag (gtag.js) -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-WEW70GGLH3"></script>
+    <script>
+        window.dataLayer = window.dataLayer || [];
+        function gtag(){dataLayer.push(arguments);}
+        gtag('js', new Date());
+        gtag('config', 'G-WEW70GGLH3');
+    </script>
+</head>
+
+<body>
+    <!-- Particle Canvas -->
+    <canvas id="particleCanvas"></canvas>
+
+    <!-- Custom Cursor -->
+    <div class="cursor-dot" id="cursorDot"></div>
+    <div class="cursor-ring" id="cursorRing"></div>
+
+    <!-- Navigation -->
+    <nav class="navbar" id="navbar">
+        <div class="container">
+            <a href="index.html" class="logo">
+                <img src="company-logo.png" alt="AK International Logo" class="logo-img">
+                <span class="logo-text">AK<span class="logo-accent">Int</span></span>
+            </a>
+            <ul class="nav-menu" id="navMenu">
+                <li><a href="index.html" class="nav-link" data-text="Home">Home</a></li>
+                <li><a href="index.html#about" class="nav-link" data-text="About">About</a></li>
+                <li><a href="index.html#services" class="nav-link" data-text="Services">Services</a></li>
+                <li><a href="index.html#portfolio" class="nav-link" data-text="Portfolio">Portfolio</a></li>
+                <li><a href="index.html#contact" class="nav-link" data-text="Contact">Contact</a></li>
+                <li><a href="odoo.html" class="nav-link nav-link--tech active" data-text="Odoo Solutions">Odoo Solutions</a></li>
+                <li><a href="leather-products.html" class="nav-link nav-link--tech" data-text="AKI Import Export">AKI Import Export</a></li>
+                <li><a href="index.html#contact" class="nav-link nav-link--cta">Get a Quote</a></li>
+            </ul>
+            <div class="hamburger" id="hamburger">
+                <span></span>
+                <span></span>
+                <span></span>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <section class="odoo-hero" id="hero">
+        <div class="hero-grid-bg"></div>
+        <div class="hero-glow hero-glow--1"></div>
+        <div class="hero-glow hero-glow--2"></div>
+        <div class="hero-glow hero-glow--3"></div>
+        <div class="odoo-hero__content">
+            <div class="hero-badge reveal">
+                <span class="hero-badge__dot"></span>
+                Odoo ERP Specialists
+            </div>
+            <h1 class="hero-title reveal">
+                <span class="hero-line">Odoo</span>
+                <span class="hero-line hero-line--gradient">Custom Solutions</span>
+                <span class="hero-line">Built for You</span>
+            </h1>
+            <p class="hero-subtitle reveal">
+                Custom Apps &bull; Addons &bull; Integrations &bull; <span class="text-gradient">Full Support</span>
+            </p>
+            <p class="odoo-hero__desc reveal">
+                We design, develop, and maintain tailor-made Odoo modules and addons that perfectly fit your business workflows — with full support for <strong>Odoo versions 16, 17, 18 &amp; 19</strong>.
+            </p>
+            <div class="odoo-versions reveal">
+                <span class="odoo-version-badge"><i class="fas fa-check-circle"></i> Odoo 16</span>
+                <span class="odoo-version-badge"><i class="fas fa-check-circle"></i> Odoo 17</span>
+                <span class="odoo-version-badge"><i class="fas fa-check-circle"></i> Odoo 18</span>
+                <span class="odoo-version-badge"><i class="fas fa-check-circle"></i> Odoo 19</span>
+            </div>
+            <div class="hero-buttons reveal">
+                <a href="#addons" class="btn btn--primary magnetic-btn">
+                    <span>Browse Addons</span>
+                    <i class="fas fa-arrow-down"></i>
+                </a>
+                <a href="index.html#contact" class="btn btn--outline magnetic-btn">
+                    <span>Request Custom App</span>
+                    <i class="fas fa-rocket"></i>
+                </a>
+            </div>
+            <div class="hero-stats reveal">
+                <div class="hero-stat">
+                    <span class="hero-stat__number" data-count="4">0</span><span class="hero-stat__plus">+</span>
+                    <span class="hero-stat__label">Versions</span>
+                </div>
+                <div class="hero-stat__divider"></div>
+                <div class="hero-stat">
+                    <span class="hero-stat__number" data-count="2">0</span><span class="hero-stat__plus">+</span>
+                    <span class="hero-stat__label">Addons</span>
+                </div>
+                <div class="hero-stat__divider"></div>
+                <div class="hero-stat">
+                    <span class="hero-stat__number" data-count="100">0</span><span class="hero-stat__plus">%</span>
+                    <span class="hero-stat__label">Custom</span>
+                </div>
+            </div>
+        </div>
+        <div class="hero-scroll">
+            <span>Scroll</span>
+            <div class="hero-scroll__line"></div>
+        </div>
+    </section>
+
+    <!-- What We Offer Section -->
+    <section class="section section--dark" id="services">
+        <div class="container">
+            <div class="section-header reveal">
+                <span class="section-tag"><i class="fas fa-cubes"></i> What We Offer</span>
+                <h2 class="section-title">Our Odoo <span class="text-gradient">Expertise</span></h2>
+                <p class="section-desc">From a single custom module to a complete Odoo ERP rollout — we cover the full spectrum.</p>
+            </div>
+            <div class="odoo-services-grid">
+                <div class="odoo-service-card reveal" data-tilt>
+                    <div class="odoo-service-card__glow"></div>
+                    <div class="odoo-service-card__icon">
+                        <i class="fas fa-code"></i>
+                    </div>
+                    <h3>Custom Module Development</h3>
+                    <p>We build purpose-built Odoo modules from scratch — perfectly aligned with your unique business logic, reports, and automation needs.</p>
+                </div>
+                <div class="odoo-service-card reveal" data-tilt>
+                    <div class="odoo-service-card__glow"></div>
+                    <div class="odoo-service-card__icon">
+                        <i class="fas fa-puzzle-piece"></i>
+                    </div>
+                    <h3>Addon Customization</h3>
+                    <p>Extend or modify existing Odoo apps to match your workflows. We customize standard features without breaking upgradability.</p>
+                </div>
+                <div class="odoo-service-card reveal" data-tilt>
+                    <div class="odoo-service-card__glow"></div>
+                    <div class="odoo-service-card__icon">
+                        <i class="fas fa-arrow-up-right-dots"></i>
+                    </div>
+                    <h3>Version Migration</h3>
+                    <p>Seamlessly migrate your Odoo instance and custom modules from older versions to Odoo 16, 17, 18, or 19 with full data integrity.</p>
+                </div>
+                <div class="odoo-service-card reveal" data-tilt>
+                    <div class="odoo-service-card__glow"></div>
+                    <div class="odoo-service-card__icon">
+                        <i class="fas fa-plug"></i>
+                    </div>
+                    <h3>Third-Party Integrations</h3>
+                    <p>Connect Odoo with payment gateways, shipping APIs, e-commerce platforms, ERPs, and any external system via REST or XML-RPC.</p>
+                </div>
+                <div class="odoo-service-card reveal" data-tilt>
+                    <div class="odoo-service-card__glow"></div>
+                    <div class="odoo-service-card__icon">
+                        <i class="fas fa-headset"></i>
+                    </div>
+                    <h3>Ongoing Support</h3>
+                    <p>Dedicated post-deployment support, bug fixes, performance optimization, and user training to keep your Odoo running at peak.</p>
+                </div>
+                <div class="odoo-service-card reveal" data-tilt>
+                    <div class="odoo-service-card__glow"></div>
+                    <div class="odoo-service-card__icon">
+                        <i class="fas fa-server"></i>
+                    </div>
+                    <h3>Odoo Deployment</h3>
+                    <p>End-to-end Odoo setup on your server or cloud — configuration, module installation, user roles, and production-ready deployment.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Apps / Addons Section -->
+    <section id="addons" class="section">
+        <div class="container">
+            <div class="section-header reveal">
+                <span class="section-tag"><i class="fas fa-layer-group"></i> Our Addons</span>
+                <h2 class="section-title">Apps &amp; Addons We <span class="text-gradient">Built</span></h2>
+                <p class="section-desc">Ready-to-install Odoo modules crafted by our team — each solving a real-world business problem.</p>
+            </div>
+            <div class="odoo-apps-grid">
+
+                <!-- App 1: Sales to Purchase Cycle -->
+                <div class="odoo-app-card reveal" data-tilt>
+                    <div class="odoo-app-card__screenshot">
+                        <img src="img/odoo-sp-screenshot.png" alt="Sales to Purchase Cycle - Create PQ from Sales Order" loading="lazy">
+                        <div class="odoo-app-card__screenshot-overlay"></div>
+                        <div class="odoo-app-card__badge">New</div>
+                    </div>
+                    <div class="odoo-app-card__body">
+                        <div class="odoo-app-card__header">
+                            <div class="odoo-app-card__icon">
+                                <img src="img/odoo-sp-icon.png" alt="Sales to Purchase Cycle Icon">
+                            </div>
+                            <div class="odoo-app-card__title-wrap">
+                                <h3>Sales &rarr; Purchase Cycle</h3>
+                                <div class="odoo-app-card__versions">
+                                    <span class="odoo-app-card__ver">v16</span>
+                                    <span class="odoo-app-card__ver">v17</span>
+                                    <span class="odoo-app-card__ver">v18</span>
+                                    <span class="odoo-app-card__ver">v19</span>
+                                </div>
+                            </div>
+                        </div>
+                        <p class="odoo-app-card__desc">
+                            A smart bridge module that connects your Sales and Purchasing flows to handle out-of-stock items without missing a beat. When a customer order can't be fulfilled from current stock, this addon lets you instantly generate a Purchase Quotation (PQ) directly from the Sales Order — keeping both teams in sync and the workflow moving.
+                        </p>
+                        <ul class="odoo-app-card__features">
+                            <li>
+                                <i class="fas fa-circle-check"></i>
+                                <span>One-click <strong>Create PQ</strong> button on Quotation / Sales Order to auto-generate a Purchase Quotation for out-of-stock products.</span>
+                            </li>
+                            <li>
+                                <i class="fas fa-circle-check"></i>
+                                <span>Automatically maps sales order lines to purchase order lines — product, quantity, and vendor in one step.</span>
+                            </li>
+                            <li>
+                                <i class="fas fa-circle-check"></i>
+                                <span>Displays <strong>On-Hand Qty</strong> directly in the order line for instant stock visibility while quoting.</span>
+                            </li>
+                            <li>
+                                <i class="fas fa-circle-check"></i>
+                                <span>Eliminates manual data re-entry between Sales and Purchase teams — faster response, fewer errors.</span>
+                            </li>
+                            <li>
+                                <i class="fas fa-circle-check"></i>
+                                <span>Works seamlessly across Odoo 16 to 19 with no core overrides.</span>
+                            </li>
+                        </ul>
+                        <div class="odoo-app-card__footer">
+                            <span class="odoo-app-card__category"><i class="fas fa-tag"></i> &nbsp;Sales &middot; Purchase</span>
+                            <a href="index.html#contact" class="btn btn--primary btn--sm magnetic-btn">
+                                <span>Get This Addon</span>
+                                <i class="fas fa-arrow-right"></i>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- App 2: Attendance Overview -->
+                <div class="odoo-app-card reveal" data-tilt>
+                    <div class="odoo-app-card__screenshot">
+                        <img src="img/odoo-ao-screenshot.png" alt="AKI Attendance Overview - Daily Overview Dashboard" loading="lazy">
+                        <div class="odoo-app-card__screenshot-overlay"></div>
+                        <div class="odoo-app-card__badge">HR</div>
+                    </div>
+                    <div class="odoo-app-card__body">
+                        <div class="odoo-app-card__header">
+                            <div class="odoo-app-card__icon">
+                                <img src="img/odoo-ao-icon.png" alt="Attendance Overview Icon">
+                            </div>
+                            <div class="odoo-app-card__title-wrap">
+                                <h3>Attendance Overview</h3>
+                                <div class="odoo-app-card__versions">
+                                    <span class="odoo-app-card__ver">v16</span>
+                                    <span class="odoo-app-card__ver">v17</span>
+                                    <span class="odoo-app-card__ver">v18</span>
+                                    <span class="odoo-app-card__ver">v19</span>
+                                </div>
+                            </div>
+                        </div>
+                        <p class="odoo-app-card__desc">
+                            A dedicated <strong>Daily Overview</strong> dashboard added right inside Odoo Attendances. At a glance, managers see the real-time attendance status of every active employee for any selected date — no more digging through raw check-in records. Color-coded indicators make the entire workforce status instantly readable.
+                        </p>
+                        <ul class="odoo-app-card__features">
+                            <li>
+                                <i class="fas fa-circle-check"></i>
+                                <span><strong>Present</strong> — employee checked in before 14:00; shows exact check-in time (From HH:MM:SS).</span>
+                            </li>
+                            <li>
+                                <i class="fas fa-circle-check"></i>
+                                <span><strong>Absent</strong> — no qualifying check-in and current time is past 09:00; highlighted in red for immediate action.</span>
+                            </li>
+                            <li>
+                                <i class="fas fa-circle-check"></i>
+                                <span><strong>On Leave</strong> — employee has an approved time-off covering the selected day; shown in blue.</span>
+                            </li>
+                            <li>
+                                <i class="fas fa-circle-check"></i>
+                                <span><strong>Week Off</strong> — automatically marks Fridays (or your configured off-day) as Week Off with no false absences.</span>
+                            </li>
+                            <li>
+                                <i class="fas fa-circle-check"></i>
+                                <span>Navigate day-by-day with prev/next arrows or jump to Today — all employees, all statuses, one view.</span>
+                            </li>
+                        </ul>
+                        <div class="odoo-app-card__footer">
+                            <span class="odoo-app-card__category"><i class="fas fa-tag"></i> &nbsp;HR &middot; Attendances</span>
+                            <a href="index.html#contact" class="btn btn--primary btn--sm magnetic-btn">
+                                <span>Get This Addon</span>
+                                <i class="fas fa-arrow-right"></i>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Coming Soon Placeholder -->
+                <div class="odoo-app-card odoo-app-card--soon reveal">
+                    <div class="odoo-app-card__soon-inner">
+                        <i class="fas fa-clock"></i>
+                        <h3>More Addons Coming Soon</h3>
+                        <p>We are continuously building new Odoo modules. Check back soon or contact us for a custom solution.</p>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </section>
+
+    <!-- How We Work -->
+    <section class="section section--dark">
+        <div class="container">
+            <div class="section-header reveal">
+                <span class="section-tag"><i class="fas fa-route"></i> How We Work</span>
+                <h2 class="section-title">Our <span class="text-gradient">Process</span></h2>
+                <p class="section-desc">From your idea to a live Odoo module — clear, fast, and collaborative.</p>
+            </div>
+            <div class="odoo-process-grid">
+                <div class="odoo-process-step reveal">
+                    <div class="odoo-process-step__num">01</div>
+                    <div class="odoo-process-step__icon"><i class="fas fa-comments"></i></div>
+                    <h3>Discover</h3>
+                    <p>We understand your workflow challenges and define the exact scope of your custom Odoo module.</p>
+                </div>
+                <div class="odoo-process-step reveal">
+                    <div class="odoo-process-step__num">02</div>
+                    <div class="odoo-process-step__icon"><i class="fas fa-pencil-ruler"></i></div>
+                    <h3>Design</h3>
+                    <p>We map the data model, views, and automation logic — then share a clear spec for your review.</p>
+                </div>
+                <div class="odoo-process-step reveal">
+                    <div class="odoo-process-step__num">03</div>
+                    <div class="odoo-process-step__icon"><i class="fas fa-code"></i></div>
+                    <h3>Develop &amp; Test</h3>
+                    <p>Our Odoo developers build the module, run unit and integration tests, and deliver a staging demo.</p>
+                </div>
+                <div class="odoo-process-step reveal">
+                    <div class="odoo-process-step__num">04</div>
+                    <div class="odoo-process-step__icon"><i class="fas fa-rocket"></i></div>
+                    <h3>Deploy &amp; Support</h3>
+                    <p>We deploy to your production instance and provide ongoing support, updates, and training.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Stats Marquee -->
+    <section class="stats-marquee">
+        <div class="stats-marquee__track">
+            <div class="stats-marquee__content">
+                <div class="marquee-stat">
+                    <span class="marquee-stat__number">Odoo 16</span>
+                    <span class="marquee-stat__label">Supported</span>
+                </div>
+                <div class="marquee-stat__sep">&mdash;</div>
+                <div class="marquee-stat">
+                    <span class="marquee-stat__number">Odoo 17</span>
+                    <span class="marquee-stat__label">Supported</span>
+                </div>
+                <div class="marquee-stat__sep">&mdash;</div>
+                <div class="marquee-stat">
+                    <span class="marquee-stat__number">Odoo 18</span>
+                    <span class="marquee-stat__label">Supported</span>
+                </div>
+                <div class="marquee-stat__sep">&mdash;</div>
+                <div class="marquee-stat">
+                    <span class="marquee-stat__number">Odoo 19</span>
+                    <span class="marquee-stat__label">Supported</span>
+                </div>
+                <div class="marquee-stat__sep">&mdash;</div>
+                <div class="marquee-stat">
+                    <span class="marquee-stat__number">100%</span>
+                    <span class="marquee-stat__label">Custom</span>
+                </div>
+                <div class="marquee-stat__sep">&mdash;</div>
+                <div class="marquee-stat">
+                    <span class="marquee-stat__number">Odoo 16</span>
+                    <span class="marquee-stat__label">Supported</span>
+                </div>
+                <div class="marquee-stat__sep">&mdash;</div>
+                <div class="marquee-stat">
+                    <span class="marquee-stat__number">Odoo 17</span>
+                    <span class="marquee-stat__label">Supported</span>
+                </div>
+                <div class="marquee-stat__sep">&mdash;</div>
+                <div class="marquee-stat">
+                    <span class="marquee-stat__number">Odoo 18</span>
+                    <span class="marquee-stat__label">Supported</span>
+                </div>
+                <div class="marquee-stat__sep">&mdash;</div>
+                <div class="marquee-stat">
+                    <span class="marquee-stat__number">Odoo 19</span>
+                    <span class="marquee-stat__label">Supported</span>
+                </div>
+                <div class="marquee-stat__sep">&mdash;</div>
+                <div class="marquee-stat">
+                    <span class="marquee-stat__number">100%</span>
+                    <span class="marquee-stat__label">Custom</span>
+                </div>
+                <div class="marquee-stat__sep">&mdash;</div>
+            </div>
+        </div>
+    </section>
+
+    <!-- CTA Section -->
+    <section class="section-cta">
+        <div class="container">
+            <div class="cta-box reveal">
+                <div class="cta-box__glow"></div>
+                <h2>Need a <span class="text-gradient">Custom Odoo Module</span>?</h2>
+                <p>Tell us about your workflow challenge. We'll design and build the exact Odoo solution you need — on any version from 16 to 19.</p>
+                <div class="cta-box__buttons">
+                    <a href="index.html#contact" class="btn btn--primary magnetic-btn">
+                        <span>Get a Free Consultation</span>
+                        <i class="fas fa-arrow-right"></i>
+                    </a>
+                    <a href="index.html" class="btn btn--outline magnetic-btn">
+                        <span>Back to Home</span>
+                        <i class="fas fa-home"></i>
+                    </a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-grid">
+                <div class="footer-col footer-col--brand">
+                    <div class="footer-logo">
+                        <img src="company-logo.png" alt="AK International Logo" class="logo-img">
+                        <span class="logo-text">AK<span class="logo-accent">Int</span></span>
+                    </div>
+                    <p>Odoo custom apps, addons &amp; ERP solutions — built for businesses that want more from their Odoo platform.</p>
+                    <div class="social-links">
+                        <a href="#" aria-label="Facebook"><i class="fab fa-facebook-f"></i></a>
+                        <a href="#" aria-label="Instagram"><i class="fab fa-instagram"></i></a>
+                        <a href="#" aria-label="LinkedIn"><i class="fab fa-linkedin-in"></i></a>
+                        <a href="#" aria-label="WhatsApp"><i class="fab fa-whatsapp"></i></a>
+                    </div>
+                </div>
+                <div class="footer-col">
+                    <h4>Quick Links</h4>
+                    <ul>
+                        <li><a href="index.html">Home</a></li>
+                        <li><a href="index.html#about">About Us</a></li>
+                        <li><a href="index.html#services">Tech Services</a></li>
+                        <li><a href="index.html#contact">Contact</a></li>
+                    </ul>
+                </div>
+                <div class="footer-col">
+                    <h4>Odoo Services</h4>
+                    <ul>
+                        <li><a href="#services">Custom Development</a></li>
+                        <li><a href="#services">Addon Customization</a></li>
+                        <li><a href="#services">Version Migration</a></li>
+                        <li><a href="#addons">Browse Addons</a></li>
+                    </ul>
+                </div>
+                <div class="footer-col">
+                    <h4>Contact Info</h4>
+                    <ul class="footer-contact">
+                        <li><i class="fas fa-location-dot"></i> Kolkata, India</li>
+                        <li><i class="fas fa-envelope"></i> info@akint.co.in</li>
+                        <li><i class="fas fa-phone"></i> +91 90518 67095</li>
+                    </ul>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>&copy; 2025 AK International. All rights reserved.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script src="script.js"></script>
+</body>
+
+</html>
