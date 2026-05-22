@@ -175,6 +175,17 @@
                 document.body.style.overflow = '';
             });
         });
+
+        // Mobile dropdown toggle
+        navMenu.querySelectorAll('.nav-item--dropdown > .nav-link').forEach(link => {
+            link.addEventListener('click', (e) => {
+                if (window.innerWidth <= 992) {
+                    e.preventDefault();
+                    const parent = link.closest('.nav-item--dropdown');
+                    parent.classList.toggle('open');
+                }
+            });
+        });
     }
 
     // Active nav link on scroll
