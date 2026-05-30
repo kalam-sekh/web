@@ -21,6 +21,8 @@
         }
         _configLoaded = true;
     }
+    // Expose for other scripts or event handlers that may run in different scopes
+    try { window.ensureConfigLoaded = ensureConfigLoaded; window.API_BASE = API_BASE; } catch (e) {}
 
     // ===== PARTICLE BACKGROUND =====
     const canvas = document.getElementById('particleCanvas');
