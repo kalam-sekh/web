@@ -399,34 +399,13 @@
 const backToTopButton = document.createElement('button');
 backToTopButton.innerHTML = '<i class="fas fa-arrow-up"></i>';
 backToTopButton.classList.add('back-to-top');
-backToTopButton.style.cssText = `
-    position: fixed;
-    bottom: 30px;
-    right: 30px;
-    width: 50px;
-    height: 50px;
-    background: linear-gradient(135deg, #6366f1 0%, #a855f7 100%);
-    color: white;
-    border: none;
-    border-radius: 50%;
-    cursor: pointer;
-    display: none;
-    align-items: center;
-    justify-content: center;
-    font-size: 1.2rem;
-    box-shadow: 0 4px 20px rgba(99, 102, 241, 0.4);
-    -webkit-transition: all 0.3s ease;
-    transition: all 0.3s ease;
-    z-index: 999;
-`;
-
 document.body.appendChild(backToTopButton);
 
 window.addEventListener('scroll', () => {
     if (window.pageYOffset > 300) {
-        backToTopButton.style.display = 'flex';
+        backToTopButton.classList.add('show');
     } else {
-        backToTopButton.style.display = 'none';
+        backToTopButton.classList.remove('show');
     }
 });
 
@@ -435,16 +414,6 @@ backToTopButton.addEventListener('click', () => {
         top: 0,
         behavior: 'smooth'
     });
-});
-
-backToTopButton.addEventListener('mouseenter', function() {
-    this.style.transform = 'translateY(-5px)';
-    this.style.boxShadow = '0 10px 15px rgba(0, 0, 0, 0.2)';
-});
-
-backToTopButton.addEventListener('mouseleave', function() {
-    this.style.transform = 'translateY(0)';
-    this.style.boxShadow = '0 4px 6px rgba(0, 0, 0, 0.1)';
 });
 
 // ===== LOADING ANIMATION =====
@@ -471,6 +440,506 @@ serviceCards.forEach(card => {
         this.style.transform = 'translateY(0) scale(1)';
     });
 });
+
+// ===== FLOATING CHAT ICON =====
+(function () {
+    // 1. Create and inject dynamic styles
+    const styles = `
+        /* Back to Top Button */
+        .back-to-top {
+            position: fixed;
+            bottom: 105px;
+            right: 35px;
+            width: 50px;
+            height: 50px;
+            background: linear-gradient(135deg, #6366f1 0%, #a855f7 100%);
+            color: white;
+            border: none;
+            border-radius: 50%;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.2rem;
+            box-shadow: 0 4px 20px rgba(99, 102, 241, 0.4);
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+            z-index: 999;
+            opacity: 0;
+            visibility: hidden;
+            transform: translateY(10px);
+        }
+
+        .back-to-top.show {
+            opacity: 1;
+            visibility: visible;
+            transform: translateY(0);
+        }
+
+        .back-to-top:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 20px rgba(99, 102, 241, 0.6);
+        }
+
+        .back-to-top:active {
+            transform: translateY(0) scale(0.95);
+        }
+
+        /* Floating Chat Container */
+        .floating-chat-container {
+            position: fixed;
+            bottom: 30px;
+            right: 30px;
+            z-index: 9999;
+            display: flex;
+            flex-direction: column;
+            align-items: flex-end;
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+            pointer-events: none; /* Let clicks pass through except on child interactive elements */
+        }
+
+        /* Chat Trigger Button */
+        .floating-chat-icon {
+            width: 60px;
+            height: 60px;
+            border-radius: 50%;
+            background: linear-gradient(135deg, #06b6d4 0%, #6366f1 100%);
+            border: none;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            box-shadow: 0 4px 20px rgba(99, 102, 241, 0.4), inset 0 2px 4px rgba(255, 255, 255, 0.2);
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+            position: relative;
+            outline: none;
+            padding: 0;
+            animation: chatFloat 3.5s ease-in-out infinite;
+            pointer-events: auto; /* Re-enable pointer events */
+        }
+
+        .floating-chat-icon:hover {
+            transform: scale(1.1) translateY(-2px);
+            box-shadow: 0 8px 30px rgba(99, 102, 241, 0.7), inset 0 2px 4px rgba(255, 255, 255, 0.3);
+            background: linear-gradient(135deg, #0891b2 0%, #4f46e5 100%);
+        }
+
+        .floating-chat-icon:active {
+            transform: scale(0.95);
+        }
+
+        .floating-chat-icon svg {
+            width: 28px;
+            height: 28px;
+            transition: transform 0.3s ease;
+        }
+
+        .floating-chat-icon:hover svg {
+            transform: rotate(8deg) scale(1.05);
+        }
+
+        /* Dynamic Float Animation */
+        @keyframes chatFloat {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(-6px); }
+        }
+
+        /* Online/Notification Badge */
+        .chat-badge {
+            position: absolute;
+            top: 2px;
+            right: 2px;
+            width: 14px;
+            height: 14px;
+            background-color: #10b981;
+            border: 2.5px solid #0a0a0f;
+            border-radius: 50%;
+            box-shadow: 0 0 10px rgba(16, 185, 129, 0.6);
+        }
+
+        /* Online Badge Pulse */
+        .chat-badge::after {
+            content: '';
+            position: absolute;
+            top: -2.5px;
+            left: -2.5px;
+            width: 14px;
+            height: 14px;
+            border-radius: 50%;
+            border: 2px solid #10b981;
+            animation: badgePulse 2s infinite ease-in-out;
+            opacity: 0;
+        }
+
+        @keyframes badgePulse {
+            0% { transform: scale(1); opacity: 1; }
+            100% { transform: scale(2.2); opacity: 0; }
+        }
+
+        /* Tooltip Speech Bubble */
+        .chat-tooltip {
+            position: absolute;
+            bottom: 75px;
+            right: 5px;
+            width: 240px;
+            background: rgba(18, 18, 26, 0.85);
+            backdrop-filter: blur(16px);
+            -webkit-backdrop-filter: blur(16px);
+            border: 1px solid rgba(255, 255, 255, 0.08);
+            border-radius: 16px;
+            padding: 14px 16px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.4), 0 0 1px rgba(99, 102, 241, 0.2);
+            color: #f1f5f9;
+            opacity: 0;
+            transform: translateY(10px) scale(0.95);
+            transform-origin: bottom right;
+            visibility: hidden;
+            transition: all 0.4s cubic-bezier(0.34, 1.56, 0.64, 1);
+            z-index: 10000;
+            pointer-events: auto; /* Re-enable pointer events */
+        }
+
+        .chat-tooltip.show {
+            opacity: 1;
+            transform: translateY(0) scale(1);
+            visibility: visible;
+        }
+
+        .chat-tooltip-content {
+            font-size: 13px;
+            line-height: 1.5;
+            font-weight: 500;
+            padding-right: 15px;
+        }
+
+        .chat-tooltip-title {
+            font-size: 11px;
+            font-weight: 700;
+            color: #818cf8;
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+            margin-bottom: 4px;
+        }
+
+        .chat-tooltip-close {
+            position: absolute;
+            top: 10px;
+            right: 12px;
+            border: none;
+            background: transparent;
+            color: #64748b;
+            cursor: pointer;
+            font-size: 14px;
+            padding: 2px;
+            line-height: 1;
+            transition: color 0.2s;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .chat-tooltip-close:hover {
+            color: #f1f5f9;
+        }
+
+        /* Tooltip Little Triangle Pointer */
+        .chat-tooltip::after {
+            content: '';
+            position: absolute;
+            bottom: -6px;
+            right: 24px;
+            width: 12px;
+            height: 12px;
+            background: rgba(18, 18, 26, 0.85);
+            border-right: 1px solid rgba(255, 255, 255, 0.08);
+            border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+            transform: rotate(45deg);
+        }
+
+        /* Mobile responsive adjustments */
+        @media (max-width: 768px) {
+            .back-to-top {
+                bottom: 87px;
+                right: 23px;
+                width: 46px;
+                height: 46px;
+                font-size: 1rem;
+            }
+
+            .floating-chat-container {
+                bottom: 20px;
+                right: 20px;
+            }
+            
+            .floating-chat-icon {
+                width: 52px;
+                height: 52px;
+            }
+            
+            .floating-chat-icon svg {
+                width: 24px;
+                height: 24px;
+            }
+            
+            .chat-tooltip {
+                bottom: 67px;
+                right: 0;
+                width: 220px;
+                padding: 12px 14px;
+            }
+        }
+        /* Simple chat UI elements */
+        .chat-message { margin-bottom: 8px; font-size: 14px; }
+        .chat-message.system { font-weight: 600; color: #e6eefc; }
+        .chat-message.small { font-size: 12px; color: #cbd5e1; }
+        .chat-options { display: flex; flex-direction: column; gap: 8px; margin-top: 8px; }
+        .chat-option { background: rgba(255,255,255,0.03); border: 1px solid rgba(255,255,255,0.04); padding: 8px 10px; border-radius: 10px; cursor: pointer; font-size: 13px; color: #e6eefc; text-align: left; }
+        .chat-option:hover { background: rgba(255,255,255,0.06); }
+        .chat-input textarea { width: 100%; resize: vertical; margin-top: 8px; padding: 8px; border-radius: 8px; border: 1px solid rgba(255,255,255,0.06); background: rgba(255,255,255,0.02); color: #fff; }
+        .chat-input .btn { margin-top: 8px; background: #6366f1; color: #fff; border: none; padding: 8px 12px; border-radius: 8px; cursor: pointer; }
+    `;
+    const styleEl = document.createElement('style');
+    styleEl.textContent = styles;
+    document.head.appendChild(styleEl);
+
+    // 2. Create the DOM elements
+    const chatContainer = document.createElement('div');
+    chatContainer.className = 'floating-chat-container';
+    chatContainer.id = 'floatingChatContainer';
+
+    // Tooltip Speech Bubble
+    const tooltip = document.createElement('div');
+    tooltip.className = 'chat-tooltip';
+    tooltip.id = 'chatTooltip';
+    tooltip.innerHTML = `
+        <button class="chat-tooltip-close" id="chatTooltipClose" aria-label="Close message">×</button>
+        <div class="chat-tooltip-title">AK Support</div>
+        <div class="chat-tooltip-body">
+            <div class="chat-message system">Welcome to AKI Assist</div>
+            <div class="chat-message system small" id="chatPrompt">How can we help you today? Please choose an option below:</div>
+            <div class="chat-options" id="chatOptions"></div>
+            <div class="chat-input" id="chatInput" style="display:none;">
+                <textarea id="chatTextarea" rows="3" placeholder="Describe your issue..."></textarea>
+                <button id="chatSendBtn" class="btn">Send</button>
+            </div>
+        </div>
+    `;
+
+    // Chat Trigger Button
+    const chatButton = document.createElement('button');
+    chatButton.className = 'floating-chat-icon';
+    chatButton.id = 'floatingChatIcon';
+    chatButton.setAttribute('aria-label', 'Open Live Chat');
+    chatButton.innerHTML = `
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"></path>
+        </svg>
+        <span class="chat-badge"></span>
+    `;
+
+    // Assemble components
+    chatContainer.appendChild(tooltip);
+    chatContainer.appendChild(chatButton);
+    document.body.appendChild(chatContainer);
+
+    // 3. Register Custom Cursor interaction if available
+    const cursorDot = document.getElementById('cursorDot');
+    const cursorRing = document.getElementById('cursorRing');
+    
+    function registerCursorHover(el) {
+        if (cursorDot && cursorRing) {
+            el.addEventListener('mouseenter', () => {
+                cursorDot.classList.add('hovering');
+                cursorRing.classList.add('hovering');
+            });
+            el.addEventListener('mouseleave', () => {
+                cursorDot.classList.remove('hovering');
+                cursorRing.classList.remove('hovering');
+            });
+        }
+    }
+    
+    registerCursorHover(chatButton);
+    const closeBtn = tooltip.querySelector('#chatTooltipClose');
+    if (closeBtn) registerCursorHover(closeBtn);
+
+    // 4. Behaviors & Animations
+    // Show tooltip after 3 seconds
+    let tooltipTimeout = setTimeout(() => {
+        tooltip.classList.add('show');
+    }, 3000);
+
+    // Close tooltip click event
+    closeBtn.addEventListener('click', (e) => {
+        e.stopPropagation();
+        tooltip.classList.remove('show');
+        clearTimeout(tooltipTimeout);
+    });
+
+    // Chat icon click (future functionality placeholder)
+    // Chat interaction logic
+    const CHAT_OPTIONS = [
+        { key: 'technical', label: 'Technical Support' },
+        { key: 'odoo', label: 'Odoo Queries' },
+        { key: 'web', label: 'Web & Web Applications' },
+        { key: 'mobile', label: 'iOS & Android' },
+        { key: 'other', label: 'Other Inquiries' }
+    ];
+
+    function populateOptions() {
+        const container = tooltip.querySelector('#chatOptions');
+        if (!container) return;
+        container.innerHTML = '';
+        CHAT_OPTIONS.forEach(opt => {
+            const btn = document.createElement('button');
+            btn.className = 'chat-option';
+            btn.type = 'button';
+            btn.textContent = opt.label;
+            btn.dataset.key = opt.key;
+            btn.addEventListener('click', () => handleOptionSelect(opt));
+            container.appendChild(btn);
+        });
+    }
+
+    function getVisitorCountry() {
+        try {
+            const locale = (Intl && Intl.DateTimeFormat) ? Intl.DateTimeFormat().resolvedOptions().locale || navigator.language : navigator.language;
+            if (!locale) return '';
+            const parts = locale.replace('_', '-').split('-');
+            const region = parts.length > 1 ? parts[1].toUpperCase() : '';
+            const map = { US: 'United States', GB: 'United Kingdom', IN: 'India', PK: 'Pakistan', AU: 'Australia', CA: 'Canada', DE: 'Germany', FR: 'France', ES: 'Spain', IT: 'Italy', NL: 'Netherlands' };
+            return map[region] || region || '';
+        } catch (e) {
+            return '';
+        }
+    }
+
+    function handleOptionSelect(opt) {
+        const body = tooltip.querySelector('.chat-tooltip-body');
+        if (!body) return;
+
+        const inferredCountry = getVisitorCountry();
+
+        body.innerHTML = `
+            <div class="chat-message system">Our live agent will connect you soon.</div>
+            <div class="chat-message system small">We require a few details before we proceed.</div>
+            <div class="chat-form">
+                <label style="font-size:12px;margin-top:8px;display:block;color:#9fb4ff">Name</label>
+                <input id="chatName" type="text" placeholder="Your name" style="width:100%;padding:8px;border-radius:8px;border:1px solid rgba(255,255,255,0.06);background:rgba(255,255,255,0.02);color:#fff;">
+                <label style="font-size:12px;margin-top:8px;display:block;color:#9fb4ff">Mobile</label>
+                <input id="chatMobile" type="text" placeholder="Mobile number" style="width:100%;padding:8px;border-radius:8px;border:1px solid rgba(255,255,255,0.06);background:rgba(255,255,255,0.02);color:#fff;">
+                <label style="font-size:12px;margin-top:8px;display:block;color:#9fb4ff">Email</label>
+                <input id="chatEmail" type="email" placeholder="you@example.com" style="width:100%;padding:8px;border-radius:8px;border:1px solid rgba(255,255,255,0.06);background:rgba(255,255,255,0.02);color:#fff;">
+                <label style="font-size:12px;margin-top:8px;display:block;color:#9fb4ff">Country</label>
+                <input id="chatCountry" type="text" placeholder="Country" value="${inferredCountry}" style="width:100%;padding:8px;border-radius:8px;border:1px solid rgba(255,255,255,0.06);background:rgba(255,255,255,0.02);color:#fff;">
+                <div style="display:flex;justify-content:flex-end;margin-top:8px;"><button id="chatStartBtn" class="btn">Start Chat</button></div>
+            </div>
+        `;
+
+        const startBtn = tooltip.querySelector('#chatStartBtn');
+        if (startBtn) {
+            startBtn.addEventListener('click', async () => {
+                const name = (tooltip.querySelector('#chatName')||{}).value?.trim() || '';
+                const mobile = (tooltip.querySelector('#chatMobile')||{}).value?.trim() || '';
+                const email = (tooltip.querySelector('#chatEmail')||{}).value?.trim() || '';
+                const country = (tooltip.querySelector('#chatCountry')||{}).value?.trim() || '';
+
+                if (!name || !email) {
+                    startBtn.textContent = 'Please complete Name & Email';
+                    setTimeout(() => startBtn.textContent = 'Start Chat', 1600);
+                    return;
+                }
+
+                startBtn.disabled = true;
+                startBtn.textContent = 'Saving...';
+
+                try {
+                    const resp = await fetch('/api/connect', {
+                        method: 'POST',
+                        headers: { 'Content-Type': 'application/json' },
+                        body: JSON.stringify({ option: opt.key, name, mobile, email, country })
+                    });
+                    const data = await resp.json();
+                    if (!resp.ok) throw new Error(data?.error || 'Server error');
+
+                    body.innerHTML = `\n                        <div class="chat-message system">Thanks ${name} — your connect ID is <strong>${data.connect_id}</strong>.</div>\n                        <div class="chat-message system small">Connecting you to <strong>${opt.label}</strong> now...</div>\n                    `;
+
+                    setTimeout(() => openEmbeddedChat({ name, mobile, email, country, connect_id: data.connect_id }, opt), 900);
+                } catch (err) {
+                    startBtn.disabled = false;
+                    startBtn.textContent = 'Start Chat';
+                    body.innerHTML = `<div class="chat-message system small">Unable to save details: ${err.message}</div>`;
+                    console.error('save error', err);
+                }
+            });
+        }
+    }
+
+    function openEmbeddedChat(userData, opt) {
+        // Replace tooltip with a small chat window (keeps same footprint)
+        tooltip.innerHTML = `
+            <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:8px;">
+                <div style="font-weight:700;color:#cfe1ff">${opt.label} — AKI Assist</div>
+                <button class="chat-tooltip-close" id="chatTooltipCloseSmall" aria-label="Close chat" style="background:transparent;border:none;color:#9fb4ff;cursor:pointer">×</button>
+            </div>
+            <div id="chatWindow" style="height:180px;overflow:auto;padding:6px;border-radius:8px;border:1px solid rgba(255,255,255,0.03);background:rgba(10,10,14,0.6);">
+                <div class="chat-message system">Our live agent will join shortly. Meanwhile, you can type your message below.</div>
+            </div>
+            <div style="margin-top:8px;display:flex;gap:8px;">
+                <input id="chatMsgInput" placeholder="Type a message..." style="flex:1;padding:8px;border-radius:8px;border:1px solid rgba(255,255,255,0.06);background:rgba(255,255,255,0.02);color:#fff;">
+                <button id="chatMsgSend" class="btn">Chat</button>
+            </div>
+        `;
+
+        // rebind close
+        const closeSmall = tooltip.querySelector('#chatTooltipCloseSmall');
+        if (closeSmall) {
+            registerCursorHover(closeSmall);
+            closeSmall.addEventListener('click', (e) => { e.stopPropagation(); tooltip.classList.remove('show'); });
+        }
+
+        const chatWin = tooltip.querySelector('#chatWindow');
+        const input = tooltip.querySelector('#chatMsgInput');
+        const send = tooltip.querySelector('#chatMsgSend');
+
+        function appendMessage(text, who='user') {
+            const el = document.createElement('div');
+            el.className = 'chat-message';
+            el.style.marginBottom = '6px';
+            el.textContent = text;
+            if (who === 'agent') el.style.color = '#cfe1ff';
+            chatWin.appendChild(el);
+            chatWin.scrollTop = chatWin.scrollHeight;
+        }
+
+        // simulate agent connection after a short delay
+        setTimeout(() => appendMessage('Agent: Hi ' + (userData.name || '') + ', I will be assisting you shortly.', 'agent'), 1400);
+
+        if (send && input) {
+            send.addEventListener('click', () => {
+                const txt = input.value.trim();
+                if (!txt) return;
+                appendMessage('You: ' + txt, 'user');
+                input.value = '';
+                // echo simulated agent reply
+                setTimeout(() => appendMessage('Agent: Thanks for the details. We will respond soon.' , 'agent'), 800 + Math.random()*800);
+            });
+        }
+    }
+
+    chatButton.addEventListener('click', () => {
+        const willShow = !tooltip.classList.contains('show');
+        if (willShow) {
+            // prepare UI
+            const bodyPrompt = tooltip.querySelector('#chatPrompt');
+            if (bodyPrompt) bodyPrompt.textContent = 'How can we help you today? Please choose an option below:';
+            populateOptions();
+            tooltip.classList.add('show');
+        } else {
+            tooltip.classList.remove('show');
+        }
+    });
+})();
 
 // ===== CONSOLE MESSAGE =====
 console.log('%c🚀 Welcome to AK International! ', 'background: linear-gradient(135deg, #6366f1 0%, #a855f7 100%); color: white; font-size: 20px; padding: 10px; border-radius: 5px;');
