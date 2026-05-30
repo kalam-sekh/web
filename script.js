@@ -5,6 +5,23 @@
 (function () {
     'use strict';
 
+    // Config loader: optional /config.json can set { "API_BASE": "https://your-railway-url" }
+    let API_BASE = '';
+    let _configLoaded = false;
+    async function ensureConfigLoaded() {
+        if (_configLoaded) return;
+        try {
+            const res = await fetch('/config.json', { cache: 'no-store' });
+            if (res.ok) {
+                const cfg = await res.json();
+                API_BASE = (cfg.API_BASE || '').replace(/\/$/, '');
+            }
+        } catch (e) {
+            // ignore
+        }
+        _configLoaded = true;
+    }
+
     // ===== PARTICLE BACKGROUND =====
     const canvas = document.getElementById('particleCanvas');
     if (canvas) {
@@ -854,13 +871,25 @@ serviceCards.forEach(card => {
                 startBtn.textContent = 'Saving...';
 
                 try {
-                    const resp = await fetch('/api/connect', {
+                    await ensureConfigLoaded();
+                    const endpoint = API_BASE ? `${API_BASE}/api/connect` : '/api/connect';
+                    const resp = await fetch(endpoint, {
                         method: 'POST',
                         headers: { 'Content-Type': 'application/json' },
                         body: JSON.stringify({ option: opt.key, name, mobile, email, country })
                     });
-                    const data = await resp.json();
-                    if (!resp.ok) throw new Error(data?.error || 'Server error');
+
+                    // If server returns JSON, parse it. If not, surface the text (helpful for HTML error pages).
+                    const ct = (resp.headers.get('content-type') || '').toLowerCase();
+                    let data = null;
+                    if (ct.includes('application/json')) {
+                        data = await resp.json();
+                    } else {
+                        const text = await resp.text();
+                        throw new Error(`Server returned ${resp.status} ${resp.statusText}: ${text.replace(/\s+/g, ' ').slice(0,300)}`);
+                    }
+
+                    if (!resp.ok) throw new Error(data?.error || `Server error ${resp.status}`);
 
                     body.innerHTML = `\n                        <div class="chat-message system">Thanks ${name} — your connect ID is <strong>${data.connect_id}</strong>.</div>\n                        <div class="chat-message system small">Connecting you to <strong>${opt.label}</strong> now...</div>\n                    `;
 
