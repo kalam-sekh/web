@@ -873,7 +873,22 @@ serviceCards.forEach(card => {
                 startBtn.textContent = 'Saving...';
 
                 try {
-                    await ensureConfigLoaded();
+                    // Guard against cases where the loader isn't available in this scope
+                    if (typeof ensureConfigLoaded === 'function') {
+                        await ensureConfigLoaded();
+                    } else {
+                        console.warn('ensureConfigLoaded not available, loading /config.json directly');
+                        try {
+                            const _res = await fetch('/config.json', { cache: 'no-store' });
+                            if (_res.ok) {
+                                const _cfg = await _res.json();
+                                API_BASE = (_cfg.API_BASE || '').replace(/\/$/, '');
+                            }
+                        } catch (e) {
+                            /* ignore */
+                        }
+                        _configLoaded = true;
+                    }
                     const endpoint = API_BASE ? `${API_BASE}/api/connect` : '/api/connect';
                     const payload = { option: opt.key, name, mobile, email, country };
                     // Log outgoing payload for debugging (helps trace malformed requests)
