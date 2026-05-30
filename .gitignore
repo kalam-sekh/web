@@ -1,0 +1,21 @@
+# Node and dependency folders
+node_modules/
+
+# Local env files
+.env
+.env.local
+
+# Backend artifacts (do not publish backend files in public site repo)
+server_for_railway/
+server.js
+package.json
+README_CHAT_BACKEND.md
+
+# Logs
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+
+# OS files
+.DS_Store
+Thumbs.db
