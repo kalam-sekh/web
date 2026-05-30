@@ -873,10 +873,13 @@ serviceCards.forEach(card => {
                 try {
                     await ensureConfigLoaded();
                     const endpoint = API_BASE ? `${API_BASE}/api/connect` : '/api/connect';
+                    const payload = { option: opt.key, name, mobile, email, country };
+                    // Log outgoing payload for debugging (helps trace malformed requests)
+                    try { console.debug('AKI Assist -> POST', endpoint, payload, JSON.stringify(payload)); } catch (e) {}
                     const resp = await fetch(endpoint, {
                         method: 'POST',
-                        headers: { 'Content-Type': 'application/json' },
-                        body: JSON.stringify({ option: opt.key, name, mobile, email, country })
+                        headers: { 'Content-Type': 'application/json', 'Accept': 'application/json' },
+                        body: JSON.stringify(payload)
                     });
 
                     // If server returns JSON, parse it. If not, surface the text (helpful for HTML error pages).
