@@ -3,6 +3,63 @@
    Inherits base from styles.css
    ======================================== */
 
+.page-with-home-bg .odoo-hero {
+    background: transparent;
+}
+
+.page-with-home-bg .navbar .container {
+    width: 100%;
+    max-width: none;
+    margin: 0;
+    padding-left: 32px;
+    padding-right: 32px;
+    display: grid;
+    grid-template-columns: auto 1fr auto;
+    align-items: center;
+    column-gap: 24px;
+}
+
+.page-with-home-bg .logo {
+    justify-self: start;
+}
+
+.page-with-home-bg .nav-menu {
+    justify-content: center;
+    min-width: 0;
+    flex-wrap: wrap;
+}
+
+.page-with-home-bg .hamburger {
+    justify-self: end;
+}
+
+.page-with-home-bg .section,
+.page-with-home-bg .section--dark {
+    background: transparent;
+}
+
+.page-with-home-bg .section::before {
+    background: linear-gradient(180deg, rgba(255, 255, 255, 0.02), transparent 18%, transparent 82%, rgba(255, 255, 255, 0.02));
+}
+
+.page-with-home-bg .odoo-hero__content,
+.page-with-home-bg .section-header,
+.page-with-home-bg .cta__content,
+.page-with-home-bg .footer-grid,
+.page-with-home-bg .footer-bottom {
+    position: relative;
+    z-index: 2;
+}
+
+.page-with-home-bg .odoo-hero__content {
+    padding: 40px 32px;
+    border: 1px solid rgba(255, 255, 255, 0.08);
+    border-radius: 28px;
+    background: linear-gradient(180deg, rgba(255, 255, 255, 0.04), rgba(255, 255, 255, 0.015));
+    backdrop-filter: blur(18px);
+    box-shadow: 0 28px 65px rgba(1, 9, 15, 0.45);
+}
+
 /* ===== ODOO HERO ===== */
 .odoo-hero {
     position: relative;
@@ -32,7 +89,7 @@
 
 /* Odoo brand accent */
 .text-gradient-odoo {
-    background: linear-gradient(135deg, #714B67 0%, #017E84 60%, #00B0B9 100%);
+    background: linear-gradient(135deg, #6366f1 0%, #a855f7 55%, #67e8f9 100%);
     -webkit-background-clip: text;
     -webkit-text-fill-color: transparent;
     background-clip: text;
@@ -57,9 +114,9 @@
     font-size: 0.8rem;
     font-weight: 600;
     letter-spacing: 0.04em;
-    background: rgba(113, 75, 103, 0.12);
-    border: 1px solid rgba(113, 75, 103, 0.35);
-    color: #c084fc;
+    background: rgba(99, 102, 241, 0.12);
+    border: 1px solid rgba(99, 102, 241, 0.3);
+    color: #7ae7ff;
 }
 
 .odoo-version-badge i {
@@ -80,6 +137,19 @@
     .odoo-services-grid { grid-template-columns: 1fr; }
 }
 
+@media (max-width: 768px) {
+    .page-with-home-bg .navbar .container {
+        display: flex;
+        padding-left: 20px;
+        padding-right: 20px;
+    }
+
+    .page-with-home-bg .odoo-hero__content {
+        padding: 28px 18px;
+        border-radius: 22px;
+    }
+}
+
 .odoo-service-card {
     position: relative;
     background: var(--bg-card);
@@ -93,14 +163,14 @@
 
 .odoo-service-card:hover {
     transform: translateY(-6px);
-    border-color: rgba(113, 75, 103, 0.5);
-    box-shadow: 0 20px 60px rgba(0,0,0,0.35), 0 0 40px rgba(113,75,103,0.08);
+    border-color: rgba(99, 102, 241, 0.4);
+    box-shadow: 0 20px 60px rgba(0,0,0,0.35), 0 0 40px rgba(99, 102, 241, 0.08);
 }
 
 .odoo-service-card__glow {
     position: absolute;
     inset: 0;
-    background: radial-gradient(ellipse at top left, rgba(113,75,103,0.12) 0%, transparent 65%);
+    background: radial-gradient(ellipse at top left, rgba(99,102,241,0.12) 0%, transparent 65%);
     pointer-events: none;
 }
 
@@ -108,13 +178,13 @@
     width: 56px;
     height: 56px;
     border-radius: 14px;
-    background: linear-gradient(135deg, rgba(113,75,103,0.25), rgba(1,126,132,0.15));
-    border: 1px solid rgba(113,75,103,0.3);
+    background: linear-gradient(135deg, rgba(99,102,241,0.24), rgba(103,232,249,0.14));
+    border: 1px solid rgba(99,102,241,0.28);
     display: flex;
     align-items: center;
     justify-content: center;
     font-size: 1.4rem;
-    color: #c084fc;
+    color: #7ae7ff;
     margin-bottom: 20px;
 }
 
@@ -155,8 +225,8 @@
 
 .odoo-app-card:hover {
     transform: translateY(-6px);
-    border-color: rgba(113,75,103,0.45);
-    box-shadow: 0 24px 64px rgba(0,0,0,0.4), 0 0 48px rgba(113,75,103,0.1);
+    border-color: rgba(99,102,241,0.38);
+    box-shadow: 0 24px 64px rgba(0,0,0,0.4), 0 0 48px rgba(99,102,241,0.1);
 }
 
 /* Screenshot area */
@@ -199,7 +269,7 @@
     font-weight: 700;
     letter-spacing: 0.06em;
     text-transform: uppercase;
-    background: linear-gradient(135deg, #714B67, #017E84);
+    background: linear-gradient(135deg, #6366f1, #22d3ee);
     color: #fff;
 }
 
@@ -221,8 +291,8 @@
     border-radius: 16px;
     overflow: hidden;
     flex-shrink: 0;
-    border: 1px solid rgba(113,75,103,0.35);
-    box-shadow: 0 4px 16px rgba(113,75,103,0.25);
+    border: 1px solid rgba(99,102,241,0.3);
+    box-shadow: 0 4px 16px rgba(99,102,241,0.22);
 }
 
 .odoo-app-card__icon img {
@@ -299,7 +369,7 @@
     font-weight: 600;
     letter-spacing: 0.06em;
     text-transform: uppercase;
-    color: #c084fc;
+    color: #7ae7ff;
 }
 
 /* ===== PROCESS STEPS ===== */
@@ -337,7 +407,7 @@
     width: 40px;
     height: 40px;
     border-radius: 50%;
-    background: linear-gradient(135deg, #714B67, #017E84);
+    background: linear-gradient(135deg, #6366f1, #22d3ee);
     color: #fff;
     font-size: 0.85rem;
     font-weight: 800;
@@ -348,7 +418,7 @@
 
 .odoo-process-step__icon {
     font-size: 1.6rem;
-    color: #c084fc;
+    color: #7ae7ff;
     margin-bottom: 14px;
 }
 

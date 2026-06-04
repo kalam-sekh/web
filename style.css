@@ -14,7 +14,7 @@
     --text-color: #334155;
     --border-color: #e2e8f0;
     --success-color: #10b981;
-    --warning-color: #f59e0b;
+    --warning-color: #22d3ee;
     --danger-color: #ef4444;
     --gradient-1: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
     --gradient-2: linear-gradient(135deg, #2563eb 0%, #1e40af 100%);
@@ -245,7 +245,7 @@ a {
 }
 
 .highlight {
-    background: linear-gradient(135deg, #fbbf24 0%, #f59e0b 100%);
+    background: linear-gradient(135deg, #6366f1 0%, #22d3ee 100%);
     -webkit-background-clip: text;
     -webkit-text-fill-color: transparent;
     background-clip: text;

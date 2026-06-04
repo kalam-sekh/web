@@ -24,6 +24,55 @@
     // Expose for other scripts or event handlers that may run in different scopes
     try { window.ensureConfigLoaded = ensureConfigLoaded; window.API_BASE = API_BASE; } catch (e) {}
 
+    // ===== FIXED BACKGROUND VIDEO LOOP =====
+    const siteBgVideo = document.getElementById('siteBgVideo');
+    if (siteBgVideo) {
+        let videoFadeFrame = null;
+        siteBgVideo.style.opacity = '0';
+
+        const updateVideoFade = () => {
+            if (!siteBgVideo.paused && siteBgVideo.duration) {
+                const cur = siteBgVideo.currentTime;
+                const dur = siteBgVideo.duration;
+                const fadeDuration = 0.5;
+                let opacity = 1;
+
+                if (cur < fadeDuration) {
+                    opacity = cur / fadeDuration;
+                } else if (cur > dur - fadeDuration) {
+                    opacity = Math.max(0, (dur - cur) / fadeDuration);
+                }
+
+                siteBgVideo.style.opacity = String(opacity);
+            }
+
+            videoFadeFrame = requestAnimationFrame(updateVideoFade);
+        };
+
+        const restartVideo = () => {
+            siteBgVideo.style.opacity = '0';
+            setTimeout(() => {
+                siteBgVideo.currentTime = 0;
+                siteBgVideo.play().catch(() => {});
+            }, 100);
+        };
+
+        siteBgVideo.addEventListener('ended', restartVideo);
+        siteBgVideo.addEventListener('loadeddata', () => {
+            siteBgVideo.play().catch(() => {});
+        });
+
+        document.addEventListener('visibilitychange', () => {
+            if (document.hidden) {
+                siteBgVideo.pause();
+            } else {
+                siteBgVideo.play().catch(() => {});
+            }
+        });
+
+        updateVideoFade();
+    }
+
     // ===== PARTICLE BACKGROUND =====
     const canvas = document.getElementById('particleCanvas');
     if (canvas) {
@@ -31,6 +80,11 @@
         let particles = [];
         let mouse = { x: null, y: null };
         const particleCount = Math.min(80, Math.floor(window.innerWidth / 15));
+        const particleColors = [
+            [99, 102, 241],
+            [15, 211, 197],
+            [168, 85, 247]
+        ];
 
         function resizeCanvas() {
             canvas.width = window.innerWidth;
@@ -51,6 +105,7 @@
                 this.speedX = (Math.random() - 0.5) * 0.4;
                 this.speedY = (Math.random() - 0.5) * 0.4;
                 this.opacity = Math.random() * 0.5 + 0.1;
+                this.color = particleColors[Math.floor(Math.random() * particleColors.length)];
             }
             update() {
                 this.x += this.speedX;
@@ -74,7 +129,7 @@
             draw() {
                 ctx.beginPath();
                 ctx.arc(this.x, this.y, this.size, 0, Math.PI * 2);
-                ctx.fillStyle = `rgba(99, 102, 241, ${this.opacity})`;
+                ctx.fillStyle = `rgba(${this.color[0]}, ${this.color[1]}, ${this.color[2]}, ${this.opacity})`;
                 ctx.fill();
             }
         }
@@ -91,8 +146,11 @@
                     const dist = Math.sqrt(dx * dx + dy * dy);
                     if (dist < 150) {
                         const opacity = (1 - dist / 150) * 0.15;
+                        const mix = (particles[i].color[0] + particles[j].color[0]) / 2;
                         ctx.beginPath();
-                        ctx.strokeStyle = `rgba(99, 102, 241, ${opacity})`;
+                        ctx.strokeStyle = mix > 160
+                            ? `rgba(99, 102, 241, ${opacity})`
+                            : `rgba(15, 211, 197, ${opacity})`;
                         ctx.lineWidth = 0.5;
                         ctx.moveTo(particles[i].x, particles[i].y);
                         ctx.lineTo(particles[j].x, particles[j].y);
@@ -396,6 +454,26 @@
                 const speed = (i + 1) * 0.1;
                 glow.style.transform = `translateY(${scrollY * speed}px)`;
             });
+        });
+    }
+
+    // ===== HERO MEDIA PARALLAX =====
+    const hero = document.getElementById('hero');
+    const heroBanner = document.querySelector('.hero-media__banner');
+    const heroSymbol = document.querySelector('.hero-media__symbol');
+    if (hero && heroBanner && heroSymbol && window.innerWidth > 768) {
+        hero.addEventListener('mousemove', (e) => {
+            const rect = hero.getBoundingClientRect();
+            const x = ((e.clientX - rect.left) / rect.width - 0.5);
+            const y = ((e.clientY - rect.top) / rect.height - 0.5);
+
+            heroBanner.style.transform = `translate3d(calc(-50% + ${x * 22}px), calc(-50% + ${y * 18}px), 0) scale(1.06)`;
+            heroSymbol.style.transform = `translate3d(calc(-50% + ${x * -14}px), calc(-50% + ${y * -10}px), 0) scale(0.98)`;
+        });
+
+        hero.addEventListener('mouseleave', () => {
+            heroBanner.style.transform = '';
+            heroSymbol.style.transform = '';
         });
     }
 

@@ -3,6 +3,64 @@
    Inherits base from styles.css
    ======================================== */
 
+.page-with-home-bg .lp-hero {
+    background: transparent;
+}
+
+.page-with-home-bg .navbar .container {
+    width: 100%;
+    max-width: none;
+    margin: 0;
+    padding-left: 32px;
+    padding-right: 32px;
+    display: grid;
+    grid-template-columns: auto 1fr auto;
+    align-items: center;
+    column-gap: 24px;
+}
+
+.page-with-home-bg .logo {
+    justify-self: start;
+}
+
+.page-with-home-bg .nav-menu {
+    justify-content: center;
+    min-width: 0;
+    flex-wrap: wrap;
+}
+
+.page-with-home-bg .hamburger {
+    justify-self: end;
+}
+
+.page-with-home-bg .section,
+.page-with-home-bg .section--dark,
+.page-with-home-bg .section-cta,
+.page-with-home-bg .footer {
+    background: transparent;
+}
+
+.page-with-home-bg .section::before {
+    background: linear-gradient(180deg, rgba(255, 255, 255, 0.02), transparent 18%, transparent 82%, rgba(255, 255, 255, 0.02));
+}
+
+.page-with-home-bg .lp-hero__content,
+.page-with-home-bg .cta-box,
+.page-with-home-bg .footer-grid,
+.page-with-home-bg .footer-bottom {
+    position: relative;
+    z-index: 2;
+}
+
+.page-with-home-bg .lp-hero__content {
+    padding: 40px 32px;
+    border: 1px solid rgba(255, 255, 255, 0.08);
+    border-radius: 28px;
+    background: linear-gradient(180deg, rgba(255, 255, 255, 0.04), rgba(255, 255, 255, 0.015));
+    backdrop-filter: blur(18px);
+    box-shadow: 0 28px 65px rgba(1, 9, 15, 0.45);
+}
+
 /* ===== LEATHER HERO ===== */
 .lp-hero {
     position: relative;
@@ -88,6 +146,19 @@
 @media (max-width: 600px) {
     .cta-box { padding: 48px 24px; }
     .cta-box__buttons { flex-direction: column; align-items: center; }
+}
+
+@media (max-width: 768px) {
+    .page-with-home-bg .navbar .container {
+        display: flex;
+        padding-left: 20px;
+        padding-right: 20px;
+    }
+
+    .page-with-home-bg .lp-hero__content {
+        padding: 28px 18px;
+        border-radius: 22px;
+    }
 }
 
 /* ===== PRODUCT CARD GRID ===== */

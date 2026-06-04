@@ -10,9 +10,9 @@
     <link rel="icon" type="image/png" sizes="32x32" href="logo.png?v=20251110">
     <link rel="icon" type="image/png" sizes="16x16" href="logo.png?v=20251110">
     <link rel="apple-touch-icon" href="logo.png?v=20251110">
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=JetBrains+Mono:wght@400;700&display=swap" rel="stylesheet">
+    <link rel="preconnect" href="https://api.fontshare.com">
+    <link rel="stylesheet" href="https://api.fontshare.com/v2/css?f[]=general-sans@400,500,600,700&display=swap">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fontsource/geist-sans@5.0.3/index.css">
     <link rel="stylesheet" href="styles.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
     <meta name="google-site-verification" content="V1P7aZ0JMxQGUBhl6dix0LruMbCjodkPA53dPlZEHMw" />
@@ -27,97 +27,89 @@
 </head>
 
 <body>
-    <!-- Particle Canvas -->
-    <canvas id="particleCanvas"></canvas>
+    <div class="site-bg-media" aria-hidden="true">
+        <video
+            id="siteBgVideo"
+            class="site-bg-media__video"
+            src="https://d8j0ntlcm91z4.cloudfront.net/user_38xzZboKViGWJOttwIXH07lWA1P/hf_20260328_065045_c44942da-53c6-4804-b734-f9e07fc22e08.mp4"
+            muted
+            playsinline
+            autoplay
+        ></video>
+        <img src="img/ep-tech-bg.png" alt="" class="site-bg-media__shadow">
+    </div>
 
     <!-- Custom Cursor -->
     <div class="cursor-dot" id="cursorDot"></div>
     <div class="cursor-ring" id="cursorRing"></div>
 
-    <!-- Navigation -->
-    <nav class="navbar" id="navbar">
-        <div class="container">
-            <a href="index.html" class="logo">
-                <img src="company-logo.png" alt="AK International Logo" class="logo-img">
-                <span class="logo-text">AK<span class="logo-accent">Int</span></span>
-            </a>
-            <ul class="nav-menu" id="navMenu">
-                <li><a href="index.html" class="nav-link active" data-text="Home">Home</a></li>
-                <li><a href="#about" class="nav-link" data-text="About">About</a></li>
-                <li><a href="#services" class="nav-link" data-text="Services">Services</a></li>
-                <li><a href="#portfolio" class="nav-link" data-text="Portfolio">Portfolio</a></li>
-                <li class="nav-item--dropdown">
-                    <a href="#" class="nav-link" data-text="Products">Products <i class="fas fa-chevron-down nav-dropdown-arrow"></i></a>
-                    <ul class="nav-dropdown">
-                        <li><a href="#contact" class="nav-dropdown__link"><i class="fas fa-truck"></i>Advance Vehicle &amp; Heavy Equipment Management</a></li>
-                        <li class="nav-dropdown__divider"></li>
-                        <li><a href="#contact" class="nav-dropdown__link"><i class="fas fa-briefcase"></i>Business Management Light</a></li>
-                        <li class="nav-dropdown__divider"></li>
-                        <li><a href="#contact" class="nav-dropdown__link"><i class="fas fa-file-invoice"></i>Invoice Creation</a></li>
-                        <li class="nav-dropdown__divider"></li>
-                        <li><a href="#contact" class="nav-dropdown__link"><i class="fas fa-boxes-stacked"></i>Inventory Management</a></li>
-                    </ul>
-                </li>
-                <li><a href="#contact" class="nav-link" data-text="Contact">Contact</a></li>
-                <li><a href="odoo.html" class="nav-link nav-link--tech" data-text="Odoo Solutions">Odoo Solutions</a></li>
-                <li><a href="leather-products.html" class="nav-link nav-link--tech" data-text="AKI Import Export">AKI Import Export</a></li>
-                <li><a href="#contact" class="nav-link nav-link--cta">Get a Quote</a></li>
-            </ul>
-            <div class="hamburger" id="hamburger">
-                <span></span>
-                <span></span>
-                <span></span>
-            </div>
-        </div>
-    </nav>
+    <section class="hero-foundation" id="hero">
+        <div class="hero-foundation__blur" aria-hidden="true"></div>
+        <div class="hero-foundation__content">
+            <nav class="foundation-nav" id="navbar">
+                <a href="index.html" class="foundation-nav__brand">
+                    <img src="company-logo.png" alt="AK International Logo" class="foundation-nav__logo">
+                </a>
+                <ul class="foundation-nav__menu" id="navMenu">
+                    <li><a href="index.html" class="foundation-nav__link">Home</a></li>
+                    <li><a href="#about" class="foundation-nav__link">About</a></li>
+                    <li><a href="#services" class="foundation-nav__link">Services</a></li>
+                    <li><a href="#portfolio" class="foundation-nav__link">Portfolio</a></li>
+                    <li class="nav-item--dropdown">
+                        <a href="#" class="foundation-nav__link" data-text="Products">Products <i class="fas fa-chevron-down nav-dropdown-arrow"></i></a>
+                        <ul class="nav-dropdown">
+                            <li><a href="#contact" class="nav-dropdown__link"><i class="fas fa-truck"></i>Advance Vehicle &amp; Heavy Equipment Management</a></li>
+                            <li class="nav-dropdown__divider"></li>
+                            <li><a href="#contact" class="nav-dropdown__link"><i class="fas fa-briefcase"></i>Business Management Light</a></li>
+                            <li class="nav-dropdown__divider"></li>
+                            <li><a href="#contact" class="nav-dropdown__link"><i class="fas fa-file-invoice"></i>Invoice Creation</a></li>
+                            <li class="nav-dropdown__divider"></li>
+                            <li><a href="#contact" class="nav-dropdown__link"><i class="fas fa-boxes-stacked"></i>Inventory Management</a></li>
+                        </ul>
+                    </li>
+                    <li><a href="#contact" class="foundation-nav__link">Contact</a></li>
+                    <li><a href="odoo.html" class="foundation-nav__link foundation-nav__link--tech">Odoo Solutions</a></li>
+                    <li><a href="leather-products.html" class="foundation-nav__link foundation-nav__link--tech">AKI Import Export</a></li>
+                    <li><a href="#contact" class="foundation-nav__link foundation-nav__link--cta">Get a Quote</a></li>
+                </ul>
+                <div class="foundation-nav__actions">
+                    <a href="#contact" class="btn btn--hero-secondary">Get a Quote</a>
+                </div>
+            </nav>
+            <div class="foundation-nav__divider"></div>
 
-    <!-- Hero Section -->
-    <section class="hero" id="hero">
-        <div class="hero-grid-bg"></div>
-        <div class="hero-glow hero-glow--1"></div>
-        <div class="hero-glow hero-glow--2"></div>
-        <div class="hero-glow hero-glow--3"></div>
-        <div class="hero-content">
-            <div class="hero-badge reveal">
-                <span class="hero-badge__dot"></span>
-                Next-Gen Technology Solutions
-            </div>
-            <h1 class="hero-title reveal">
-                <span class="hero-line">We Build</span>
-                <span class="hero-line hero-line--gradient">Digital</span>
-                <span class="hero-line">Experiences</span>
-            </h1>
-            <p class="hero-subtitle reveal">Web Development &bull; Mobile Apps &bull; AI Solutions &bull; <span class="text-gradient">Cloud & DevOps</span></p>
-            <div class="hero-buttons reveal">
-                <a href="#services" class="btn btn--primary">
-                    <span>Explore Services</span>
-                    <i class="fas fa-arrow-right"></i>
-                </a>
-                <a href="#contact" class="btn btn--outline">
-                    <span>Start a Project</span>
-                    <i class="fas fa-rocket"></i>
-                </a>
-            </div>
-            <div class="hero-stats reveal">
-                <div class="hero-stat">
-                    <span class="hero-stat__number" data-count="150">0</span><span class="hero-stat__plus">+</span>
-                    <span class="hero-stat__label">Projects</span>
-                </div>
-                <div class="hero-stat__divider"></div>
-                <div class="hero-stat">
-                    <span class="hero-stat__number" data-count="50">0</span><span class="hero-stat__plus">+</span>
-                    <span class="hero-stat__label">Clients</span>
-                </div>
-                <div class="hero-stat__divider"></div>
-                <div class="hero-stat">
-                    <span class="hero-stat__number" data-count="99">0</span><span class="hero-stat__plus">%</span>
-                    <span class="hero-stat__label">Uptime</span>
+            <div class="hero-foundation__center">
+                <div class="hero-foundation__copy">
+                    <h1 class="hero-foundation__headline">
+                        <span>Digital </span>
+                        <span class="hero-foundation__headline-accent">Solutions</span>
+                    </h1>
+                    <p class="hero-foundation__subtitle">Web development, mobile apps, AI systems, cloud infrastructure,<br>Odoo solutions, and custom business platforms built for growth.</p>
+                    <a href="#contact" class="btn btn--hero-secondary btn--hero-consult">Schedule a Consult</a>
                 </div>
             </div>
-        </div>
-        <div class="hero-scroll">
-            <span>Scroll</span>
-            <div class="hero-scroll__line"></div>
+
+            <div class="hero-foundation__marquee-wrap">
+                <div class="hero-foundation__marquee">
+                    <div class="hero-foundation__marquee-label">Solutions built for<br>modern business operations</div>
+                    <div class="hero-foundation__marquee-track-wrap">
+                        <div class="hero-foundation__marquee-track">
+                            <div class="hero-foundation__logo-item"><span class="liquid-glass hero-foundation__logo-icon">W</span><span>Web Development</span></div>
+                            <div class="hero-foundation__logo-item"><span class="liquid-glass hero-foundation__logo-icon">M</span><span>Mobile Apps</span></div>
+                            <div class="hero-foundation__logo-item"><span class="liquid-glass hero-foundation__logo-icon">A</span><span>AI Solutions</span></div>
+                            <div class="hero-foundation__logo-item"><span class="liquid-glass hero-foundation__logo-icon">C</span><span>Cloud &amp; DevOps</span></div>
+                            <div class="hero-foundation__logo-item"><span class="liquid-glass hero-foundation__logo-icon">O</span><span>Odoo Custom Apps</span></div>
+                            <div class="hero-foundation__logo-item"><span class="liquid-glass hero-foundation__logo-icon">I</span><span>Import Export</span></div>
+                            <div class="hero-foundation__logo-item"><span class="liquid-glass hero-foundation__logo-icon">W</span><span>Web Development</span></div>
+                            <div class="hero-foundation__logo-item"><span class="liquid-glass hero-foundation__logo-icon">M</span><span>Mobile Apps</span></div>
+                            <div class="hero-foundation__logo-item"><span class="liquid-glass hero-foundation__logo-icon">A</span><span>AI Solutions</span></div>
+                            <div class="hero-foundation__logo-item"><span class="liquid-glass hero-foundation__logo-icon">C</span><span>Cloud &amp; DevOps</span></div>
+                            <div class="hero-foundation__logo-item"><span class="liquid-glass hero-foundation__logo-icon">O</span><span>Odoo Custom Apps</span></div>
+                            <div class="hero-foundation__logo-item"><span class="liquid-glass hero-foundation__logo-icon">I</span><span>Import Export</span></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
         </div>
     </section>
 
