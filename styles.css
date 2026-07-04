@@ -1467,7 +1467,7 @@ a {
     position: relative;
     z-index: 1;
     width: 100%;
-    margin-top: auto;
+    overflow: hidden;
 }
 
 .footer__glow {
@@ -1579,6 +1579,7 @@ a {
 .footer-bottom p {
     font-size: 0.85rem;
     color: var(--text-muted);
+    margin: 0;
 }
 
 .footer-bottom__tech {
