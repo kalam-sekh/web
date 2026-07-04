@@ -10,6 +10,7 @@ server_for_railway/
 server.js
 package.json
 README_CHAT_BACKEND.md
+config.json
 
 # Logs
 npm-debug.log*
