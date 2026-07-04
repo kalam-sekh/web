@@ -62,15 +62,13 @@ body {
     overflow-x: hidden;
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
-    display: flex;
-    flex-direction: column;
-    min-height: 100vh;
 }
 
 html {
     scroll-behavior: smooth;
     scrollbar-width: thin;
     scrollbar-color: var(--accent) var(--bg-secondary);
+    overflow-x: hidden;
 }
 
 ::-webkit-scrollbar { width: 8px; }
@@ -1466,7 +1464,6 @@ a {
     position: relative;
     z-index: 1;
     width: 100%;
-    margin-top: auto;
 }
 
 .footer__glow {
