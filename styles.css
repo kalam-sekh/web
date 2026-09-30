@@ -1356,12 +1356,60 @@ a {
     line-height: 1.55;
 }
 
-.network-partner-card {
-    width: min(100%, 520px);
+.network-partners {
+    width: 100%;
+    max-width: 920px;
+    overflow: hidden;
+    margin: 28px auto 0;
+    padding: 12px;
+    border: 1px solid rgba(255, 255, 255, 0.14);
+    border-radius: 14px;
+    position: relative;
+}
+
+.network-partners::before,
+.network-partners::after {
+    content: "";
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    width: 70px;
+    z-index: 2;
+    pointer-events: none;
+}
+
+.network-partners::before {
+    left: 0;
+    background: linear-gradient(90deg, var(--bg-primary), rgba(10, 10, 15, 0));
+}
+
+.network-partners::after {
+    right: 0;
+    background: linear-gradient(270deg, var(--bg-primary), rgba(10, 10, 15, 0));
+}
+
+.network-partners__track {
     display: flex;
+    width: max-content;
+    animation: partnerSlide 18s linear infinite;
+}
+
+.network-partners:hover .network-partners__track {
+    animation-play-state: paused;
+}
+
+.network-partners__group {
+    display: flex;
+    gap: 16px;
+    padding-right: 16px;
+}
+
+.network-partner-card {
+    width: 300px;
+    display: flex;
+    flex: 0 0 auto;
     align-items: center;
     gap: 18px;
-    margin: 28px auto 0;
     padding: 18px 20px;
     background: rgba(255, 255, 255, 0.04);
     border: 1px solid rgba(255, 255, 255, 0.16);
@@ -1386,6 +1434,10 @@ a {
     padding: 10px;
     background: #ffffff;
     border-radius: 8px;
+}
+
+.network-partner-card__logo--wide {
+    width: 178px;
 }
 
 .network-partner-card__logo img {
@@ -1414,6 +1466,16 @@ a {
     line-height: 1.2;
 }
 
+@keyframes partnerSlide {
+    from {
+        transform: translateX(0);
+    }
+
+    to {
+        transform: translateX(-50%);
+    }
+}
+
 .customers-section__title {
     font-size: clamp(2.6rem, 6vw, 5rem);
 }
@@ -1430,11 +1492,11 @@ a {
 .customers-carousel {
     width: 100%;
     overflow: hidden;
-    padding: 20px;
+    padding: 24px;
     background: transparent;
-    border: 1px solid rgba(255, 255, 255, 0.16);
+    border: 1px solid rgba(255, 255, 255, 0.18);
     border-radius: 14px;
-    box-shadow: none;
+    box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.05);
     position: relative;
 }
 
@@ -1476,37 +1538,49 @@ a {
 }
 
 .customer-logo-card {
-    width: 198px;
-    min-height: 158px;
+    width: 218px;
+    min-height: 188px;
     display: flex;
     flex: 0 0 auto;
     flex-direction: column;
     align-items: center;
     justify-content: center;
     gap: 16px;
-    padding: 26px 22px;
-    background: rgba(248, 250, 252, 0.94);
-    border: 1px solid rgba(255, 255, 255, 0.78);
-    border-radius: 9px;
-    box-shadow: 0 14px 28px rgba(40, 54, 73, 0.13);
+    padding: 24px 20px 22px;
+    background: linear-gradient(180deg, rgba(255, 255, 255, 0.98), rgba(241, 245, 249, 0.94));
+    border: 1px solid rgba(255, 255, 255, 0.82);
+    border-radius: 12px;
+    box-shadow: 0 16px 34px rgba(2, 8, 23, 0.22), inset 0 1px 0 rgba(255, 255, 255, 0.9);
     position: relative;
     overflow: hidden;
-    transition: transform var(--transition), box-shadow var(--transition), background var(--transition);
+    transition: transform var(--transition), box-shadow var(--transition), border-color var(--transition);
 }
 
 .customer-logo-card::before {
     content: "";
     position: absolute;
     inset: 0;
-    background: linear-gradient(135deg, rgba(6, 182, 212, 0.09), rgba(245, 158, 11, 0.1));
+    background: radial-gradient(circle at 50% 0%, rgba(6, 182, 212, 0.12), transparent 45%);
     opacity: 0;
     transition: opacity var(--transition);
 }
 
+.customer-logo-card::after {
+    content: "";
+    position: absolute;
+    left: 22px;
+    right: 22px;
+    bottom: 0;
+    height: 3px;
+    background: linear-gradient(90deg, var(--cyan), var(--accent), var(--amber));
+    border-radius: 999px 999px 0 0;
+    opacity: 0.72;
+}
+
 .customer-logo-card:hover {
-    transform: translateY(-5px) scale(1.02);
-    background: #ffffff;
-    box-shadow: 0 20px 38px rgba(40, 54, 73, 0.2);
+    transform: translateY(-7px) scale(1.025);
+    border-color: rgba(34, 211, 238, 0.42);
+    box-shadow: 0 24px 50px rgba(2, 8, 23, 0.28), 0 0 24px rgba(6, 182, 212, 0.13);
 }
 
 .customer-logo-card:hover::before {
@@ -1514,38 +1588,47 @@ a {
 }
 
 .customer-logo-card__mark {
-    width: 132px;
-    height: 86px;
+    width: 142px;
+    height: 98px;
     display: flex;
     align-items: center;
     justify-content: center;
+    padding: 10px;
+    background: #ffffff;
+    border: 1px solid rgba(15, 23, 42, 0.07);
+    border-radius: 10px;
+    box-shadow: 0 10px 22px rgba(15, 23, 42, 0.08);
     position: relative;
     z-index: 1;
 }
 
 .customer-logo-card__mark--wide {
-    width: 160px;
+    width: 172px;
 }
 
 .customer-logo-card img {
-    width: 132px;
-    max-height: 86px;
+    width: 122px;
+    max-height: 78px;
     object-fit: contain;
-    filter: drop-shadow(0 5px 8px rgba(15, 23, 42, 0.16));
+    filter: drop-shadow(0 4px 7px rgba(15, 23, 42, 0.13));
     position: relative;
     z-index: 1;
 }
 
 .customer-logo-card__mark--wide img {
-    width: 160px;
+    width: 150px;
 }
 
 .customer-logo-card__name {
-    color: #253244;
-    font-size: 1rem;
+    color: #172033;
+    font-size: 0.98rem;
     font-weight: 800;
     letter-spacing: 0.01em;
     line-height: 1.2;
+    text-align: center;
+    min-height: 2.4em;
+    display: flex;
+    align-items: center;
     position: relative;
     z-index: 1;
 }
@@ -1579,9 +1662,36 @@ a {
 }
 
 @media (max-width: 640px) {
+    .network-partners {
+        padding: 10px;
+    }
+
+    .network-partners::before,
+    .network-partners::after {
+        width: 36px;
+    }
+
+    .network-partners__group {
+        gap: 12px;
+        padding-right: 12px;
+    }
+
     .network-partner-card {
+        width: 184px;
         flex-direction: column;
         text-align: center;
+        gap: 12px;
+        padding: 16px;
+    }
+
+    .network-partner-card__logo,
+    .network-partner-card__logo--wide {
+        width: 132px;
+        height: 62px;
+    }
+
+    .network-partner-card strong {
+        font-size: 0.98rem;
     }
 
     .customers-section__title {
@@ -1607,24 +1717,24 @@ a {
     }
 
     .customer-logo-card {
-        width: 156px;
-        min-height: 132px;
+        width: 168px;
+        min-height: 156px;
         padding: 18px 16px;
     }
 
     .customer-logo-card__mark,
     .customer-logo-card img {
-        width: 104px;
-        max-height: 68px;
+        width: 112px;
+        max-height: 72px;
     }
 
     .customer-logo-card__mark--wide,
     .customer-logo-card__mark--wide img {
-        width: 126px;
+        width: 132px;
     }
 
     .customer-logo-card__name {
-        font-size: 0.86rem;
+        font-size: 0.84rem;
     }
 }
 
