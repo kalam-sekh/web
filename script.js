@@ -314,6 +314,19 @@
         });
     }
 
+    // Homepage nav (no hamburger): tap the AKI Products trigger to open/close its dropdown
+    document.querySelectorAll('.foundation-nav .nav-item--dropdown > .foundation-nav__link').forEach(trigger => {
+        trigger.addEventListener('click', (e) => {
+            e.preventDefault();
+            trigger.parentElement.classList.toggle('open');
+        });
+    });
+    document.addEventListener('click', (e) => {
+        document.querySelectorAll('.foundation-nav .nav-item--dropdown.open').forEach(item => {
+            if (!item.contains(e.target)) item.classList.remove('open');
+        });
+    });
+
     // Active nav link on scroll
     const sections = document.querySelectorAll('section[id]');
     function updateActiveNav() {
