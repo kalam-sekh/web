@@ -689,7 +689,7 @@ serviceCards.forEach(card => {
             position: absolute;
             bottom: 75px;
             right: 5px;
-            width: 240px;
+            width: 290px;
             background: rgba(18, 18, 26, 0.85);
             backdrop-filter: blur(16px);
             -webkit-backdrop-filter: blur(16px);
@@ -792,7 +792,7 @@ serviceCards.forEach(card => {
             .chat-tooltip {
                 bottom: 67px;
                 right: 0;
-                width: 220px;
+                width: min(290px, calc(100vw - 40px));
                 padding: 12px 14px;
             }
         }
@@ -819,25 +819,13 @@ serviceCards.forEach(card => {
     const tooltip = document.createElement('div');
     tooltip.className = 'chat-tooltip';
     tooltip.id = 'chatTooltip';
-    tooltip.innerHTML = `
-        <button class="chat-tooltip-close" id="chatTooltipClose" aria-label="Close message">×</button>
-        <div class="chat-tooltip-title">AK Support</div>
-        <div class="chat-tooltip-body">
-            <div class="chat-message system">Welcome to AKI Assist</div>
-            <div class="chat-message system small" id="chatPrompt">How can we help you today? Please choose an option below:</div>
-            <div class="chat-options" id="chatOptions"></div>
-            <div class="chat-input" id="chatInput" style="display:none;">
-                <textarea id="chatTextarea" rows="3" placeholder="Describe your issue..."></textarea>
-                <button id="chatSendBtn" class="btn">Send</button>
-            </div>
-        </div>
-    `;
+    tooltip.innerHTML = "";
 
     // Chat Trigger Button
     const chatButton = document.createElement('button');
     chatButton.className = 'floating-chat-icon';
     chatButton.id = 'floatingChatIcon';
-    chatButton.setAttribute('aria-label', 'Open Live Chat');
+    chatButton.setAttribute('aria-label', 'Request a Call Back or Send a Query');
     chatButton.innerHTML = `
         <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
             <path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"></path>
@@ -868,37 +856,32 @@ serviceCards.forEach(card => {
     }
     
     registerCursorHover(chatButton);
-    const closeBtn = tooltip.querySelector('#chatTooltipClose');
-    if (closeBtn) registerCursorHover(closeBtn);
 
     // 4. Behaviors & Animations
     // Show tooltip after 3 seconds
     let tooltipTimeout = setTimeout(() => {
+        showMenu();
         tooltip.classList.add('show');
     }, 3000);
 
-    // Close tooltip click event
-    closeBtn.addEventListener('click', (e) => {
-        e.stopPropagation();
-        tooltip.classList.remove('show');
-        clearTimeout(tooltipTimeout);
-    });
+    // Call back / query request logic (submissions are emailed via Web3Forms)
+    // The access key is public by design; get one at https://web3forms.com using noreply@akint.co.in
+    const WEB3FORMS_ACCESS_KEY = '98b31045-1b2f-420c-9370-3f17ab4d1ccd';
+    const WEB3FORMS_ENDPOINT = 'https://api.web3forms.com/submit';
 
-    // Chat icon click (future functionality placeholder)
-    // Chat interaction logic
-    const CHAT_OPTIONS = [
-        { key: 'technical', label: 'Technical Support' },
-        { key: 'odoo', label: 'Odoo Queries' },
-        { key: 'web', label: 'Web & Web Applications' },
-        { key: 'mobile', label: 'iOS & Android' },
-        { key: 'other', label: 'Other Inquiries' }
+    const REQUEST_TYPES = [
+        { key: 'callback', label: 'Request a Call Back' },
+        { key: 'query', label: 'Send a Query' }
     ];
+
+    const fieldStyle = 'width:100%;padding:8px;border-radius:8px;border:1px solid rgba(255,255,255,0.06);background:rgba(255,255,255,0.02);color:#fff;';
+    const labelStyle = 'font-size:12px;margin-top:8px;display:block;color:#9fb4ff';
 
     function populateOptions() {
         const container = tooltip.querySelector('#chatOptions');
         if (!container) return;
         container.innerHTML = '';
-        CHAT_OPTIONS.forEach(opt => {
+        REQUEST_TYPES.forEach(opt => {
             const btn = document.createElement('button');
             btn.className = 'chat-option';
             btn.type = 'button';
@@ -909,173 +892,208 @@ serviceCards.forEach(card => {
         });
     }
 
-    function getVisitorCountry() {
+    function showMenu() {
+        tooltip.innerHTML = `
+            <button class="chat-tooltip-close" id="chatTooltipClose" aria-label="Close message">×</button>
+            <div class="chat-tooltip-title">AK Support</div>
+            <div class="chat-tooltip-body">
+                <div class="chat-message system">How can we help you?</div>
+                <div class="chat-message system small" id="chatPrompt">Please choose an option below:</div>
+                <div class="chat-options" id="chatOptions"></div>
+            </div>
+        `;
+        const close = tooltip.querySelector('#chatTooltipClose');
+        registerCursorHover(close);
+        close.addEventListener('click', (e) => {
+            e.stopPropagation();
+            tooltip.classList.remove('show');
+            clearTimeout(tooltipTimeout);
+        });
+        populateOptions();
+    }
+
+    const COUNTRY_CODES = 'AF AL DZ AD AO AG AR AM AU AT AZ BS BH BD BB BY BE BZ BJ BT BO BA BW BR BN BG BF BI KH CM CA CV CF TD CL CN CO KM CG CD CR CI HR CU CY CZ DK DJ DM DO EC EG SV GQ ER EE SZ ET FJ FI FR GA GM GE DE GH GR GD GT GN GW GY HT HN HK HU IS IN ID IR IQ IE IL IT JM JP JO KZ KE KI KP KR KW KG LA LV LB LS LR LY LI LT LU MO MG MW MY MV ML MT MH MR MU MX FM MD MC MN ME MA MZ MM NA NR NP NL NZ NI NE NG MK NO OM PK PW PS PA PG PY PE PH PL PT QA RO RU RW KN LC VC WS SM ST SA SN RS SC SL SG SK SI SB SO ZA SS ES LK SD SR SE CH SY TW TJ TZ TH TL TG TO TT TN TR TM TV UG UA AE GB US UY UZ VU VA VE VN YE ZM ZW'.split(' ');
+
+    function getCountryList() {
+        let names;
         try {
-            const locale = (Intl && Intl.DateTimeFormat) ? Intl.DateTimeFormat().resolvedOptions().locale || navigator.language : navigator.language;
-            if (!locale) return '';
-            const parts = locale.replace('_', '-').split('-');
-            const region = parts.length > 1 ? parts[1].toUpperCase() : '';
-            const map = { US: 'United States', GB: 'United Kingdom', IN: 'India', PK: 'Pakistan', AU: 'Australia', CA: 'Canada', DE: 'Germany', FR: 'France', ES: 'Spain', IT: 'Italy', NL: 'Netherlands' };
-            return map[region] || region || '';
+            const dn = new Intl.DisplayNames(['en'], { type: 'region' });
+            names = COUNTRY_CODES.map(code => ({ code, name: dn.of(code) }));
         } catch (e) {
-            return '';
+            names = [];
         }
+        return names.sort((a, b) => a.name.localeCompare(b.name));
+    }
+
+    // Detect the visitor's actual country from their IP (not browser language)
+    async function detectVisitorCountryCode() {
+        const sources = [
+            ['https://api.country.is/', d => d.country],
+            ['https://ipapi.co/json/', d => d.country_code]
+        ];
+        for (const [url, pick] of sources) {
+            try {
+                const res = await fetch(url, { cache: 'no-store' });
+                if (!res.ok) continue;
+                const code = String(pick(await res.json()) || '').toUpperCase();
+                if (COUNTRY_CODES.includes(code)) return code;
+            } catch (e) { /* try next source */ }
+        }
+        return '';
     }
 
     function handleOptionSelect(opt) {
         const body = tooltip.querySelector('.chat-tooltip-body');
         if (!body) return;
-
-        const inferredCountry = getVisitorCountry();
+        const isCallback = opt.key === 'callback';
+        const submitLabel = isCallback ? 'Request Call Back' : 'Send Query';
 
         body.innerHTML = `
-            <div class="chat-message system">Our live agent will connect you soon.</div>
-            <div class="chat-message system small">We require a few details before we proceed.</div>
-            <div class="chat-form">
-                <label style="font-size:12px;margin-top:8px;display:block;color:#9fb4ff">Name</label>
-                <input id="chatName" type="text" placeholder="Your name" style="width:100%;padding:8px;border-radius:8px;border:1px solid rgba(255,255,255,0.06);background:rgba(255,255,255,0.02);color:#fff;">
-                <label style="font-size:12px;margin-top:8px;display:block;color:#9fb4ff">Mobile</label>
-                <input id="chatMobile" type="text" placeholder="Mobile number" style="width:100%;padding:8px;border-radius:8px;border:1px solid rgba(255,255,255,0.06);background:rgba(255,255,255,0.02);color:#fff;">
-                <label style="font-size:12px;margin-top:8px;display:block;color:#9fb4ff">Email</label>
-                <input id="chatEmail" type="email" placeholder="you@example.com" style="width:100%;padding:8px;border-radius:8px;border:1px solid rgba(255,255,255,0.06);background:rgba(255,255,255,0.02);color:#fff;">
-                <label style="font-size:12px;margin-top:8px;display:block;color:#9fb4ff">Country</label>
-                <input id="chatCountry" type="text" placeholder="Country" value="${inferredCountry}" style="width:100%;padding:8px;border-radius:8px;border:1px solid rgba(255,255,255,0.06);background:rgba(255,255,255,0.02);color:#fff;">
-                <div style="display:flex;justify-content:flex-end;margin-top:8px;"><button id="chatStartBtn" class="btn">Start Chat</button></div>
-            </div>
+            <div class="chat-message system">${isCallback ? 'We will call you back soon.' : 'Tell us how we can help.'}</div>
+            <div class="chat-message system small">Please share a few details.</div>
+            <form class="chat-form" id="chatForm" novalidate>
+                <input type="text" id="chatBotcheck" tabindex="-1" autocomplete="off" style="display:none">
+                <label style="${labelStyle}">Name</label>
+                <input id="chatName" type="text" placeholder="Your name" style="${fieldStyle}">
+                <label style="${labelStyle}">Mobile</label>
+                <input id="chatMobile" type="tel" placeholder="Mobile number" style="${fieldStyle}">
+                <label style="${labelStyle}">Email</label>
+                <input id="chatEmail" type="email" placeholder="you@example.com" style="${fieldStyle}">
+                <label style="${labelStyle}">Country</label>
+                <input id="chatCountry" type="text" autocomplete="off" placeholder="Search country..." style="${fieldStyle}">
+                <ul id="chatCountryList" style="display:none;list-style:none;margin:4px 0 0;padding:4px;max-height:120px;overflow-y:auto;border-radius:8px;border:1px solid rgba(255,255,255,0.08);background:rgba(10,10,14,0.95);"></ul>
+                ${isCallback
+                    ? `<label style="${labelStyle}">Preferred time (optional)</label>
+                       <input id="chatTime" type="text" placeholder="e.g. Today 5-7 PM IST" style="${fieldStyle}">`
+                    : `<label style="${labelStyle}">Your query</label>
+                       <textarea id="chatMessage" rows="3" placeholder="Describe your query..." style="${fieldStyle}resize:vertical;"></textarea>`}
+                <div id="chatFormError" class="chat-message small" style="color:#fca5a5;margin-top:6px;display:none;"></div>
+                <div style="display:flex;justify-content:flex-end;margin-top:8px;"><button id="chatStartBtn" type="submit" class="btn">${submitLabel}</button></div>
+            </form>
         `;
 
+        const countryInput = tooltip.querySelector('#chatCountry');
+        const countryList = tooltip.querySelector('#chatCountryList');
+        const countries = getCountryList();
+        let countryTouched = false;
+
+        function renderCountryList() {
+            const q = countryInput.value.trim().toLowerCase();
+            const matches = countries.filter(c => c.name.toLowerCase().includes(q));
+            countryList.innerHTML = '';
+            matches.forEach(c => {
+                const li = document.createElement('li');
+                li.textContent = c.name;
+                li.style.cssText = 'padding:6px 8px;border-radius:6px;cursor:pointer;font-size:13px;color:#e6eefc;';
+                li.addEventListener('mouseenter', () => { li.style.background = 'rgba(255,255,255,0.08)'; });
+                li.addEventListener('mouseleave', () => { li.style.background = ''; });
+                li.addEventListener('mousedown', (e) => {
+                    e.preventDefault(); // keep focus so blur doesn't hide the list first
+                    countryInput.value = c.name;
+                    countryTouched = true;
+                    countryList.style.display = 'none';
+                });
+                countryList.appendChild(li);
+            });
+            countryList.style.display = matches.length ? 'block' : 'none';
+        }
+        countryInput.addEventListener('focus', () => { countryInput.select(); renderCountryList(); });
+        countryInput.addEventListener('input', () => { countryTouched = true; renderCountryList(); });
+        countryInput.addEventListener('blur', () => { countryList.style.display = 'none'; });
+
+        detectVisitorCountryCode().then(code => {
+            const match = countries.find(c => c.code === code);
+            if (match && !countryTouched) countryInput.value = match.name;
+        });
+
+        const form = tooltip.querySelector('#chatForm');
         const startBtn = tooltip.querySelector('#chatStartBtn');
-        if (startBtn) {
-            startBtn.addEventListener('click', async () => {
-                const name = (tooltip.querySelector('#chatName')||{}).value?.trim() || '';
-                const mobile = (tooltip.querySelector('#chatMobile')||{}).value?.trim() || '';
-                const email = (tooltip.querySelector('#chatEmail')||{}).value?.trim() || '';
-                const country = (tooltip.querySelector('#chatCountry')||{}).value?.trim() || '';
+        const errorEl = tooltip.querySelector('#chatFormError');
+        const val = (id) => ((tooltip.querySelector(id) || {}).value || '').trim();
+        const showError = (msg) => { errorEl.textContent = msg; errorEl.style.display = 'block'; };
 
-                if (!name || !email) {
-                    startBtn.textContent = 'Please complete Name & Email';
-                    setTimeout(() => startBtn.textContent = 'Start Chat', 1600);
-                    return;
-                }
+        form.addEventListener('submit', async (e) => {
+            e.preventDefault();
+            errorEl.style.display = 'none';
 
-                startBtn.disabled = true;
-                startBtn.textContent = 'Saving...';
+            const name = val('#chatName');
+            const mobile = val('#chatMobile');
+            const email = val('#chatEmail');
+            const country = val('#chatCountry');
+            const preferredTime = val('#chatTime');
+            const message = val('#chatMessage');
 
-                try {
-                    // Guard against cases where the loader isn't available in this scope
-                    if (typeof ensureConfigLoaded === 'function') {
-                        await ensureConfigLoaded();
-                    } else {
-                        console.warn('ensureConfigLoaded not available, loading /config.json directly');
-                        try {
-                            const _res = await fetch('/config.json', { cache: 'no-store' });
-                            if (_res.ok) {
-                                const _cfg = await _res.json();
-                                API_BASE = (_cfg.API_BASE || '').replace(/\/$/, '');
-                            }
-                        } catch (e) {
-                            /* ignore */
-                        }
-                        _configLoaded = true;
-                    }
-                    const endpoint = API_BASE ? `${API_BASE}/api/connect` : '/api/connect';
-                    const payload = { option: opt.key, name, mobile, email, country };
-                    // Log outgoing payload for debugging (helps trace malformed requests)
-                    try { console.debug('AKI Assist -> POST', endpoint, payload, JSON.stringify(payload)); } catch (e) {}
-                    const resp = await fetch(endpoint, {
-                        method: 'POST',
-                        headers: { 'Content-Type': 'application/json', 'Accept': 'application/json' },
-                        body: JSON.stringify(payload)
-                    });
+            if (!name) return showError('Please enter your name.');
+            if (!mobile) return showError('Please enter your mobile number.');
+            if (!/^\S+@\S+\.\S+$/.test(email)) return showError('Please enter a valid email.');
+            if (country && !countries.some(c => c.name.toLowerCase() === country.toLowerCase())) return showError('Please pick your country from the list.');
+            if (!isCallback && !message) return showError('Please enter your query.');
+            if (val('#chatBotcheck')) return; // honeypot: bots fill hidden fields
 
-                    // If server returns JSON, parse it. If not, surface the text (helpful for HTML error pages).
-                    const ct = (resp.headers.get('content-type') || '').toLowerCase();
-                    let data = null;
-                    if (ct.includes('application/json')) {
-                        data = await resp.json();
-                    } else {
-                        const text = await resp.text();
-                        throw new Error(`Server returned ${resp.status} ${resp.statusText}: ${text.replace(/\s+/g, ' ').slice(0,300)}`);
-                    }
+            startBtn.disabled = true;
+            startBtn.textContent = 'Sending...';
 
-                    if (!resp.ok) throw new Error(data?.error || `Server error ${resp.status}`);
+            const payload = {
+                access_key: WEB3FORMS_ACCESS_KEY,
+                subject: `${opt.label} from ${name} (akint.co.in)`,
+                from_name: 'AK International Website',
+                replyto: email,
+                request_type: opt.label,
+                name, mobile, email, country,
+                page: location.href
+            };
+            if (isCallback) payload.preferred_time = preferredTime || 'Not specified';
+            else payload.message = message;
 
-                    body.innerHTML = `\n                        <div class="chat-message system">Thanks ${name} — your connect ID is <strong>${data.connect_id}</strong>.</div>\n                        <div class="chat-message system small">Connecting you to <strong>${opt.label}</strong> now...</div>\n                    `;
+            try {
+                const resp = await fetch(WEB3FORMS_ENDPOINT, {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json', 'Accept': 'application/json' },
+                    body: JSON.stringify(payload)
+                });
+                const data = await resp.json().catch(() => ({}));
+                if (!resp.ok || !data.success) throw new Error(data.message || `Server error ${resp.status}`);
 
-                    setTimeout(() => openEmbeddedChat({ name, mobile, email, country, connect_id: data.connect_id }, opt), 900);
-                } catch (err) {
-                    startBtn.disabled = false;
-                    startBtn.textContent = 'Start Chat';
-                    body.innerHTML = `<div class="chat-message system small">Unable to save details: ${err.message}</div>`;
-                    console.error('save error', err);
-                }
-            });
-        }
+                body.innerHTML = '';
+                const thanks = document.createElement('div');
+                thanks.className = 'chat-message system';
+                thanks.textContent = `Thanks ${name}! ` + (isCallback
+                    ? 'We have received your request and will call you back shortly.'
+                    : 'We have received your query and will get back to you soon.');
+                body.appendChild(thanks);
+            } catch (err) {
+                startBtn.disabled = false;
+                startBtn.textContent = submitLabel;
+                showError('Unable to send right now. Please try again or email info@akint.co.in.');
+                console.error('request submit error', err);
+            }
+        });
     }
 
-    function openEmbeddedChat(userData, opt) {
-        // Replace tooltip with a small chat window (keeps same footprint)
-        tooltip.innerHTML = `
-            <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:8px;">
-                <div style="font-weight:700;color:#cfe1ff">${opt.label} — AKI Assist</div>
-                <button class="chat-tooltip-close" id="chatTooltipCloseSmall" aria-label="Close chat" style="background:transparent;border:none;color:#9fb4ff;cursor:pointer">×</button>
-            </div>
-            <div id="chatWindow" style="height:180px;overflow:auto;padding:6px;border-radius:8px;border:1px solid rgba(255,255,255,0.03);background:rgba(10,10,14,0.6);">
-                <div class="chat-message system">Our live agent will join shortly. Meanwhile, you can type your message below.</div>
-            </div>
-            <div style="margin-top:8px;display:flex;gap:8px;">
-                <input id="chatMsgInput" placeholder="Type a message..." style="flex:1;padding:8px;border-radius:8px;border:1px solid rgba(255,255,255,0.06);background:rgba(255,255,255,0.02);color:#fff;">
-                <button id="chatMsgSend" class="btn">Chat</button>
-            </div>
-        `;
-
-        // rebind close
-        const closeSmall = tooltip.querySelector('#chatTooltipCloseSmall');
-        if (closeSmall) {
-            registerCursorHover(closeSmall);
-            closeSmall.addEventListener('click', (e) => { e.stopPropagation(); tooltip.classList.remove('show'); });
-        }
-
-        const chatWin = tooltip.querySelector('#chatWindow');
-        const input = tooltip.querySelector('#chatMsgInput');
-        const send = tooltip.querySelector('#chatMsgSend');
-
-        function appendMessage(text, who='user') {
-            const el = document.createElement('div');
-            el.className = 'chat-message';
-            el.style.marginBottom = '6px';
-            el.textContent = text;
-            if (who === 'agent') el.style.color = '#cfe1ff';
-            chatWin.appendChild(el);
-            chatWin.scrollTop = chatWin.scrollHeight;
-        }
-
-        // simulate agent connection after a short delay
-        setTimeout(() => appendMessage('Agent: Hi ' + (userData.name || '') + ', I will be assisting you shortly.', 'agent'), 1400);
-
-        if (send && input) {
-            send.addEventListener('click', () => {
-                const txt = input.value.trim();
-                if (!txt) return;
-                appendMessage('You: ' + txt, 'user');
-                input.value = '';
-                // echo simulated agent reply
-                setTimeout(() => appendMessage('Agent: Thanks for the details. We will respond soon.' , 'agent'), 800 + Math.random()*800);
-            });
-        }
+    function openRequestWidget(typeKey) {
+        clearTimeout(tooltipTimeout);
+        showMenu();
+        tooltip.classList.add('show');
+        const opt = REQUEST_TYPES.find(t => t.key === typeKey);
+        if (opt) handleOptionSelect(opt);
     }
+    window.openRequestWidget = openRequestWidget;
 
     chatButton.addEventListener('click', () => {
-        const willShow = !tooltip.classList.contains('show');
-        if (willShow) {
-            // prepare UI
-            const bodyPrompt = tooltip.querySelector('#chatPrompt');
-            if (bodyPrompt) bodyPrompt.textContent = 'How can we help you today? Please choose an option below:';
-            populateOptions();
-            tooltip.classList.add('show');
-        } else {
+        if (tooltip.classList.contains('show')) {
             tooltip.classList.remove('show');
+        } else {
+            showMenu();
+            tooltip.classList.add('show');
         }
+    });
+
+    // Send "Contact", "Get a Quote", etc. links to the call back / query request instead of the contact section
+    document.addEventListener('click', (e) => {
+        const link = e.target.closest && e.target.closest('a[href$="#contact"]');
+        if (!link) return;
+        e.preventDefault();
+        openRequestWidget();
     });
 })();
 
