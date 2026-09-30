@@ -960,8 +960,8 @@ serviceCards.forEach(card => {
                 <label style="${labelStyle}">Email</label>
                 <input id="chatEmail" type="email" placeholder="you@example.com" style="${fieldStyle}">
                 <label style="${labelStyle}">Country</label>
-                <input id="chatCountry" type="text" autocomplete="off" placeholder="Search country..." style="${fieldStyle}">
-                <ul id="chatCountryList" style="display:none;list-style:none;margin:4px 0 0;padding:4px;max-height:120px;overflow-y:auto;border-radius:8px;border:1px solid rgba(255,255,255,0.08);background:rgba(10,10,14,0.95);"></ul>
+                <input id="chatCountry" type="text" autocomplete="off" placeholder="Type to search country..." style="${fieldStyle}">
+                <ul id="chatCountryList" style="display:none;list-style:none;margin:4px 0 0;padding:4px;max-height:150px;overflow-y:auto;border-radius:8px;border:1px solid rgba(255,255,255,0.08);background:rgba(10,10,14,0.95);"></ul>
                 ${isCallback
                     ? `<label style="${labelStyle}">Preferred time (optional)</label>
                        <input id="chatTime" type="text" placeholder="e.g. Today 5-7 PM IST" style="${fieldStyle}">`
@@ -979,7 +979,8 @@ serviceCards.forEach(card => {
 
         function renderCountryList() {
             const q = countryInput.value.trim().toLowerCase();
-            const matches = countries.filter(c => c.name.toLowerCase().includes(q));
+            // Never show the full list: nothing until the visitor types, then at most 5 matches
+            const matches = q ? countries.filter(c => c.name.toLowerCase().includes(q)).slice(0, 5) : [];
             countryList.innerHTML = '';
             matches.forEach(c => {
                 const li = document.createElement('li');
@@ -997,7 +998,7 @@ serviceCards.forEach(card => {
             });
             countryList.style.display = matches.length ? 'block' : 'none';
         }
-        countryInput.addEventListener('focus', () => { countryInput.select(); renderCountryList(); });
+        countryInput.addEventListener('focus', () => countryInput.select());
         countryInput.addEventListener('input', () => { countryTouched = true; renderCountryList(); });
         countryInput.addEventListener('blur', () => { countryList.style.display = 'none'; });
 
