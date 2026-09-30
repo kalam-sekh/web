@@ -912,17 +912,34 @@ serviceCards.forEach(card => {
         populateOptions();
     }
 
-    function getVisitorCountry() {
+    const COUNTRY_CODES = 'AF AL DZ AD AO AG AR AM AU AT AZ BS BH BD BB BY BE BZ BJ BT BO BA BW BR BN BG BF BI KH CM CA CV CF TD CL CN CO KM CG CD CR CI HR CU CY CZ DK DJ DM DO EC EG SV GQ ER EE SZ ET FJ FI FR GA GM GE DE GH GR GD GT GN GW GY HT HN HK HU IS IN ID IR IQ IE IL IT JM JP JO KZ KE KI KP KR KW KG LA LV LB LS LR LY LI LT LU MO MG MW MY MV ML MT MH MR MU MX FM MD MC MN ME MA MZ MM NA NR NP NL NZ NI NE NG MK NO OM PK PW PS PA PG PY PE PH PL PT QA RO RU RW KN LC VC WS SM ST SA SN RS SC SL SG SK SI SB SO ZA SS ES LK SD SR SE CH SY TW TJ TZ TH TL TG TO TT TN TR TM TV UG UA AE GB US UY UZ VU VA VE VN YE ZM ZW'.split(' ');
+
+    function getCountryList() {
+        let names;
         try {
-            const locale = (Intl && Intl.DateTimeFormat) ? Intl.DateTimeFormat().resolvedOptions().locale || navigator.language : navigator.language;
-            if (!locale) return '';
-            const parts = locale.replace('_', '-').split('-');
-            const region = parts.length > 1 ? parts[1].toUpperCase() : '';
-            const map = { US: 'United States', GB: 'United Kingdom', IN: 'India', PK: 'Pakistan', AU: 'Australia', CA: 'Canada', DE: 'Germany', FR: 'France', ES: 'Spain', IT: 'Italy', NL: 'Netherlands', SA: 'Saudi Arabia' };
-            return map[region] || region || '';
+            const dn = new Intl.DisplayNames(['en'], { type: 'region' });
+            names = COUNTRY_CODES.map(code => ({ code, name: dn.of(code) }));
         } catch (e) {
-            return '';
+            names = [];
         }
+        return names.sort((a, b) => a.name.localeCompare(b.name));
+    }
+
+    // Detect the visitor's actual country from their IP (not browser language)
+    async function detectVisitorCountryCode() {
+        const sources = [
+            ['https://api.country.is/', d => d.country],
+            ['https://ipapi.co/json/', d => d.country_code]
+        ];
+        for (const [url, pick] of sources) {
+            try {
+                const res = await fetch(url, { cache: 'no-store' });
+                if (!res.ok) continue;
+                const code = String(pick(await res.json()) || '').toUpperCase();
+                if (COUNTRY_CODES.includes(code)) return code;
+            } catch (e) { /* try next source */ }
+        }
+        return '';
     }
 
     function handleOptionSelect(opt) {
@@ -943,7 +960,7 @@ serviceCards.forEach(card => {
                 <label style="${labelStyle}">Email</label>
                 <input id="chatEmail" type="email" placeholder="you@example.com" style="${fieldStyle}">
                 <label style="${labelStyle}">Country</label>
-                <input id="chatCountry" type="text" placeholder="Country" value="${getVisitorCountry()}" style="${fieldStyle}">
+                <select id="chatCountry" style="${fieldStyle}"><option value="">Detecting your country...</option></select>
                 ${isCallback
                     ? `<label style="${labelStyle}">Preferred time (optional)</label>
                        <input id="chatTime" type="text" placeholder="e.g. Today 5-7 PM IST" style="${fieldStyle}">`
@@ -953,6 +970,17 @@ serviceCards.forEach(card => {
                 <div style="display:flex;justify-content:flex-end;margin-top:8px;"><button id="chatStartBtn" type="submit" class="btn">${submitLabel}</button></div>
             </form>
         `;
+
+        const countrySelect = tooltip.querySelector('#chatCountry');
+        const countries = getCountryList();
+        countrySelect.innerHTML = '<option value="">Select country</option>' +
+            countries.map(c => `<option value="${c.name}" data-code="${c.code}">${c.name}</option>`).join('');
+        let countryTouched = false;
+        countrySelect.addEventListener('change', () => { countryTouched = true; });
+        detectVisitorCountryCode().then(code => {
+            const match = countries.find(c => c.code === code);
+            if (match && !countryTouched) countrySelect.value = match.name;
+        });
 
         const form = tooltip.querySelector('#chatForm');
         const startBtn = tooltip.querySelector('#chatStartBtn');
