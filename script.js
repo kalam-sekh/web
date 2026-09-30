@@ -960,7 +960,8 @@ serviceCards.forEach(card => {
                 <label style="${labelStyle}">Email</label>
                 <input id="chatEmail" type="email" placeholder="you@example.com" style="${fieldStyle}">
                 <label style="${labelStyle}">Country</label>
-                <select id="chatCountry" style="${fieldStyle}"><option value="">Detecting your country...</option></select>
+                <input id="chatCountry" type="text" autocomplete="off" placeholder="Search country..." style="${fieldStyle}">
+                <ul id="chatCountryList" style="display:none;list-style:none;margin:4px 0 0;padding:4px;max-height:120px;overflow-y:auto;border-radius:8px;border:1px solid rgba(255,255,255,0.08);background:rgba(10,10,14,0.95);"></ul>
                 ${isCallback
                     ? `<label style="${labelStyle}">Preferred time (optional)</label>
                        <input id="chatTime" type="text" placeholder="e.g. Today 5-7 PM IST" style="${fieldStyle}">`
@@ -971,15 +972,38 @@ serviceCards.forEach(card => {
             </form>
         `;
 
-        const countrySelect = tooltip.querySelector('#chatCountry');
+        const countryInput = tooltip.querySelector('#chatCountry');
+        const countryList = tooltip.querySelector('#chatCountryList');
         const countries = getCountryList();
-        countrySelect.innerHTML = '<option value="">Select country</option>' +
-            countries.map(c => `<option value="${c.name}" data-code="${c.code}">${c.name}</option>`).join('');
         let countryTouched = false;
-        countrySelect.addEventListener('change', () => { countryTouched = true; });
+
+        function renderCountryList() {
+            const q = countryInput.value.trim().toLowerCase();
+            const matches = countries.filter(c => c.name.toLowerCase().includes(q));
+            countryList.innerHTML = '';
+            matches.forEach(c => {
+                const li = document.createElement('li');
+                li.textContent = c.name;
+                li.style.cssText = 'padding:6px 8px;border-radius:6px;cursor:pointer;font-size:13px;color:#e6eefc;';
+                li.addEventListener('mouseenter', () => { li.style.background = 'rgba(255,255,255,0.08)'; });
+                li.addEventListener('mouseleave', () => { li.style.background = ''; });
+                li.addEventListener('mousedown', (e) => {
+                    e.preventDefault(); // keep focus so blur doesn't hide the list first
+                    countryInput.value = c.name;
+                    countryTouched = true;
+                    countryList.style.display = 'none';
+                });
+                countryList.appendChild(li);
+            });
+            countryList.style.display = matches.length ? 'block' : 'none';
+        }
+        countryInput.addEventListener('focus', () => { countryInput.select(); renderCountryList(); });
+        countryInput.addEventListener('input', () => { countryTouched = true; renderCountryList(); });
+        countryInput.addEventListener('blur', () => { countryList.style.display = 'none'; });
+
         detectVisitorCountryCode().then(code => {
             const match = countries.find(c => c.code === code);
-            if (match && !countryTouched) countrySelect.value = match.name;
+            if (match && !countryTouched) countryInput.value = match.name;
         });
 
         const form = tooltip.querySelector('#chatForm');
@@ -1002,6 +1026,7 @@ serviceCards.forEach(card => {
             if (!name) return showError('Please enter your name.');
             if (!mobile) return showError('Please enter your mobile number.');
             if (!/^\S+@\S+\.\S+$/.test(email)) return showError('Please enter a valid email.');
+            if (country && !countries.some(c => c.name.toLowerCase() === country.toLowerCase())) return showError('Please pick your country from the list.');
             if (!isCallback && !message) return showError('Please enter your query.');
             if (val('#chatBotcheck')) return; // honeypot: bots fill hidden fields
 
