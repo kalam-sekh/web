@@ -5,6 +5,17 @@
 (function () {
     'use strict';
 
+    const INSTAGRAM_URL = 'https://www.instagram.com/ak_int_office/?hl=en';
+    document.querySelectorAll('a[aria-label="Instagram"], a[href*="instagram.com/ak_int_office"], .social-links a').forEach(link => {
+        const hasInstagramIcon = link.querySelector('.fa-instagram');
+        const isInstagramText = link.textContent.trim().toLowerCase() === 'instagram';
+        if (hasInstagramIcon || isInstagramText || link.getAttribute('aria-label') === 'Instagram') {
+            link.href = INSTAGRAM_URL;
+            link.target = '_blank';
+            link.rel = 'noopener';
+        }
+    });
+
     // Config loader: optional /config.json can set { "API_BASE": "https://your-railway-url" }
     let API_BASE = '';
     let _configLoaded = false;
