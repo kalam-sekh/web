@@ -396,9 +396,20 @@ a {
     opacity: 0;
     visibility: hidden;
     pointer-events: none;
-    transition: opacity 0.22s ease, transform 0.22s ease, visibility 0.22s;
+    /* short close delay so the menu doesn't vanish while the cursor travels to it */
+    transition: opacity 0.22s ease 0.2s, transform 0.22s ease 0.2s, visibility 0s linear 0.42s;
     z-index: 2000;
     box-shadow: 0 20px 60px rgba(0, 0, 0, 0.5), 0 0 0 1px rgba(99,102,241,0.08);
+}
+
+/* invisible bridge over the gap between trigger and menu so hover isn't lost */
+.nav-dropdown::before {
+    content: '';
+    position: absolute;
+    top: -16px;
+    left: 0;
+    right: 0;
+    height: 16px;
 }
 
 .nav-item--dropdown:hover .nav-dropdown,
@@ -408,6 +419,7 @@ a {
     visibility: visible;
     pointer-events: auto;
     transform: translateX(-50%) translateY(0);
+    transition-delay: 0s;
 }
 
 .nav-dropdown li {

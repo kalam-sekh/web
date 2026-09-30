@@ -286,13 +286,9 @@
         window.addEventListener('resize', updateMobileNavItems);
 
         navMenu.querySelectorAll('.nav-link').forEach(link => {
-            link.addEventListener('click', (e) => {
-                const dropdownTrigger = link.closest('.nav-item--dropdown') && window.innerWidth <= mobileBreakpoint;
-                if (dropdownTrigger) {
-                    e.preventDefault();
-                    link.closest('.nav-item--dropdown').classList.toggle('open');
-                    return;
-                }
+            link.addEventListener('click', () => {
+                // dropdown triggers are handled by the dropdown handler below
+                if (link.parentElement.classList.contains('nav-item--dropdown')) return;
                 closeMobileMenu();
             });
         });
@@ -314,17 +310,33 @@
         });
     }
 
-    // Homepage nav (no hamburger): tap the AKI Products trigger to open/close its dropdown
-    document.querySelectorAll('.foundation-nav .nav-item--dropdown > .foundation-nav__link').forEach(trigger => {
+    // Dropdowns (all pages): click/tap the trigger to pin it open; click elsewhere to close.
+    // Hover also opens it on desktop (CSS), so it stays open while the cursor moves to an item.
+    const dropdownItems = document.querySelectorAll('.nav-item--dropdown');
+    dropdownItems.forEach(item => {
+        const trigger = item.querySelector(':scope > a');
+        if (!trigger) return;
         trigger.addEventListener('click', (e) => {
             e.preventDefault();
-            trigger.parentElement.classList.toggle('open');
+            const willOpen = !item.classList.contains('open');
+            dropdownItems.forEach(other => {
+                other.classList.remove('open');
+                other.querySelector(':scope > a')?.setAttribute('aria-expanded', 'false');
+            });
+            item.classList.toggle('open', willOpen);
+            trigger.setAttribute('aria-expanded', String(willOpen));
         });
     });
     document.addEventListener('click', (e) => {
-        document.querySelectorAll('.foundation-nav .nav-item--dropdown.open').forEach(item => {
-            if (!item.contains(e.target)) item.classList.remove('open');
+        dropdownItems.forEach(item => {
+            if (!item.contains(e.target)) {
+                item.classList.remove('open');
+                item.querySelector(':scope > a')?.setAttribute('aria-expanded', 'false');
+            }
         });
+    });
+    document.addEventListener('keydown', (e) => {
+        if (e.key === 'Escape') dropdownItems.forEach(item => item.classList.remove('open'));
     });
 
     // Active nav link on scroll
