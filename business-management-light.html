@@ -1,0 +1,366 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Business Management Light - AK International</title>
+    <meta name="description" content="Business Management Light by AK International — a simplified, affordable business management tool for small businesses and startups.">
+    <link rel="shortcut icon" type="image/png" href="logo.png?v=20251110">
+    <link rel="icon" type="image/png" sizes="32x32" href="logo.png?v=20251110">
+    <link rel="icon" type="image/png" sizes="16x16" href="logo.png?v=20251110">
+    <link rel="apple-touch-icon" href="logo.png?v=20251110">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=JetBrains+Mono:wght@400;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+    <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="products.css">
+    <!-- Google tag (gtag.js) -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-WEW70GGLH3"></script>
+    <script>
+        window.dataLayer = window.dataLayer || [];
+        function gtag(){dataLayer.push(arguments);}
+        gtag('js', new Date());
+        gtag('config', 'G-WEW70GGLH3');
+    </script>
+</head>
+
+<body class="page-with-home-bg">
+    <div class="site-bg-media" aria-hidden="true">
+        <video
+            id="siteBgVideo"
+            class="site-bg-media__video"
+            src="https://d8j0ntlcm91z4.cloudfront.net/user_38xzZboKViGWJOttwIXH07lWA1P/hf_20260328_065045_c44942da-53c6-4804-b734-f9e07fc22e08.mp4"
+            muted
+            playsinline
+            autoplay
+        ></video>
+    </div>
+
+    <!-- Particle Canvas -->
+    <canvas id="particleCanvas"></canvas>
+
+    <!-- Custom Cursor -->
+    <div class="cursor-dot" id="cursorDot"></div>
+    <div class="cursor-ring" id="cursorRing"></div>
+
+    <!-- Navigation -->
+    <nav class="navbar" id="navbar">
+        <div class="container">
+            <a href="index.html" class="logo">
+                <img src="company-logo.png" alt="AK International Logo" class="logo-img">
+                <span class="logo-text">AK<span class="logo-accent">Int</span></span>
+            </a>
+            <ul class="nav-menu" id="navMenu">
+                <li><a href="index.html" class="nav-link" data-text="Home">Home</a></li>
+                <li><a href="index.html#about" class="nav-link" data-text="About">About</a></li>
+                <li class="nav-item--dropdown">
+                    <a href="#" class="nav-link" data-text="Products" aria-haspopup="true" aria-expanded="false">Products <i class="fas fa-chevron-down nav-dropdown-arrow"></i></a>
+                    <ul class="nav-dropdown">
+                        <li><a href="ibm.html" class="nav-dropdown__link"><i class="fas fa-building"></i>Integrated Business Management (IBM)</a></li>
+                        <li class="nav-dropdown__divider"></li>
+                        <li><a href="web-development.html" class="nav-dropdown__link"><i class="fas fa-code"></i>Web Development</a></li>
+                        <li class="nav-dropdown__divider"></li>
+                        <li><a href="vehicle-equipment-management.html" class="nav-dropdown__link"><i class="fas fa-truck"></i>Advance Vehicle &amp; Heavy Equipment Management</a></li>
+                        <li class="nav-dropdown__divider"></li>
+                        <li><a href="business-management-light.html" class="nav-dropdown__link active"><i class="fas fa-briefcase"></i>Business Management Light</a></li>
+                        <li class="nav-dropdown__divider"></li>
+                        <li><a href="invoice-creation.html" class="nav-dropdown__link"><i class="fas fa-file-invoice"></i>Invoice Creation</a></li>
+                        <li class="nav-dropdown__divider"></li>
+                        <li><a href="inventory-management.html" class="nav-dropdown__link"><i class="fas fa-boxes-stacked"></i>Inventory Management</a></li>
+                        <li class="nav-dropdown__divider"></li>
+                        <li><a href="odoo.html" class="nav-dropdown__link"><i class="fas fa-cubes"></i>Odoo Solutions</a></li>
+                    </ul>
+                </li>
+                <li class="nav-item--dropdown">
+                    <a href="#" class="nav-link" data-text="Our Businesses" aria-haspopup="true" aria-expanded="false">Our Businesses <i class="fas fa-chevron-down nav-dropdown-arrow"></i></a>
+                    <ul class="nav-dropdown">
+                        <li><a href="https://store.akint.co.in/" class="nav-dropdown__link" target="_blank" rel="noopener"><i class="fas fa-cart-shopping"></i>AKI Ecom</a></li>
+                        <li class="nav-dropdown__divider"></li>
+                        <li><a href="leather-products.html" class="nav-dropdown__link"><i class="fas fa-ship"></i>AKI Import Export</a></li>
+                        <li class="nav-dropdown__divider"></li>
+                        <li><a href="https://tech.akint.co.in/" class="nav-dropdown__link" target="_blank" rel="noopener"><i class="fas fa-laptop-code"></i>AKI IT</a></li>
+                    </ul>
+                </li>
+                <li><a href="index.html#contact" class="nav-link" data-text="Contact">Contact</a></li>
+                <li><a href="index.html#contact" class="nav-link nav-link--cta">Get a Quote</a></li>
+            </ul>
+            <div class="hamburger" id="hamburger">
+                <span></span>
+                <span></span>
+                <span></span>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <section class="product-hero" id="hero">
+        <div class="hero-grid-bg"></div>
+        <div class="hero-glow hero-glow--1"></div>
+        <div class="hero-glow hero-glow--2"></div>
+        <div class="hero-glow hero-glow--3"></div>
+        <div class="product-hero__content">
+            <div class="hero-badge reveal">
+                <span class="hero-badge__dot"></span>
+                Simple. Affordable. Powerful.
+            </div>
+            <h1 class="hero-title reveal">
+                <span class="hero-line">Business Management</span>
+                <span class="hero-line hero-line--gradient">Light</span>
+            </h1>
+            <p class="hero-subtitle reveal">
+                Sales &bull; Expenses &bull; Invoicing &bull; <span class="text-gradient">Built for Small Teams</span>
+            </p>
+            <p class="product-hero__desc reveal">
+                A lightweight, easy-to-use business management tool for startups and small businesses — covering the essentials of sales, expenses, invoicing, and basic inventory, without the complexity or cost of a full ERP.
+            </p>
+            <div class="hero-buttons reveal">
+                <a href="#features" class="btn btn--primary magnetic-btn">
+                    <span>Explore Features</span>
+                    <i class="fas fa-arrow-down"></i>
+                </a>
+                <a href="index.html#contact" class="btn btn--outline magnetic-btn">
+                    <span>Request a Demo</span>
+                    <i class="fas fa-rocket"></i>
+                </a>
+            </div>
+            <div class="hero-stats reveal">
+                <div class="hero-stat">
+                    <span class="hero-stat__number" data-count="5">0</span><span class="hero-stat__plus">min</span>
+                    <span class="hero-stat__label">Setup Time</span>
+                </div>
+                <div class="hero-stat__divider"></div>
+                <div class="hero-stat">
+                    <span class="hero-stat__number" data-count="0">0</span>
+                    <span class="hero-stat__label">Training Needed</span>
+                </div>
+                <div class="hero-stat__divider"></div>
+                <div class="hero-stat">
+                    <span class="hero-stat__number" data-count="100">0</span><span class="hero-stat__plus">%</span>
+                    <span class="hero-stat__label">Cloud-Based</span>
+                </div>
+            </div>
+        </div>
+        <div class="hero-scroll">
+            <span>Scroll</span>
+            <div class="hero-scroll__line"></div>
+        </div>
+    </section>
+
+    <!-- Key Features Section -->
+    <section class="section section--dark" id="features">
+        <div class="container">
+            <div class="section-header reveal">
+                <span class="section-tag"><i class="fas fa-cubes"></i> Key Features</span>
+                <h2 class="section-title">Just What Small Businesses <span class="text-gradient">Need</span></h2>
+                <p class="section-desc">A focused feature set that covers daily operations without unnecessary complexity.</p>
+            </div>
+            <div class="product-details-grid">
+                <div class="product-detail-card reveal" data-tilt>
+                    <div class="product-detail-card__icon"><i class="fas fa-cart-shopping"></i></div>
+                    <h3>Sales Management</h3>
+                    <p>Create quotations and sales orders, and track every deal from lead to close.</p>
+                </div>
+                <div class="product-detail-card reveal" data-tilt>
+                    <div class="product-detail-card__icon"><i class="fas fa-receipt"></i></div>
+                    <h3>Expense Tracking</h3>
+                    <p>Log business expenses by category and keep a clear view of where money is going.</p>
+                </div>
+                <div class="product-detail-card reveal" data-tilt>
+                    <div class="product-detail-card__icon"><i class="fas fa-file-invoice"></i></div>
+                    <h3>Simple Invoicing</h3>
+                    <p>Generate and send professional invoices in seconds, with payment status tracking.</p>
+                </div>
+                <div class="product-detail-card reveal" data-tilt>
+                    <div class="product-detail-card__icon"><i class="fas fa-boxes"></i></div>
+                    <h3>Basic Inventory</h3>
+                    <p>Keep track of product stock levels without the overhead of a full inventory system.</p>
+                </div>
+                <div class="product-detail-card reveal" data-tilt>
+                    <div class="product-detail-card__icon"><i class="fas fa-address-book"></i></div>
+                    <h3>Contact Management</h3>
+                    <p>Store customer and vendor details in one organized, searchable address book.</p>
+                </div>
+                <div class="product-detail-card reveal" data-tilt>
+                    <div class="product-detail-card__icon"><i class="fas fa-chart-simple"></i></div>
+                    <h3>Simple Dashboards</h3>
+                    <p>A clear, at-a-glance view of sales, expenses, and outstanding payments.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Why Choose Section -->
+    <section class="section" id="why">
+        <div class="container">
+            <div class="section-header reveal">
+                <span class="section-tag"><i class="fas fa-gem"></i> Why Light</span>
+                <h2 class="section-title">Grow Without <span class="text-gradient">Growing Pains</span></h2>
+                <p class="section-desc">Start simple, and upgrade to full Integrated Business Management whenever you're ready.</p>
+            </div>
+            <div class="features-grid">
+                <div class="feature-card reveal" data-tilt>
+                    <div class="feature-card__glow"></div>
+                    <div class="feature-card__icon">
+                        <i class="fas fa-bolt"></i>
+                    </div>
+                    <h3>Quick to Start</h3>
+                    <p>Be up and running the same day — no lengthy implementation process.</p>
+                    <div class="feature-card__number">01</div>
+                </div>
+                <div class="feature-card reveal" data-tilt>
+                    <div class="feature-card__glow"></div>
+                    <div class="feature-card__icon">
+                        <i class="fas fa-wallet"></i>
+                    </div>
+                    <h3>Budget-Friendly</h3>
+                    <p>Priced for startups and small teams, with no hidden fees or long contracts.</p>
+                    <div class="feature-card__number">02</div>
+                </div>
+                <div class="feature-card reveal" data-tilt>
+                    <div class="feature-card__glow"></div>
+                    <div class="feature-card__icon">
+                        <i class="fas fa-arrow-up-right-dots"></i>
+                    </div>
+                    <h3>Upgrade Path</h3>
+                    <p>Move to full IBM later without losing any of your existing data.</p>
+                    <div class="feature-card__number">03</div>
+                </div>
+                <div class="feature-card reveal" data-tilt>
+                    <div class="feature-card__glow"></div>
+                    <div class="feature-card__icon">
+                        <i class="fas fa-mobile-screen-button"></i>
+                    </div>
+                    <h3>Works Anywhere</h3>
+                    <p>Access your business data from your phone, tablet, or laptop — anytime.</p>
+                    <div class="feature-card__number">04</div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Process Section -->
+    <section class="section section--dark">
+        <div class="container">
+            <div class="section-header reveal">
+                <span class="section-tag"><i class="fas fa-route"></i> Getting Started</span>
+                <h2 class="section-title">Up and Running in <span class="text-gradient">Days, Not Months</span></h2>
+                <p class="section-desc">A lightweight rollout designed for busy small business owners.</p>
+            </div>
+            <div class="product-process-grid">
+                <div class="product-process-step reveal">
+                    <div class="product-process-step__num">01</div>
+                    <div class="product-process-step__icon"><i class="fas fa-comments"></i></div>
+                    <h3>Quick Consultation</h3>
+                    <p>We understand your basic needs in a short, focused call.</p>
+                </div>
+                <div class="product-process-step reveal">
+                    <div class="product-process-step__num">02</div>
+                    <div class="product-process-step__icon"><i class="fas fa-user-gear"></i></div>
+                    <h3>Account Setup</h3>
+                    <p>We configure your products, contacts, and invoice templates.</p>
+                </div>
+                <div class="product-process-step reveal">
+                    <div class="product-process-step__num">03</div>
+                    <div class="product-process-step__icon"><i class="fas fa-graduation-cap"></i></div>
+                    <h3>Quick Walkthrough</h3>
+                    <p>A short session to get your team comfortable with the essentials.</p>
+                </div>
+                <div class="product-process-step reveal">
+                    <div class="product-process-step__num">04</div>
+                    <div class="product-process-step__icon"><i class="fas fa-rocket"></i></div>
+                    <h3>Start Using It</h3>
+                    <p>Start creating invoices and tracking sales right away.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- CTA Section -->
+    <section class="section-cta">
+        <div class="container">
+            <div class="cta-box reveal">
+                <div class="cta-box__glow"></div>
+                <h2>Ready for <span class="text-gradient">Simpler Business Management</span>?</h2>
+                <p>Get started with Business Management Light and run your small business with confidence.</p>
+                <div class="cta-box__buttons">
+                    <a href="index.html#contact" class="btn btn--primary magnetic-btn">
+                        <span>Get a Free Consultation</span>
+                        <i class="fas fa-arrow-right"></i>
+                    </a>
+                    <a href="index.html" class="btn btn--outline magnetic-btn">
+                        <span>Back to Home</span>
+                        <i class="fas fa-home"></i>
+                    </a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-grid">
+                <div class="footer-col footer-col--brand">
+                    <div class="footer-logo">
+                        <img src="company-logo.png" alt="AK International Logo" class="logo-img">
+                        <span class="logo-text">AK<span class="logo-accent">Int</span></span>
+                    </div>
+                    <p>Business Management Light — a simple, affordable business tool for startups and small teams.</p>
+                    <div class="social-links">
+                        <a href="#" aria-label="Facebook"><i class="fab fa-facebook-f"></i></a>
+                        <a href="https://www.instagram.com/ak_int_office/?hl=en" aria-label="Instagram" target="_blank" rel="noopener"><i class="fab fa-instagram"></i></a>
+                        <a href="https://www.linkedin.com/in/ak-international-9188b13ab" aria-label="LinkedIn"><i class="fab fa-linkedin-in"></i></a>
+                        <a href="#" aria-label="WhatsApp"><i class="fab fa-whatsapp"></i></a>
+                    </div>
+                </div>
+                <div class="footer-col">
+                    <h4>Quick Links</h4>
+                    <ul>
+                        <li><a href="index.html">Home</a></li>
+                        <li><a href="index.html#about">About Us</a></li>
+                        <li><a href="index.html#services">Tech Services</a></li>
+                        <li><a href="index.html#portfolio">Portfolio</a></li>
+                        <li><a href="https://store.akint.co.in/" target="_blank" rel="noopener">AKI Ecom</a></li>
+                        <li><a href="index.html#contact">Contact</a></li>
+                    </ul>
+                </div>
+                <div class="footer-col">
+                    <h4>Products</h4>
+                    <ul>
+                        <li><a href="ibm.html">Integrated Business Management</a></li>
+                        <li><a href="web-development.html">Web Development</a></li>
+                        <li><a href="vehicle-equipment-management.html">Vehicle &amp; Equipment Management</a></li>
+                        <li><a href="business-management-light.html">Business Management Light</a></li>
+                        <li><a href="invoice-creation.html">Invoice Creation</a></li>
+                        <li><a href="inventory-management.html">Inventory Management</a></li>
+                    </ul>
+                </div>
+                <div class="footer-col">
+                    <h4>Our Businesses</h4>
+                    <ul>
+                        <li><a href="https://store.akint.co.in/" target="_blank" rel="noopener">AKI Ecom</a></li>
+                        <li><a href="leather-products.html">AKI Import Export</a></li>
+                        <li><a href="https://tech.akint.co.in/" target="_blank" rel="noopener">AKI IT</a></li>
+                    </ul>
+                </div>
+                <div class="footer-col">
+                    <h4>Contact Info</h4>
+                    <ul class="footer-contact">
+                        <li><i class="fas fa-location-dot"></i> Kolkata, India</li>
+                        <li><i class="fas fa-envelope"></i> info@akint.co.in</li>
+                        <li><i class="fas fa-phone"></i> +91 90518 67095</li>
+                    </ul>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>&copy; 2025 AK International. All rights reserved.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script src="script.js"></script>
+</body>
+
+</html>

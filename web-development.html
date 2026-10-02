@@ -1,0 +1,366 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Web Development - AK International</title>
+    <meta name="description" content="Web Development by AK International — custom websites, web applications, and e-commerce platforms built to be fast, responsive, and scalable.">
+    <link rel="shortcut icon" type="image/png" href="logo.png?v=20251110">
+    <link rel="icon" type="image/png" sizes="32x32" href="logo.png?v=20251110">
+    <link rel="icon" type="image/png" sizes="16x16" href="logo.png?v=20251110">
+    <link rel="apple-touch-icon" href="logo.png?v=20251110">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=JetBrains+Mono:wght@400;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+    <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="products.css">
+    <!-- Google tag (gtag.js) -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-WEW70GGLH3"></script>
+    <script>
+        window.dataLayer = window.dataLayer || [];
+        function gtag(){dataLayer.push(arguments);}
+        gtag('js', new Date());
+        gtag('config', 'G-WEW70GGLH3');
+    </script>
+</head>
+
+<body class="page-with-home-bg">
+    <div class="site-bg-media" aria-hidden="true">
+        <video
+            id="siteBgVideo"
+            class="site-bg-media__video"
+            src="https://d8j0ntlcm91z4.cloudfront.net/user_38xzZboKViGWJOttwIXH07lWA1P/hf_20260328_065045_c44942da-53c6-4804-b734-f9e07fc22e08.mp4"
+            muted
+            playsinline
+            autoplay
+        ></video>
+    </div>
+
+    <!-- Particle Canvas -->
+    <canvas id="particleCanvas"></canvas>
+
+    <!-- Custom Cursor -->
+    <div class="cursor-dot" id="cursorDot"></div>
+    <div class="cursor-ring" id="cursorRing"></div>
+
+    <!-- Navigation -->
+    <nav class="navbar" id="navbar">
+        <div class="container">
+            <a href="index.html" class="logo">
+                <img src="company-logo.png" alt="AK International Logo" class="logo-img">
+                <span class="logo-text">AK<span class="logo-accent">Int</span></span>
+            </a>
+            <ul class="nav-menu" id="navMenu">
+                <li><a href="index.html" class="nav-link" data-text="Home">Home</a></li>
+                <li><a href="index.html#about" class="nav-link" data-text="About">About</a></li>
+                <li class="nav-item--dropdown">
+                    <a href="#" class="nav-link" data-text="Products" aria-haspopup="true" aria-expanded="false">Products <i class="fas fa-chevron-down nav-dropdown-arrow"></i></a>
+                    <ul class="nav-dropdown">
+                        <li><a href="ibm.html" class="nav-dropdown__link"><i class="fas fa-building"></i>Integrated Business Management (IBM)</a></li>
+                        <li class="nav-dropdown__divider"></li>
+                        <li><a href="web-development.html" class="nav-dropdown__link active"><i class="fas fa-code"></i>Web Development</a></li>
+                        <li class="nav-dropdown__divider"></li>
+                        <li><a href="vehicle-equipment-management.html" class="nav-dropdown__link"><i class="fas fa-truck"></i>Advance Vehicle &amp; Heavy Equipment Management</a></li>
+                        <li class="nav-dropdown__divider"></li>
+                        <li><a href="business-management-light.html" class="nav-dropdown__link"><i class="fas fa-briefcase"></i>Business Management Light</a></li>
+                        <li class="nav-dropdown__divider"></li>
+                        <li><a href="invoice-creation.html" class="nav-dropdown__link"><i class="fas fa-file-invoice"></i>Invoice Creation</a></li>
+                        <li class="nav-dropdown__divider"></li>
+                        <li><a href="inventory-management.html" class="nav-dropdown__link"><i class="fas fa-boxes-stacked"></i>Inventory Management</a></li>
+                        <li class="nav-dropdown__divider"></li>
+                        <li><a href="odoo.html" class="nav-dropdown__link"><i class="fas fa-cubes"></i>Odoo Solutions</a></li>
+                    </ul>
+                </li>
+                <li class="nav-item--dropdown">
+                    <a href="#" class="nav-link" data-text="Our Businesses" aria-haspopup="true" aria-expanded="false">Our Businesses <i class="fas fa-chevron-down nav-dropdown-arrow"></i></a>
+                    <ul class="nav-dropdown">
+                        <li><a href="https://store.akint.co.in/" class="nav-dropdown__link" target="_blank" rel="noopener"><i class="fas fa-cart-shopping"></i>AKI Ecom</a></li>
+                        <li class="nav-dropdown__divider"></li>
+                        <li><a href="leather-products.html" class="nav-dropdown__link"><i class="fas fa-ship"></i>AKI Import Export</a></li>
+                        <li class="nav-dropdown__divider"></li>
+                        <li><a href="https://tech.akint.co.in/" class="nav-dropdown__link" target="_blank" rel="noopener"><i class="fas fa-laptop-code"></i>AKI IT</a></li>
+                    </ul>
+                </li>
+                <li><a href="index.html#contact" class="nav-link" data-text="Contact">Contact</a></li>
+                <li><a href="index.html#contact" class="nav-link nav-link--cta">Get a Quote</a></li>
+            </ul>
+            <div class="hamburger" id="hamburger">
+                <span></span>
+                <span></span>
+                <span></span>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <section class="product-hero" id="hero">
+        <div class="hero-grid-bg"></div>
+        <div class="hero-glow hero-glow--1"></div>
+        <div class="hero-glow hero-glow--2"></div>
+        <div class="hero-glow hero-glow--3"></div>
+        <div class="product-hero__content">
+            <div class="hero-badge reveal">
+                <span class="hero-badge__dot"></span>
+                Custom Web Development
+            </div>
+            <h1 class="hero-title reveal">
+                <span class="hero-line">Web</span>
+                <span class="hero-line hero-line--gradient">Development</span>
+            </h1>
+            <p class="hero-subtitle reveal">
+                Websites &bull; Web Apps &bull; E-Commerce &bull; <span class="text-gradient">Custom Platforms</span>
+            </p>
+            <p class="product-hero__desc reveal">
+                We design and build fast, responsive, and scalable websites and web applications — from marketing sites and e-commerce stores to complex custom platforms — engineered to grow with your business.
+            </p>
+            <div class="hero-buttons reveal">
+                <a href="#features" class="btn btn--primary magnetic-btn">
+                    <span>Explore Features</span>
+                    <i class="fas fa-arrow-down"></i>
+                </a>
+                <a href="index.html#contact" class="btn btn--outline magnetic-btn">
+                    <span>Start Your Project</span>
+                    <i class="fas fa-rocket"></i>
+                </a>
+            </div>
+            <div class="hero-stats reveal">
+                <div class="hero-stat">
+                    <span class="hero-stat__number" data-count="100">0</span><span class="hero-stat__plus">%</span>
+                    <span class="hero-stat__label">Responsive</span>
+                </div>
+                <div class="hero-stat__divider"></div>
+                <div class="hero-stat">
+                    <span class="hero-stat__number" data-count="99">0</span><span class="hero-stat__plus">.9%</span>
+                    <span class="hero-stat__label">Uptime</span>
+                </div>
+                <div class="hero-stat__divider"></div>
+                <div class="hero-stat">
+                    <span class="hero-stat__number" data-count="24">0</span><span class="hero-stat__plus">/7</span>
+                    <span class="hero-stat__label">Support</span>
+                </div>
+            </div>
+        </div>
+        <div class="hero-scroll">
+            <span>Scroll</span>
+            <div class="hero-scroll__line"></div>
+        </div>
+    </section>
+
+    <!-- Key Features Section -->
+    <section class="section section--dark" id="features">
+        <div class="container">
+            <div class="section-header reveal">
+                <span class="section-tag"><i class="fas fa-cubes"></i> Key Features</span>
+                <h2 class="section-title">Websites Built to <span class="text-gradient">Perform</span></h2>
+                <p class="section-desc">From a single landing page to a full custom platform, every build is fast, secure, and made to convert.</p>
+            </div>
+            <div class="product-details-grid">
+                <div class="product-detail-card reveal" data-tilt>
+                    <div class="product-detail-card__icon"><i class="fas fa-mobile-screen"></i></div>
+                    <h3>Responsive Design</h3>
+                    <p>Pixel-perfect layouts that adapt seamlessly across desktop, tablet, and mobile devices.</p>
+                </div>
+                <div class="product-detail-card reveal" data-tilt>
+                    <div class="product-detail-card__icon"><i class="fas fa-laptop-code"></i></div>
+                    <h3>Custom Web Applications</h3>
+                    <p>Tailor-built web apps with dashboards, user accounts, and business logic unique to you.</p>
+                </div>
+                <div class="product-detail-card reveal" data-tilt>
+                    <div class="product-detail-card__icon"><i class="fas fa-cart-shopping"></i></div>
+                    <h3>E-Commerce Development</h3>
+                    <p>Online stores with product catalogs, secure checkout, and payment gateway integration.</p>
+                </div>
+                <div class="product-detail-card reveal" data-tilt>
+                    <div class="product-detail-card__icon"><i class="fas fa-pen-to-square"></i></div>
+                    <h3>CMS Integration</h3>
+                    <p>Easily update content yourself with a clean, user-friendly content management system.</p>
+                </div>
+                <div class="product-detail-card reveal" data-tilt>
+                    <div class="product-detail-card__icon"><i class="fas fa-plug"></i></div>
+                    <h3>API Development &amp; Integration</h3>
+                    <p>Connect your site to payment gateways, CRMs, ERPs, and any third-party service you rely on.</p>
+                </div>
+                <div class="product-detail-card reveal" data-tilt>
+                    <div class="product-detail-card__icon"><i class="fas fa-gauge-high"></i></div>
+                    <h3>Performance &amp; SEO</h3>
+                    <p>Optimized for speed and search rankings, so your site loads fast and gets found.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Why Choose Section -->
+    <section class="section" id="why">
+        <div class="container">
+            <div class="section-header reveal">
+                <span class="section-tag"><i class="fas fa-gem"></i> Why Choose Us</span>
+                <h2 class="section-title">Built Right, <span class="text-gradient">Built to Last</span></h2>
+                <p class="section-desc">We use modern tools and practices so your website stays fast, secure, and easy to maintain.</p>
+            </div>
+            <div class="features-grid">
+                <div class="feature-card reveal" data-tilt>
+                    <div class="feature-card__glow"></div>
+                    <div class="feature-card__icon">
+                        <i class="fas fa-layer-group"></i>
+                    </div>
+                    <h3>Modern Tech Stack</h3>
+                    <p>Built with current frameworks and best practices for speed, security, and maintainability.</p>
+                    <div class="feature-card__number">01</div>
+                </div>
+                <div class="feature-card reveal" data-tilt>
+                    <div class="feature-card__glow"></div>
+                    <div class="feature-card__icon">
+                        <i class="fas fa-arrow-up-right-dots"></i>
+                    </div>
+                    <h3>Scalable Architecture</h3>
+                    <p>Your site grows with your traffic and features — no rebuild required down the line.</p>
+                    <div class="feature-card__number">02</div>
+                </div>
+                <div class="feature-card reveal" data-tilt>
+                    <div class="feature-card__glow"></div>
+                    <div class="feature-card__icon">
+                        <i class="fas fa-mobile-screen-button"></i>
+                    </div>
+                    <h3>Mobile-First</h3>
+                    <p>Designed for the device most of your visitors actually use, from day one.</p>
+                    <div class="feature-card__number">03</div>
+                </div>
+                <div class="feature-card reveal" data-tilt>
+                    <div class="feature-card__glow"></div>
+                    <div class="feature-card__icon">
+                        <i class="fas fa-headset"></i>
+                    </div>
+                    <h3>Ongoing Maintenance</h3>
+                    <p>Updates, backups, and support after launch so your site keeps running smoothly.</p>
+                    <div class="feature-card__number">04</div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Process Section -->
+    <section class="section section--dark">
+        <div class="container">
+            <div class="section-header reveal">
+                <span class="section-tag"><i class="fas fa-route"></i> How We Work</span>
+                <h2 class="section-title">From Idea to <span class="text-gradient">Live Site</span></h2>
+                <p class="section-desc">A clear, collaborative process from the first sketch to launch day and beyond.</p>
+            </div>
+            <div class="product-process-grid">
+                <div class="product-process-step reveal">
+                    <div class="product-process-step__num">01</div>
+                    <div class="product-process-step__icon"><i class="fas fa-comments"></i></div>
+                    <h3>Discovery</h3>
+                    <p>We learn about your goals, audience, and the features your site needs to succeed.</p>
+                </div>
+                <div class="product-process-step reveal">
+                    <div class="product-process-step__num">02</div>
+                    <div class="product-process-step__icon"><i class="fas fa-pencil-ruler"></i></div>
+                    <h3>Design</h3>
+                    <p>We craft wireframes and visual designs tailored to your brand for your review.</p>
+                </div>
+                <div class="product-process-step reveal">
+                    <div class="product-process-step__num">03</div>
+                    <div class="product-process-step__icon"><i class="fas fa-code"></i></div>
+                    <h3>Development &amp; Testing</h3>
+                    <p>We build, test across devices and browsers, and refine until it's pixel-perfect.</p>
+                </div>
+                <div class="product-process-step reveal">
+                    <div class="product-process-step__num">04</div>
+                    <div class="product-process-step__icon"><i class="fas fa-rocket"></i></div>
+                    <h3>Launch &amp; Support</h3>
+                    <p>Your site goes live, backed by ongoing support, updates, and performance monitoring.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- CTA Section -->
+    <section class="section-cta">
+        <div class="container">
+            <div class="cta-box reveal">
+                <div class="cta-box__glow"></div>
+                <h2>Ready to Build Your <span class="text-gradient">Next Website</span>?</h2>
+                <p>Tell us about your project and we'll design and build a website that works as hard as you do.</p>
+                <div class="cta-box__buttons">
+                    <a href="index.html#contact" class="btn btn--primary magnetic-btn">
+                        <span>Get a Free Consultation</span>
+                        <i class="fas fa-arrow-right"></i>
+                    </a>
+                    <a href="index.html" class="btn btn--outline magnetic-btn">
+                        <span>Back to Home</span>
+                        <i class="fas fa-home"></i>
+                    </a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-grid">
+                <div class="footer-col footer-col--brand">
+                    <div class="footer-logo">
+                        <img src="company-logo.png" alt="AK International Logo" class="logo-img">
+                        <span class="logo-text">AK<span class="logo-accent">Int</span></span>
+                    </div>
+                    <p>Web Development — custom websites, web applications, and e-commerce platforms built to perform.</p>
+                    <div class="social-links">
+                        <a href="#" aria-label="Facebook"><i class="fab fa-facebook-f"></i></a>
+                        <a href="https://www.instagram.com/ak_int_office/?hl=en" aria-label="Instagram" target="_blank" rel="noopener"><i class="fab fa-instagram"></i></a>
+                        <a href="https://www.linkedin.com/in/ak-international-9188b13ab" aria-label="LinkedIn"><i class="fab fa-linkedin-in"></i></a>
+                        <a href="#" aria-label="WhatsApp"><i class="fab fa-whatsapp"></i></a>
+                    </div>
+                </div>
+                <div class="footer-col">
+                    <h4>Quick Links</h4>
+                    <ul>
+                        <li><a href="index.html">Home</a></li>
+                        <li><a href="index.html#about">About Us</a></li>
+                        <li><a href="index.html#services">Tech Services</a></li>
+                        <li><a href="index.html#portfolio">Portfolio</a></li>
+                        <li><a href="https://store.akint.co.in/" target="_blank" rel="noopener">AKI Ecom</a></li>
+                        <li><a href="index.html#contact">Contact</a></li>
+                    </ul>
+                </div>
+                <div class="footer-col">
+                    <h4>Products</h4>
+                    <ul>
+                        <li><a href="ibm.html">Integrated Business Management</a></li>
+                        <li><a href="web-development.html">Web Development</a></li>
+                        <li><a href="vehicle-equipment-management.html">Vehicle &amp; Equipment Management</a></li>
+                        <li><a href="business-management-light.html">Business Management Light</a></li>
+                        <li><a href="invoice-creation.html">Invoice Creation</a></li>
+                        <li><a href="inventory-management.html">Inventory Management</a></li>
+                    </ul>
+                </div>
+                <div class="footer-col">
+                    <h4>Our Businesses</h4>
+                    <ul>
+                        <li><a href="https://store.akint.co.in/" target="_blank" rel="noopener">AKI Ecom</a></li>
+                        <li><a href="leather-products.html">AKI Import Export</a></li>
+                        <li><a href="https://tech.akint.co.in/" target="_blank" rel="noopener">AKI IT</a></li>
+                    </ul>
+                </div>
+                <div class="footer-col">
+                    <h4>Contact Info</h4>
+                    <ul class="footer-contact">
+                        <li><i class="fas fa-location-dot"></i> Kolkata, India</li>
+                        <li><i class="fas fa-envelope"></i> info@akint.co.in</li>
+                        <li><i class="fas fa-phone"></i> +91 90518 67095</li>
+                    </ul>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>&copy; 2025 AK International. All rights reserved.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script src="script.js"></script>
+</body>
+
+</html>

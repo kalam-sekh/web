@@ -1911,7 +1911,7 @@ a {
 
 .footer-grid {
     display: grid;
-    grid-template-columns: 1.5fr 1fr 1fr 1fr;
+    grid-template-columns: 1.3fr 1fr 1fr 1fr 1fr;
     gap: 32px;
     margin-bottom: 18px;
 }
@@ -2023,7 +2023,7 @@ a {
 /* ===== RESPONSIVE ===== */
 @media (max-width: 1024px) {
     .footer-grid {
-        grid-template-columns: 1fr 1fr;
+        grid-template-columns: 1fr;
         gap: 36px;
     }
 
@@ -2142,6 +2142,11 @@ a {
     }
 
     .section { padding: 60px 0; }
+
+    .footer-grid {
+        grid-template-columns: 1fr;
+        gap: 28px;
+    }
 }
 
 /* ===== PREFERS REDUCED MOTION ===== */

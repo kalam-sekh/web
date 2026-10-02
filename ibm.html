@@ -1,0 +1,415 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Integrated Business Management (IBM) - AK International</title>
+    <meta name="description" content="Integrated Business Management (IBM) by AK International — a unified platform bringing accounting, inventory, sales, HR and reporting into one connected system.">
+    <link rel="shortcut icon" type="image/png" href="logo.png?v=20251110">
+    <link rel="icon" type="image/png" sizes="32x32" href="logo.png?v=20251110">
+    <link rel="icon" type="image/png" sizes="16x16" href="logo.png?v=20251110">
+    <link rel="apple-touch-icon" href="logo.png?v=20251110">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=JetBrains+Mono:wght@400;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+    <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="products.css">
+    <!-- Google tag (gtag.js) -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-WEW70GGLH3"></script>
+    <script>
+        window.dataLayer = window.dataLayer || [];
+        function gtag(){dataLayer.push(arguments);}
+        gtag('js', new Date());
+        gtag('config', 'G-WEW70GGLH3');
+    </script>
+</head>
+
+<body class="page-with-home-bg">
+    <div class="site-bg-media" aria-hidden="true">
+        <video
+            id="siteBgVideo"
+            class="site-bg-media__video"
+            src="https://d8j0ntlcm91z4.cloudfront.net/user_38xzZboKViGWJOttwIXH07lWA1P/hf_20260328_065045_c44942da-53c6-4804-b734-f9e07fc22e08.mp4"
+            muted
+            playsinline
+            autoplay
+        ></video>
+    </div>
+
+    <!-- Particle Canvas -->
+    <canvas id="particleCanvas"></canvas>
+
+    <!-- Custom Cursor -->
+    <div class="cursor-dot" id="cursorDot"></div>
+    <div class="cursor-ring" id="cursorRing"></div>
+
+    <!-- Navigation -->
+    <nav class="navbar" id="navbar">
+        <div class="container">
+            <a href="index.html" class="logo">
+                <img src="company-logo.png" alt="AK International Logo" class="logo-img">
+                <span class="logo-text">AK<span class="logo-accent">Int</span></span>
+            </a>
+            <ul class="nav-menu" id="navMenu">
+                <li><a href="index.html" class="nav-link" data-text="Home">Home</a></li>
+                <li><a href="index.html#about" class="nav-link" data-text="About">About</a></li>
+                <li class="nav-item--dropdown">
+                    <a href="#" class="nav-link" data-text="Products" aria-haspopup="true" aria-expanded="false">Products <i class="fas fa-chevron-down nav-dropdown-arrow"></i></a>
+                    <ul class="nav-dropdown">
+                        <li><a href="ibm.html" class="nav-dropdown__link active"><i class="fas fa-building"></i>Integrated Business Management (IBM)</a></li>
+                        <li class="nav-dropdown__divider"></li>
+                        <li><a href="web-development.html" class="nav-dropdown__link"><i class="fas fa-code"></i>Web Development</a></li>
+                        <li class="nav-dropdown__divider"></li>
+                        <li><a href="vehicle-equipment-management.html" class="nav-dropdown__link"><i class="fas fa-truck"></i>Advance Vehicle &amp; Heavy Equipment Management</a></li>
+                        <li class="nav-dropdown__divider"></li>
+                        <li><a href="business-management-light.html" class="nav-dropdown__link"><i class="fas fa-briefcase"></i>Business Management Light</a></li>
+                        <li class="nav-dropdown__divider"></li>
+                        <li><a href="invoice-creation.html" class="nav-dropdown__link"><i class="fas fa-file-invoice"></i>Invoice Creation</a></li>
+                        <li class="nav-dropdown__divider"></li>
+                        <li><a href="inventory-management.html" class="nav-dropdown__link"><i class="fas fa-boxes-stacked"></i>Inventory Management</a></li>
+                        <li class="nav-dropdown__divider"></li>
+                        <li><a href="odoo.html" class="nav-dropdown__link"><i class="fas fa-cubes"></i>Odoo Solutions</a></li>
+                    </ul>
+                </li>
+                <li class="nav-item--dropdown">
+                    <a href="#" class="nav-link" data-text="Our Businesses" aria-haspopup="true" aria-expanded="false">Our Businesses <i class="fas fa-chevron-down nav-dropdown-arrow"></i></a>
+                    <ul class="nav-dropdown">
+                        <li><a href="https://store.akint.co.in/" class="nav-dropdown__link" target="_blank" rel="noopener"><i class="fas fa-cart-shopping"></i>AKI Ecom</a></li>
+                        <li class="nav-dropdown__divider"></li>
+                        <li><a href="leather-products.html" class="nav-dropdown__link"><i class="fas fa-ship"></i>AKI Import Export</a></li>
+                        <li class="nav-dropdown__divider"></li>
+                        <li><a href="https://tech.akint.co.in/" class="nav-dropdown__link" target="_blank" rel="noopener"><i class="fas fa-laptop-code"></i>AKI IT</a></li>
+                    </ul>
+                </li>
+                <li><a href="index.html#contact" class="nav-link" data-text="Contact">Contact</a></li>
+                <li><a href="index.html#contact" class="nav-link nav-link--cta">Get a Quote</a></li>
+            </ul>
+            <div class="hamburger" id="hamburger">
+                <span></span>
+                <span></span>
+                <span></span>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <section class="product-hero" id="hero">
+        <div class="hero-grid-bg"></div>
+        <div class="hero-glow hero-glow--1"></div>
+        <div class="hero-glow hero-glow--2"></div>
+        <div class="hero-glow hero-glow--3"></div>
+        <div class="product-hero__content">
+            <div class="hero-badge reveal">
+                <span class="hero-badge__dot"></span>
+                Business Management Suite
+            </div>
+            <h1 class="hero-title reveal">
+                <span class="hero-line">Integrated Business</span>
+                <span class="hero-line hero-line--gradient">Management (IBM)</span>
+            </h1>
+            <p class="hero-subtitle reveal">
+                Accounting &bull; Sales &bull; Inventory &bull; HR &bull; <span class="text-gradient">One Connected Platform</span>
+            </p>
+            <p class="product-hero__desc reveal">
+                A complete, all-in-one business management system that unifies every department of your organization — so data flows seamlessly across accounting, sales, inventory, procurement, and HR, giving you one single source of truth.
+            </p>
+            <div class="hero-buttons reveal">
+                <a href="#features" class="btn btn--primary magnetic-btn">
+                    <span>Explore Features</span>
+                    <i class="fas fa-arrow-down"></i>
+                </a>
+                <a href="index.html#contact" class="btn btn--outline magnetic-btn">
+                    <span>Request a Demo</span>
+                    <i class="fas fa-rocket"></i>
+                </a>
+            </div>
+            <div class="hero-stats reveal">
+                <div class="hero-stat">
+                    <span class="hero-stat__number" data-count="8">0</span><span class="hero-stat__plus">+</span>
+                    <span class="hero-stat__label">Modules</span>
+                </div>
+                <div class="hero-stat__divider"></div>
+                <div class="hero-stat">
+                    <span class="hero-stat__number" data-count="100">0</span><span class="hero-stat__plus">%</span>
+                    <span class="hero-stat__label">Unified Data</span>
+                </div>
+                <div class="hero-stat__divider"></div>
+                <div class="hero-stat">
+                    <span class="hero-stat__number" data-count="24">0</span><span class="hero-stat__plus">/7</span>
+                    <span class="hero-stat__label">Support</span>
+                </div>
+            </div>
+        </div>
+        <div class="hero-scroll">
+            <span>Scroll</span>
+            <div class="hero-scroll__line"></div>
+        </div>
+    </section>
+
+    <!-- Product Showcase Section -->
+    <section class="section" id="showcase">
+        <div class="container">
+            <div class="section-header reveal">
+                <span class="section-tag"><i class="fas fa-display"></i> See It In Action</span>
+                <h2 class="section-title">A Look Inside <span class="text-gradient">IBM</span></h2>
+                <p class="section-desc">Real screens from the platform — one workspace for every part of your business.</p>
+            </div>
+            <div class="product-showcase-grid">
+                <div class="product-showcase-card reveal" data-tilt>
+                    <div class="product-showcase-card__img">
+                        <img src="assets/IBM/ibm-dashboard-workspace.png" alt="IBM all-in-one business workspace dashboard with modules for employees, inventory, sales, CRM and more" loading="lazy">
+                    </div>
+                    <div class="product-showcase-card__body">
+                        <h3>All-in-One Business Workspace</h3>
+                        <p>Every module lives on one home screen — Employees, Attendance, Payroll, Inventory, Sales &amp; Orders, Ecommerce, Purchase, CRM, Expenses, Accounts, Assets, Contacts, Reports, Help Desk and File Manager — so your team never has to switch apps.</p>
+                    </div>
+                </div>
+                <div class="product-showcase-card reveal" data-tilt>
+                    <div class="product-showcase-card__img">
+                        <img src="assets/IBM/ibm-inventory-control.png" alt="IBM inventory dashboard showing total products, in-stock, low-stock counts and recent transactions" loading="lazy">
+                    </div>
+                    <div class="product-showcase-card__body">
+                        <h3>Smart Inventory Control</h3>
+                        <p>A live view of total products, in-stock and low-stock counts, and warehouses, paired with a product inventory table and a recent transactions feed — so stock levels are never a guess.</p>
+                    </div>
+                </div>
+                <div class="product-showcase-card reveal" data-tilt>
+                    <div class="product-showcase-card__img">
+                        <img src="assets/IBM/ibm-sales-orders.png" alt="IBM sales and orders screen showing quotations, sales orders, invoices, deliveries and payments" loading="lazy">
+                    </div>
+                    <div class="product-showcase-card__body">
+                        <h3>Sales &amp; Orders Made Easy</h3>
+                        <p>Quotations, sales orders, invoices, deliveries, and payments flow through one clean pipeline — track every customer from "sent" to "paid" without leaving the screen.</p>
+                    </div>
+                </div>
+                <div class="product-showcase-card reveal" data-tilt>
+                    <div class="product-showcase-card__img">
+                        <img src="assets/IBM/ibm-reports-insights.png" alt="IBM reports and insights dashboard with sales charts, expense breakdown and export options" loading="lazy">
+                    </div>
+                    <div class="product-showcase-card__body">
+                        <h3>Reports That Help You Grow</h3>
+                        <p>Sales and expense trends, account balances, and profit charts come together on one dashboard, with one-click export to Excel, PDF, or a summary report for faster decisions.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Key Features Section -->
+    <section class="section section--dark" id="features">
+        <div class="container">
+            <div class="section-header reveal">
+                <span class="section-tag"><i class="fas fa-cubes"></i> Key Features</span>
+                <h2 class="section-title">Everything Your Business <span class="text-gradient">Needs</span></h2>
+                <p class="section-desc">IBM brings every core business function under one roof, eliminating data silos and manual re-entry.</p>
+            </div>
+            <div class="product-details-grid">
+                <div class="product-detail-card reveal" data-tilt>
+                    <div class="product-detail-card__icon"><i class="fas fa-calculator"></i></div>
+                    <h3>Accounting &amp; Finance</h3>
+                    <p>Automated bookkeeping, ledgers, tax compliance, and real-time financial statements in one place.</p>
+                </div>
+                <div class="product-detail-card reveal" data-tilt>
+                    <div class="product-detail-card__icon"><i class="fas fa-boxes-stacked"></i></div>
+                    <h3>Inventory &amp; Procurement</h3>
+                    <p>Track stock across warehouses, automate reordering, and manage vendor purchase cycles with ease.</p>
+                </div>
+                <div class="product-detail-card reveal" data-tilt>
+                    <div class="product-detail-card__icon"><i class="fas fa-chart-line"></i></div>
+                    <h3>Sales &amp; CRM</h3>
+                    <p>Manage leads, quotations, orders, and customer relationships through a single sales pipeline.</p>
+                </div>
+                <div class="product-detail-card reveal" data-tilt>
+                    <div class="product-detail-card__icon"><i class="fas fa-users"></i></div>
+                    <h3>HR &amp; Payroll</h3>
+                    <p>Employee records, attendance, leave, and payroll processing integrated with your finances.</p>
+                </div>
+                <div class="product-detail-card reveal" data-tilt>
+                    <div class="product-detail-card__icon"><i class="fas fa-file-invoice-dollar"></i></div>
+                    <h3>Invoicing &amp; Billing</h3>
+                    <p>Create professional invoices, track payments, and automate recurring billing cycles.</p>
+                </div>
+                <div class="product-detail-card reveal" data-tilt>
+                    <div class="product-detail-card__icon"><i class="fas fa-chart-pie"></i></div>
+                    <h3>Reports &amp; Dashboards</h3>
+                    <p>Real-time dashboards and custom reports that give leadership full visibility across operations.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Why Choose Section -->
+    <section class="section" id="why">
+        <div class="container">
+            <div class="section-header reveal">
+                <span class="section-tag"><i class="fas fa-gem"></i> Why IBM</span>
+                <h2 class="section-title">Built to <span class="text-gradient">Scale With You</span></h2>
+                <p class="section-desc">Whether you're a growing SME or an established enterprise, IBM adapts to your workflows.</p>
+            </div>
+            <div class="features-grid">
+                <div class="feature-card reveal" data-tilt>
+                    <div class="feature-card__glow"></div>
+                    <div class="feature-card__icon">
+                        <i class="fas fa-link"></i>
+                    </div>
+                    <h3>Fully Integrated</h3>
+                    <p>Every module shares the same database — no duplicate entries, no sync issues.</p>
+                    <div class="feature-card__number">01</div>
+                </div>
+                <div class="feature-card reveal" data-tilt>
+                    <div class="feature-card__glow"></div>
+                    <div class="feature-card__icon">
+                        <i class="fas fa-sliders"></i>
+                    </div>
+                    <h3>Fully Customizable</h3>
+                    <p>Tailor workflows, fields, and permissions to match exactly how your business operates.</p>
+                    <div class="feature-card__number">02</div>
+                </div>
+                <div class="feature-card reveal" data-tilt>
+                    <div class="feature-card__glow"></div>
+                    <div class="feature-card__icon">
+                        <i class="fas fa-cloud"></i>
+                    </div>
+                    <h3>Cloud or On-Premise</h3>
+                    <p>Deploy on our secure cloud or your own servers — your data, your choice.</p>
+                    <div class="feature-card__number">03</div>
+                </div>
+                <div class="feature-card reveal" data-tilt>
+                    <div class="feature-card__glow"></div>
+                    <div class="feature-card__icon">
+                        <i class="fas fa-shield-halved"></i>
+                    </div>
+                    <h3>Secure by Design</h3>
+                    <p>Role-based access control and audit logs keep your business data protected.</p>
+                    <div class="feature-card__number">04</div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Process Section -->
+    <section class="section section--dark">
+        <div class="container">
+            <div class="section-header reveal">
+                <span class="section-tag"><i class="fas fa-route"></i> Getting Started</span>
+                <h2 class="section-title">From Setup to <span class="text-gradient">Go-Live</span></h2>
+                <p class="section-desc">We handle the full rollout so your team can focus on running the business.</p>
+            </div>
+            <div class="product-process-grid">
+                <div class="product-process-step reveal">
+                    <div class="product-process-step__num">01</div>
+                    <div class="product-process-step__icon"><i class="fas fa-comments"></i></div>
+                    <h3>Discovery</h3>
+                    <p>We map your current processes and identify the modules you need most.</p>
+                </div>
+                <div class="product-process-step reveal">
+                    <div class="product-process-step__num">02</div>
+                    <div class="product-process-step__icon"><i class="fas fa-gears"></i></div>
+                    <h3>Configuration</h3>
+                    <p>We set up and customize IBM to match your chart of accounts, roles, and workflows.</p>
+                </div>
+                <div class="product-process-step reveal">
+                    <div class="product-process-step__num">03</div>
+                    <div class="product-process-step__icon"><i class="fas fa-database"></i></div>
+                    <h3>Data Migration</h3>
+                    <p>We import your existing records securely with zero disruption to daily operations.</p>
+                </div>
+                <div class="product-process-step reveal">
+                    <div class="product-process-step__num">04</div>
+                    <div class="product-process-step__icon"><i class="fas fa-rocket"></i></div>
+                    <h3>Go-Live &amp; Support</h3>
+                    <p>Your team is trained and live, backed by ongoing support from our team.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- CTA Section -->
+    <section class="section-cta">
+        <div class="container">
+            <div class="cta-box reveal">
+                <div class="cta-box__glow"></div>
+                <h2>Ready to Unify Your <span class="text-gradient">Business Operations</span>?</h2>
+                <p>Talk to our team about rolling out Integrated Business Management (IBM) across your organization.</p>
+                <div class="cta-box__buttons">
+                    <a href="index.html#contact" class="btn btn--primary magnetic-btn">
+                        <span>Get a Free Consultation</span>
+                        <i class="fas fa-arrow-right"></i>
+                    </a>
+                    <a href="index.html" class="btn btn--outline magnetic-btn">
+                        <span>Back to Home</span>
+                        <i class="fas fa-home"></i>
+                    </a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-grid">
+                <div class="footer-col footer-col--brand">
+                    <div class="footer-logo">
+                        <img src="company-logo.png" alt="AK International Logo" class="logo-img">
+                        <span class="logo-text">AK<span class="logo-accent">Int</span></span>
+                    </div>
+                    <p>Integrated Business Management — one connected platform for accounting, sales, inventory, and HR.</p>
+                    <div class="social-links">
+                        <a href="#" aria-label="Facebook"><i class="fab fa-facebook-f"></i></a>
+                        <a href="https://www.instagram.com/ak_int_office/?hl=en" aria-label="Instagram" target="_blank" rel="noopener"><i class="fab fa-instagram"></i></a>
+                        <a href="https://www.linkedin.com/in/ak-international-9188b13ab" aria-label="LinkedIn"><i class="fab fa-linkedin-in"></i></a>
+                        <a href="#" aria-label="WhatsApp"><i class="fab fa-whatsapp"></i></a>
+                    </div>
+                </div>
+                <div class="footer-col">
+                    <h4>Quick Links</h4>
+                    <ul>
+                        <li><a href="index.html">Home</a></li>
+                        <li><a href="index.html#about">About Us</a></li>
+                        <li><a href="index.html#services">Tech Services</a></li>
+                        <li><a href="index.html#portfolio">Portfolio</a></li>
+                        <li><a href="https://store.akint.co.in/" target="_blank" rel="noopener">AKI Ecom</a></li>
+                        <li><a href="index.html#contact">Contact</a></li>
+                    </ul>
+                </div>
+                <div class="footer-col">
+                    <h4>Products</h4>
+                    <ul>
+                        <li><a href="ibm.html">Integrated Business Management</a></li>
+                        <li><a href="web-development.html">Web Development</a></li>
+                        <li><a href="vehicle-equipment-management.html">Vehicle &amp; Equipment Management</a></li>
+                        <li><a href="business-management-light.html">Business Management Light</a></li>
+                        <li><a href="invoice-creation.html">Invoice Creation</a></li>
+                        <li><a href="inventory-management.html">Inventory Management</a></li>
+                    </ul>
+                </div>
+                <div class="footer-col">
+                    <h4>Our Businesses</h4>
+                    <ul>
+                        <li><a href="https://store.akint.co.in/" target="_blank" rel="noopener">AKI Ecom</a></li>
+                        <li><a href="leather-products.html">AKI Import Export</a></li>
+                        <li><a href="https://tech.akint.co.in/" target="_blank" rel="noopener">AKI IT</a></li>
+                    </ul>
+                </div>
+                <div class="footer-col">
+                    <h4>Contact Info</h4>
+                    <ul class="footer-contact">
+                        <li><i class="fas fa-location-dot"></i> Kolkata, India</li>
+                        <li><i class="fas fa-envelope"></i> info@akint.co.in</li>
+                        <li><i class="fas fa-phone"></i> +91 90518 67095</li>
+                    </ul>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>&copy; 2025 AK International. All rights reserved.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script src="script.js"></script>
+</body>
+
+</html>

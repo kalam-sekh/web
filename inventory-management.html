@@ -1,0 +1,366 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Inventory Management - AK International</title>
+    <meta name="description" content="Inventory Management by AK International — real-time stock tracking, barcode scanning, multi-location support and automated reordering.">
+    <link rel="shortcut icon" type="image/png" href="logo.png?v=20251110">
+    <link rel="icon" type="image/png" sizes="32x32" href="logo.png?v=20251110">
+    <link rel="icon" type="image/png" sizes="16x16" href="logo.png?v=20251110">
+    <link rel="apple-touch-icon" href="logo.png?v=20251110">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=JetBrains+Mono:wght@400;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+    <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="products.css">
+    <!-- Google tag (gtag.js) -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-WEW70GGLH3"></script>
+    <script>
+        window.dataLayer = window.dataLayer || [];
+        function gtag(){dataLayer.push(arguments);}
+        gtag('js', new Date());
+        gtag('config', 'G-WEW70GGLH3');
+    </script>
+</head>
+
+<body class="page-with-home-bg">
+    <div class="site-bg-media" aria-hidden="true">
+        <video
+            id="siteBgVideo"
+            class="site-bg-media__video"
+            src="https://d8j0ntlcm91z4.cloudfront.net/user_38xzZboKViGWJOttwIXH07lWA1P/hf_20260328_065045_c44942da-53c6-4804-b734-f9e07fc22e08.mp4"
+            muted
+            playsinline
+            autoplay
+        ></video>
+    </div>
+
+    <!-- Particle Canvas -->
+    <canvas id="particleCanvas"></canvas>
+
+    <!-- Custom Cursor -->
+    <div class="cursor-dot" id="cursorDot"></div>
+    <div class="cursor-ring" id="cursorRing"></div>
+
+    <!-- Navigation -->
+    <nav class="navbar" id="navbar">
+        <div class="container">
+            <a href="index.html" class="logo">
+                <img src="company-logo.png" alt="AK International Logo" class="logo-img">
+                <span class="logo-text">AK<span class="logo-accent">Int</span></span>
+            </a>
+            <ul class="nav-menu" id="navMenu">
+                <li><a href="index.html" class="nav-link" data-text="Home">Home</a></li>
+                <li><a href="index.html#about" class="nav-link" data-text="About">About</a></li>
+                <li class="nav-item--dropdown">
+                    <a href="#" class="nav-link" data-text="Products" aria-haspopup="true" aria-expanded="false">Products <i class="fas fa-chevron-down nav-dropdown-arrow"></i></a>
+                    <ul class="nav-dropdown">
+                        <li><a href="ibm.html" class="nav-dropdown__link"><i class="fas fa-building"></i>Integrated Business Management (IBM)</a></li>
+                        <li class="nav-dropdown__divider"></li>
+                        <li><a href="web-development.html" class="nav-dropdown__link"><i class="fas fa-code"></i>Web Development</a></li>
+                        <li class="nav-dropdown__divider"></li>
+                        <li><a href="vehicle-equipment-management.html" class="nav-dropdown__link"><i class="fas fa-truck"></i>Advance Vehicle &amp; Heavy Equipment Management</a></li>
+                        <li class="nav-dropdown__divider"></li>
+                        <li><a href="business-management-light.html" class="nav-dropdown__link"><i class="fas fa-briefcase"></i>Business Management Light</a></li>
+                        <li class="nav-dropdown__divider"></li>
+                        <li><a href="invoice-creation.html" class="nav-dropdown__link"><i class="fas fa-file-invoice"></i>Invoice Creation</a></li>
+                        <li class="nav-dropdown__divider"></li>
+                        <li><a href="inventory-management.html" class="nav-dropdown__link active"><i class="fas fa-boxes-stacked"></i>Inventory Management</a></li>
+                        <li class="nav-dropdown__divider"></li>
+                        <li><a href="odoo.html" class="nav-dropdown__link"><i class="fas fa-cubes"></i>Odoo Solutions</a></li>
+                    </ul>
+                </li>
+                <li class="nav-item--dropdown">
+                    <a href="#" class="nav-link" data-text="Our Businesses" aria-haspopup="true" aria-expanded="false">Our Businesses <i class="fas fa-chevron-down nav-dropdown-arrow"></i></a>
+                    <ul class="nav-dropdown">
+                        <li><a href="https://store.akint.co.in/" class="nav-dropdown__link" target="_blank" rel="noopener"><i class="fas fa-cart-shopping"></i>AKI Ecom</a></li>
+                        <li class="nav-dropdown__divider"></li>
+                        <li><a href="leather-products.html" class="nav-dropdown__link"><i class="fas fa-ship"></i>AKI Import Export</a></li>
+                        <li class="nav-dropdown__divider"></li>
+                        <li><a href="https://tech.akint.co.in/" class="nav-dropdown__link" target="_blank" rel="noopener"><i class="fas fa-laptop-code"></i>AKI IT</a></li>
+                    </ul>
+                </li>
+                <li><a href="index.html#contact" class="nav-link" data-text="Contact">Contact</a></li>
+                <li><a href="index.html#contact" class="nav-link nav-link--cta">Get a Quote</a></li>
+            </ul>
+            <div class="hamburger" id="hamburger">
+                <span></span>
+                <span></span>
+                <span></span>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <section class="product-hero" id="hero">
+        <div class="hero-grid-bg"></div>
+        <div class="hero-glow hero-glow--1"></div>
+        <div class="hero-glow hero-glow--2"></div>
+        <div class="hero-glow hero-glow--3"></div>
+        <div class="product-hero__content">
+            <div class="hero-badge reveal">
+                <span class="hero-badge__dot"></span>
+                Real-Time Stock Control
+            </div>
+            <h1 class="hero-title reveal">
+                <span class="hero-line">Inventory</span>
+                <span class="hero-line hero-line--gradient">Management</span>
+            </h1>
+            <p class="hero-subtitle reveal">
+                Stock Tracking &bull; Barcode Scanning &bull; <span class="text-gradient">Multi-Location Support</span>
+            </p>
+            <p class="product-hero__desc reveal">
+                A complete inventory management solution that gives you real-time visibility into stock levels across every warehouse and location, with barcode scanning, low-stock alerts, and automated reordering to keep your business running smoothly.
+            </p>
+            <div class="hero-buttons reveal">
+                <a href="#features" class="btn btn--primary magnetic-btn">
+                    <span>Explore Features</span>
+                    <i class="fas fa-arrow-down"></i>
+                </a>
+                <a href="index.html#contact" class="btn btn--outline magnetic-btn">
+                    <span>Request a Demo</span>
+                    <i class="fas fa-rocket"></i>
+                </a>
+            </div>
+            <div class="hero-stats reveal">
+                <div class="hero-stat">
+                    <span class="hero-stat__number" data-count="100">0</span><span class="hero-stat__plus">%</span>
+                    <span class="hero-stat__label">Real-Time Accuracy</span>
+                </div>
+                <div class="hero-stat__divider"></div>
+                <div class="hero-stat">
+                    <span class="hero-stat__number" data-count="0">0</span>
+                    <span class="hero-stat__label">Stockouts Missed</span>
+                </div>
+                <div class="hero-stat__divider"></div>
+                <div class="hero-stat">
+                    <span class="hero-stat__number" data-count="24">0</span><span class="hero-stat__plus">/7</span>
+                    <span class="hero-stat__label">Visibility</span>
+                </div>
+            </div>
+        </div>
+        <div class="hero-scroll">
+            <span>Scroll</span>
+            <div class="hero-scroll__line"></div>
+        </div>
+    </section>
+
+    <!-- Key Features Section -->
+    <section class="section section--dark" id="features">
+        <div class="container">
+            <div class="section-header reveal">
+                <span class="section-tag"><i class="fas fa-cubes"></i> Key Features</span>
+                <h2 class="section-title">Full Visibility, <span class="text-gradient">Zero Guesswork</span></h2>
+                <p class="section-desc">Know exactly what you have, where it is, and when to reorder — at all times.</p>
+            </div>
+            <div class="product-details-grid">
+                <div class="product-detail-card reveal" data-tilt>
+                    <div class="product-detail-card__icon"><i class="fas fa-warehouse"></i></div>
+                    <h3>Real-Time Stock Tracking</h3>
+                    <p>See accurate stock levels update instantly across every warehouse and store.</p>
+                </div>
+                <div class="product-detail-card reveal" data-tilt>
+                    <div class="product-detail-card__icon"><i class="fas fa-barcode"></i></div>
+                    <h3>Barcode Scanning</h3>
+                    <p>Speed up receiving, picking, and stocktaking with mobile barcode scanning.</p>
+                </div>
+                <div class="product-detail-card reveal" data-tilt>
+                    <div class="product-detail-card__icon"><i class="fas fa-triangle-exclamation"></i></div>
+                    <h3>Low Stock Alerts</h3>
+                    <p>Automatic notifications when items fall below your defined reorder thresholds.</p>
+                </div>
+                <div class="product-detail-card reveal" data-tilt>
+                    <div class="product-detail-card__icon"><i class="fas fa-map-location-dot"></i></div>
+                    <h3>Multi-Location Support</h3>
+                    <p>Manage stock across multiple warehouses, stores, or project sites from one view.</p>
+                </div>
+                <div class="product-detail-card reveal" data-tilt>
+                    <div class="product-detail-card__icon"><i class="fas fa-arrows-rotate"></i></div>
+                    <h3>Automated Reordering</h3>
+                    <p>Generate purchase orders automatically when stock hits reorder points.</p>
+                </div>
+                <div class="product-detail-card reveal" data-tilt>
+                    <div class="product-detail-card__icon"><i class="fas fa-chart-column"></i></div>
+                    <h3>Advanced Reporting</h3>
+                    <p>Analyze stock movement, turnover, and valuation with detailed analytics.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Why Choose Section -->
+    <section class="section" id="why">
+        <div class="container">
+            <div class="section-header reveal">
+                <span class="section-tag"><i class="fas fa-gem"></i> Why This Platform</span>
+                <h2 class="section-title">Never Run Out, <span class="text-gradient">Never Overstock</span></h2>
+                <p class="section-desc">Built for retailers, distributors, and manufacturers who need precise stock control.</p>
+            </div>
+            <div class="features-grid">
+                <div class="feature-card reveal" data-tilt>
+                    <div class="feature-card__glow"></div>
+                    <div class="feature-card__icon">
+                        <i class="fas fa-gauge-high"></i>
+                    </div>
+                    <h3>Live Dashboards</h3>
+                    <p>Monitor stock health across your entire operation from a single screen.</p>
+                    <div class="feature-card__number">01</div>
+                </div>
+                <div class="feature-card reveal" data-tilt>
+                    <div class="feature-card__glow"></div>
+                    <div class="feature-card__icon">
+                        <i class="fas fa-right-left"></i>
+                    </div>
+                    <h3>Stock Transfers</h3>
+                    <p>Move inventory between locations with full tracking and audit trails.</p>
+                    <div class="feature-card__number">02</div>
+                </div>
+                <div class="feature-card reveal" data-tilt>
+                    <div class="feature-card__glow"></div>
+                    <div class="feature-card__icon">
+                        <i class="fas fa-tags"></i>
+                    </div>
+                    <h3>Batch &amp; Serial Tracking</h3>
+                    <p>Track items by batch or serial number for traceability and compliance.</p>
+                    <div class="feature-card__number">03</div>
+                </div>
+                <div class="feature-card reveal" data-tilt>
+                    <div class="feature-card__glow"></div>
+                    <div class="feature-card__icon">
+                        <i class="fas fa-plug"></i>
+                    </div>
+                    <h3>Integrates With IBM</h3>
+                    <p>Sync inventory data directly with Integrated Business Management.</p>
+                    <div class="feature-card__number">04</div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Process Section -->
+    <section class="section section--dark">
+        <div class="container">
+            <div class="section-header reveal">
+                <span class="section-tag"><i class="fas fa-route"></i> Getting Started</span>
+                <h2 class="section-title">From Stockroom to <span class="text-gradient">System</span></h2>
+                <p class="section-desc">We help you digitize your inventory without disrupting operations.</p>
+            </div>
+            <div class="product-process-grid">
+                <div class="product-process-step reveal">
+                    <div class="product-process-step__num">01</div>
+                    <div class="product-process-step__icon"><i class="fas fa-clipboard-list"></i></div>
+                    <h3>Stock Audit</h3>
+                    <p>We catalog your current inventory and locations as the starting baseline.</p>
+                </div>
+                <div class="product-process-step reveal">
+                    <div class="product-process-step__num">02</div>
+                    <div class="product-process-step__icon"><i class="fas fa-gears"></i></div>
+                    <h3>System Setup</h3>
+                    <p>We configure reorder points, locations, and barcode labels for your items.</p>
+                </div>
+                <div class="product-process-step reveal">
+                    <div class="product-process-step__num">03</div>
+                    <div class="product-process-step__icon"><i class="fas fa-chalkboard-user"></i></div>
+                    <h3>Team Training</h3>
+                    <p>Warehouse staff are trained on scanning, receiving, and stock transfers.</p>
+                </div>
+                <div class="product-process-step reveal">
+                    <div class="product-process-step__num">04</div>
+                    <div class="product-process-step__icon"><i class="fas fa-rocket"></i></div>
+                    <h3>Go-Live &amp; Support</h3>
+                    <p>Your inventory goes live with ongoing support from our team.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- CTA Section -->
+    <section class="section-cta">
+        <div class="container">
+            <div class="cta-box reveal">
+                <div class="cta-box__glow"></div>
+                <h2>Take Control of Your <span class="text-gradient">Inventory</span></h2>
+                <p>Talk to our team about deploying real-time Inventory Management for your business.</p>
+                <div class="cta-box__buttons">
+                    <a href="index.html#contact" class="btn btn--primary magnetic-btn">
+                        <span>Get a Free Consultation</span>
+                        <i class="fas fa-arrow-right"></i>
+                    </a>
+                    <a href="index.html" class="btn btn--outline magnetic-btn">
+                        <span>Back to Home</span>
+                        <i class="fas fa-home"></i>
+                    </a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-grid">
+                <div class="footer-col footer-col--brand">
+                    <div class="footer-logo">
+                        <img src="company-logo.png" alt="AK International Logo" class="logo-img">
+                        <span class="logo-text">AK<span class="logo-accent">Int</span></span>
+                    </div>
+                    <p>Inventory Management — real-time stock tracking and control across every location.</p>
+                    <div class="social-links">
+                        <a href="#" aria-label="Facebook"><i class="fab fa-facebook-f"></i></a>
+                        <a href="https://www.instagram.com/ak_int_office/?hl=en" aria-label="Instagram" target="_blank" rel="noopener"><i class="fab fa-instagram"></i></a>
+                        <a href="https://www.linkedin.com/in/ak-international-9188b13ab" aria-label="LinkedIn"><i class="fab fa-linkedin-in"></i></a>
+                        <a href="#" aria-label="WhatsApp"><i class="fab fa-whatsapp"></i></a>
+                    </div>
+                </div>
+                <div class="footer-col">
+                    <h4>Quick Links</h4>
+                    <ul>
+                        <li><a href="index.html">Home</a></li>
+                        <li><a href="index.html#about">About Us</a></li>
+                        <li><a href="index.html#services">Tech Services</a></li>
+                        <li><a href="index.html#portfolio">Portfolio</a></li>
+                        <li><a href="https://store.akint.co.in/" target="_blank" rel="noopener">AKI Ecom</a></li>
+                        <li><a href="index.html#contact">Contact</a></li>
+                    </ul>
+                </div>
+                <div class="footer-col">
+                    <h4>Products</h4>
+                    <ul>
+                        <li><a href="ibm.html">Integrated Business Management</a></li>
+                        <li><a href="web-development.html">Web Development</a></li>
+                        <li><a href="vehicle-equipment-management.html">Vehicle &amp; Equipment Management</a></li>
+                        <li><a href="business-management-light.html">Business Management Light</a></li>
+                        <li><a href="invoice-creation.html">Invoice Creation</a></li>
+                        <li><a href="inventory-management.html">Inventory Management</a></li>
+                    </ul>
+                </div>
+                <div class="footer-col">
+                    <h4>Our Businesses</h4>
+                    <ul>
+                        <li><a href="https://store.akint.co.in/" target="_blank" rel="noopener">AKI Ecom</a></li>
+                        <li><a href="leather-products.html">AKI Import Export</a></li>
+                        <li><a href="https://tech.akint.co.in/" target="_blank" rel="noopener">AKI IT</a></li>
+                    </ul>
+                </div>
+                <div class="footer-col">
+                    <h4>Contact Info</h4>
+                    <ul class="footer-contact">
+                        <li><i class="fas fa-location-dot"></i> Kolkata, India</li>
+                        <li><i class="fas fa-envelope"></i> info@akint.co.in</li>
+                        <li><i class="fas fa-phone"></i> +91 90518 67095</li>
+                    </ul>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>&copy; 2025 AK International. All rights reserved.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script src="script.js"></script>
+</body>
+
+</html>
