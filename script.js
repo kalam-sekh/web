@@ -894,6 +894,293 @@ serviceCards.forEach(card => {
     const WEB3FORMS_ACCESS_KEY = '98b31045-1b2f-420c-9370-3f17ab4d1ccd';
     const WEB3FORMS_ENDPOINT = 'https://api.web3forms.com/submit';
 
+    // ===== "Get a Quote" — full professional request modal =====
+    const QUOTE_PRODUCTS = [
+        'Integrated Business Management (IBM)',
+        'Web Development',
+        'Advance Vehicle & Heavy Equipment Management',
+        'Business Management Light',
+        'Invoice Creation',
+        'Inventory Management',
+        'Odoo Solutions',
+        'Not Sure / Other'
+    ];
+    const QUOTE_COMPANY_SIZES = [
+        '1–10 Employees',
+        '11–50 Employees',
+        '51–200 Employees',
+        '201–500 Employees',
+        '500+ Employees'
+    ];
+
+    let quoteModalRefs = null;
+
+    function ensureQuoteModal() {
+        if (quoteModalRefs) return quoteModalRefs;
+
+        const quoteStyles = `
+            .quote-modal-overlay {
+                position: fixed; inset: 0; z-index: 10050;
+                background: rgba(5, 5, 10, 0.72);
+                backdrop-filter: blur(6px); -webkit-backdrop-filter: blur(6px);
+                display: flex; align-items: center; justify-content: center;
+                padding: 24px; opacity: 0; visibility: hidden;
+                transition: opacity 0.3s ease, visibility 0.3s ease;
+            }
+            .quote-modal-overlay.show { opacity: 1; visibility: visible; }
+            .quote-modal {
+                width: 100%; max-width: 640px; max-height: 90vh; overflow-y: auto;
+                background: linear-gradient(180deg, rgba(20,20,28,0.98), rgba(14,14,20,0.98));
+                border: 1px solid rgba(255,255,255,0.08); border-radius: 20px;
+                padding: 34px 36px; box-shadow: 0 30px 80px rgba(0,0,0,0.55);
+                position: relative;
+                transform: translateY(16px) scale(0.97);
+                transition: transform 0.35s cubic-bezier(0.34, 1.56, 0.64, 1);
+            }
+            .quote-modal-overlay.show .quote-modal { transform: translateY(0) scale(1); }
+            .quote-modal__close {
+                position: absolute; top: 18px; right: 18px; width: 34px; height: 34px;
+                border-radius: 50%; border: 1px solid rgba(255,255,255,0.1);
+                background: rgba(255,255,255,0.04); color: #cbd5e1; font-size: 18px;
+                cursor: pointer; display: flex; align-items: center; justify-content: center;
+                transition: background 0.2s, color 0.2s;
+            }
+            .quote-modal__close:hover { background: rgba(255,255,255,0.12); color: #fff; }
+            .quote-modal__eyebrow {
+                font-size: 11px; font-weight: 700; letter-spacing: 0.08em; text-transform: uppercase;
+                color: #818cf8; margin-bottom: 8px;
+            }
+            .quote-modal__title { font-size: clamp(1.3rem, 3vw, 1.7rem); font-weight: 800; color: #fff; margin: 0 0 8px; }
+            .quote-modal__subtitle { font-size: 14px; color: #9aa5b8; line-height: 1.6; margin: 0 0 26px; max-width: 480px; }
+            .quote-form__grid { display: grid; grid-template-columns: 1fr 1fr; gap: 16px 18px; }
+            .quote-form__field { display: flex; flex-direction: column; gap: 6px; }
+            .quote-form__field--full { grid-column: 1 / -1; }
+            .quote-form__field label { font-size: 12.5px; font-weight: 600; color: #c7d0e0; }
+            .quote-form__field label .req { color: #f87171; margin-left: 2px; }
+            .quote-form__field input, .quote-form__field select, .quote-form__field textarea {
+                width: 100%; padding: 11px 13px; border-radius: 10px;
+                border: 1px solid rgba(255,255,255,0.1); background: rgba(255,255,255,0.03);
+                color: #fff; font-size: 14px; font-family: inherit;
+                transition: border-color 0.2s, background 0.2s;
+            }
+            .quote-form__field input::placeholder, .quote-form__field textarea::placeholder { color: #5b6476; }
+            .quote-form__field input:focus, .quote-form__field select:focus, .quote-form__field textarea:focus {
+                outline: none; border-color: #6366f1; background: rgba(99,102,241,0.07);
+            }
+            .quote-form__field select { cursor: pointer; }
+            .quote-form__field select option { background: #15151d; color: #fff; }
+            .quote-form__field textarea { resize: vertical; min-height: 80px; }
+            .quote-form__error {
+                margin-top: 14px; padding: 10px 12px; border-radius: 10px;
+                background: rgba(248,113,113,0.1); border: 1px solid rgba(248,113,113,0.25);
+                color: #fca5a5; font-size: 13px; display: none;
+            }
+            .quote-form__footer {
+                margin-top: 24px; display: flex; align-items: center; justify-content: space-between;
+                gap: 16px; flex-wrap: wrap;
+            }
+            .quote-form__note { font-size: 11.5px; color: #6b7686; }
+            .quote-form__submit {
+                background: linear-gradient(135deg, #6366f1, #8b5cf6); color: #fff; border: none;
+                padding: 13px 28px; border-radius: 12px; font-size: 14px; font-weight: 700;
+                cursor: pointer; display: inline-flex; align-items: center; gap: 8px;
+                transition: transform 0.2s, box-shadow 0.2s, opacity 0.2s;
+                box-shadow: 0 10px 30px rgba(99,102,241,0.3);
+            }
+            .quote-form__submit:hover:not(:disabled) { transform: translateY(-2px); box-shadow: 0 14px 36px rgba(99,102,241,0.4); }
+            .quote-form__submit:disabled { opacity: 0.7; cursor: not-allowed; transform: none; }
+            .quote-modal__success { text-align: center; padding: 22px 0 4px; }
+            .quote-modal__success-icon {
+                width: 62px; height: 62px; border-radius: 50%; margin: 0 auto 18px;
+                background: rgba(34,197,94,0.12); border: 1px solid rgba(34,197,94,0.3);
+                color: #4ade80; display: flex; align-items: center; justify-content: center; font-size: 26px;
+            }
+            .quote-modal__success h3 { color: #fff; font-size: 1.3rem; margin: 0 0 10px; }
+            .quote-modal__success p { color: #9aa5b8; font-size: 14px; line-height: 1.65; margin: 0 auto 24px; max-width: 420px; }
+            @media (max-width: 640px) {
+                .quote-modal { padding: 26px 20px; border-radius: 16px; max-height: 92vh; }
+                .quote-form__grid { grid-template-columns: 1fr; }
+                .quote-form__footer { flex-direction: column-reverse; align-items: stretch; }
+                .quote-form__submit { justify-content: center; }
+            }
+        `;
+        const quoteStyleEl = document.createElement('style');
+        quoteStyleEl.textContent = quoteStyles;
+        document.head.appendChild(quoteStyleEl);
+
+        const overlay = document.createElement('div');
+        overlay.className = 'quote-modal-overlay';
+        overlay.id = 'quoteModalOverlay';
+        const modal = document.createElement('div');
+        modal.className = 'quote-modal';
+        modal.setAttribute('role', 'dialog');
+        modal.setAttribute('aria-modal', 'true');
+        modal.setAttribute('aria-label', 'Request a Quote');
+        overlay.appendChild(modal);
+        document.body.appendChild(overlay);
+
+        function close() {
+            overlay.classList.remove('show');
+            document.body.style.overflow = '';
+        }
+
+        overlay.addEventListener('click', (e) => { if (e.target === overlay) close(); });
+        document.addEventListener('keydown', (e) => {
+            if (e.key === 'Escape' && overlay.classList.contains('show')) close();
+        });
+
+        quoteModalRefs = { overlay, modal, close };
+        return quoteModalRefs;
+    }
+
+    function optionsHtml(items) {
+        return items.map(item => `<option>${item}</option>`).join('');
+    }
+
+    function renderQuoteForm(modal, close) {
+        modal.innerHTML = `
+            <button type="button" class="quote-modal__close" id="quoteModalClose" aria-label="Close">&times;</button>
+            <div class="quote-modal__eyebrow">Request a Quote</div>
+            <h2 class="quote-modal__title">Tell us about your business</h2>
+            <p class="quote-modal__subtitle">Share a few details and our team will get back to you with a tailored quote within 24 hours.</p>
+            <form class="quote-form" id="quoteForm" novalidate>
+                <input type="text" id="quoteBotcheck" tabindex="-1" autocomplete="off" style="display:none">
+                <div class="quote-form__grid">
+                    <div class="quote-form__field">
+                        <label for="quoteName">Full Name<span class="req">*</span></label>
+                        <input type="text" id="quoteName" placeholder="Your full name" autocomplete="name">
+                    </div>
+                    <div class="quote-form__field">
+                        <label for="quoteEmail">Work Email<span class="req">*</span></label>
+                        <input type="email" id="quoteEmail" placeholder="you@company.com" autocomplete="email">
+                    </div>
+                    <div class="quote-form__field">
+                        <label for="quotePhone">Phone Number<span class="req">*</span></label>
+                        <input type="tel" id="quotePhone" placeholder="+91 00000 00000" autocomplete="tel">
+                    </div>
+                    <div class="quote-form__field">
+                        <label for="quoteCompany">Company Name<span class="req">*</span></label>
+                        <input type="text" id="quoteCompany" placeholder="Your company name" autocomplete="organization">
+                    </div>
+                    <div class="quote-form__field">
+                        <label for="quoteEmployees">Company Size<span class="req">*</span></label>
+                        <select id="quoteEmployees">
+                            <option value="" selected>Select total employees</option>
+                            ${optionsHtml(QUOTE_COMPANY_SIZES)}
+                        </select>
+                    </div>
+                    <div class="quote-form__field">
+                        <label for="quoteProduct">Product Interested In<span class="req">*</span></label>
+                        <select id="quoteProduct">
+                            <option value="" selected>Select a product</option>
+                            ${optionsHtml(QUOTE_PRODUCTS)}
+                        </select>
+                    </div>
+                    <div class="quote-form__field quote-form__field--full">
+                        <label for="quoteMessage">Requirements <span style="color:#6b7686;font-weight:500;">(optional)</span></label>
+                        <textarea id="quoteMessage" rows="3" placeholder="Tell us briefly about what you need..."></textarea>
+                    </div>
+                </div>
+                <div class="quote-form__error" id="quoteFormError"></div>
+                <div class="quote-form__footer">
+                    <span class="quote-form__note"><i class="fas fa-lock" style="margin-right:5px;"></i>Your information stays private.</span>
+                    <button type="submit" class="quote-form__submit" id="quoteSubmitBtn">
+                        <span id="quoteSubmitText">Request Quote</span>
+                        <i class="fas fa-arrow-right"></i>
+                    </button>
+                </div>
+            </form>
+        `;
+
+        const closeBtn = modal.querySelector('#quoteModalClose');
+        closeBtn.addEventListener('click', close);
+        registerCursorHover(closeBtn);
+
+        const form = modal.querySelector('#quoteForm');
+        const errorEl = modal.querySelector('#quoteFormError');
+        const submitBtn = modal.querySelector('#quoteSubmitBtn');
+        const submitText = modal.querySelector('#quoteSubmitText');
+        registerCursorHover(submitBtn);
+        const val = (id) => ((modal.querySelector(id) || {}).value || '');
+        const showError = (msg) => { errorEl.textContent = msg; errorEl.style.display = 'block'; };
+
+        form.addEventListener('submit', async (e) => {
+            e.preventDefault();
+            errorEl.style.display = 'none';
+
+            const name = val('#quoteName').trim();
+            const email = val('#quoteEmail').trim();
+            const phone = val('#quotePhone').trim();
+            const company = val('#quoteCompany').trim();
+            const employees = val('#quoteEmployees');
+            const product = val('#quoteProduct');
+            const message = val('#quoteMessage').trim();
+
+            if (!name) return showError('Please enter your full name.');
+            if (!/^\S+@\S+\.\S+$/.test(email)) return showError('Please enter a valid work email.');
+            if (!phone) return showError('Please enter your phone number.');
+            if (!company) return showError('Please enter your company name.');
+            if (!employees) return showError('Please select your company size.');
+            if (!product) return showError('Please select a product you are interested in.');
+            if (val('#quoteBotcheck')) return; // honeypot: bots fill hidden fields
+
+            submitBtn.disabled = true;
+            submitText.textContent = 'Sending...';
+
+            const payload = {
+                access_key: WEB3FORMS_ACCESS_KEY,
+                subject: `Quote Request from ${name} (${company}) - akint.co.in`,
+                from_name: 'AK International Website',
+                replyto: email,
+                request_type: 'Get a Quote',
+                name, email, phone, company,
+                company_size: employees,
+                product_interested: product,
+                message: message || 'Not specified',
+                page: location.href
+            };
+
+            try {
+                const resp = await fetch(WEB3FORMS_ENDPOINT, {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json', 'Accept': 'application/json' },
+                    body: JSON.stringify(payload)
+                });
+                const data = await resp.json().catch(() => ({}));
+                if (!resp.ok || !data.success) throw new Error(data.message || `Server error ${resp.status}`);
+
+                modal.innerHTML = `
+                    <button type="button" class="quote-modal__close" id="quoteModalCloseSuccess" aria-label="Close">&times;</button>
+                    <div class="quote-modal__success">
+                        <div class="quote-modal__success-icon"><i class="fas fa-check"></i></div>
+                        <h3>Thank you, ${name}!</h3>
+                        <p>We've received your request for <strong>${product}</strong>. Our team will reach out to you at ${email} within 24 hours with a tailored quote.</p>
+                        <button type="button" class="quote-form__submit" id="quoteCloseBtn" style="margin:0 auto;">Close</button>
+                    </div>
+                `;
+                const successClose = modal.querySelector('#quoteModalCloseSuccess');
+                const closeBtn2 = modal.querySelector('#quoteCloseBtn');
+                successClose.addEventListener('click', close);
+                closeBtn2.addEventListener('click', close);
+                registerCursorHover(successClose);
+                registerCursorHover(closeBtn2);
+            } catch (err) {
+                submitBtn.disabled = false;
+                submitText.textContent = 'Request Quote';
+                showError('Unable to send right now. Please try again or email info@akint.co.in.');
+                console.error('quote submit error', err);
+            }
+        });
+    }
+
+    function openQuoteModal() {
+        const qm = ensureQuoteModal();
+        renderQuoteForm(qm.modal, qm.close);
+        qm.overlay.classList.add('show');
+        document.body.style.overflow = 'hidden';
+    }
+    window.openQuoteModal = openQuoteModal;
+
     const REQUEST_TYPES = [
         { key: 'callback', label: 'Request a Call Back' },
         { key: 'query', label: 'Send a Query' }
@@ -1119,7 +1406,12 @@ serviceCards.forEach(card => {
         const link = e.target.closest && e.target.closest('a[href$="#contact"]');
         if (!link) return;
         e.preventDefault();
-        openRequestWidget();
+        const linkText = (link.textContent || '').trim().toLowerCase();
+        if (linkText === 'get a quote') {
+            openQuoteModal();
+        } else {
+            openRequestWidget();
+        }
     });
 })();
 
