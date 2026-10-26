@@ -576,6 +576,45 @@ serviceCards.forEach(card => {
 
 // ===== FLOATING CHAT ICON =====
 (function () {
+    // WhatsApp is the single enquiry channel across the website.  A prefilled
+    // message keeps the hand-off clear while letting visitors edit it freely.
+    const WHATSAPP_URL = 'https://wa.me/919051867095?text=' + encodeURIComponent(
+        'Hello AK International, I would like to discuss my requirements.'
+    );
+
+    const whatsappStyles = document.createElement('style');
+    whatsappStyles.textContent = `
+        .back-to-top { position:fixed; bottom:105px; right:35px; width:50px; height:50px; border:0; border-radius:50%; background:linear-gradient(135deg,#6366f1,#a855f7); color:#fff; cursor:pointer; font-size:1.2rem; box-shadow:0 4px 20px rgba(99,102,241,.4); z-index:999; opacity:0; visibility:hidden; transform:translateY(10px); transition:all .3s ease; }
+        .back-to-top.show { opacity:1; visibility:visible; transform:translateY(0); }
+        .floating-whatsapp { position:fixed; right:30px; bottom:30px; z-index:9999; width:60px; height:60px; display:flex; align-items:center; justify-content:center; border-radius:50%; background:#25d366; color:#fff; font-size:31px; text-decoration:none; box-shadow:0 8px 24px rgba(37,211,102,.38); transition:transform .25s ease, box-shadow .25s ease; animation:whatsappFloat 3.5s ease-in-out infinite; }
+        .floating-whatsapp:hover, .floating-whatsapp:focus-visible { color:#fff; transform:translateY(-4px) scale(1.08); box-shadow:0 12px 30px rgba(37,211,102,.52); }
+        .floating-whatsapp::before { content:'Chat with us on WhatsApp'; position:absolute; right:72px; width:max-content; padding:9px 12px; border-radius:8px; background:#17212b; color:#fff; font:600 12px/1.2 Inter,-apple-system,BlinkMacSystemFont,sans-serif; opacity:0; pointer-events:none; transform:translateX(6px); transition:opacity .2s ease,transform .2s ease; box-shadow:0 4px 14px rgba(0,0,0,.2); }
+        .floating-whatsapp:hover::before, .floating-whatsapp:focus-visible::before { opacity:1; transform:translateX(0); }
+        @keyframes whatsappFloat { 0%,100% { transform:translateY(0); } 50% { transform:translateY(-6px); } }
+        @media (max-width:768px) { .back-to-top { bottom:87px; right:23px; width:46px; height:46px; } .floating-whatsapp { right:20px; bottom:20px; width:54px; height:54px; font-size:28px; } .floating-whatsapp::before { display:none; } }
+    `;
+    document.head.appendChild(whatsappStyles);
+
+    const whatsappButton = document.createElement('a');
+    whatsappButton.className = 'floating-whatsapp';
+    whatsappButton.href = WHATSAPP_URL;
+    whatsappButton.target = '_blank';
+    whatsappButton.rel = 'noopener';
+    whatsappButton.setAttribute('aria-label', 'Chat with AK International on WhatsApp');
+    whatsappButton.setAttribute('title', 'Chat with us on WhatsApp');
+    whatsappButton.innerHTML = '<i class="fab fa-whatsapp" aria-hidden="true"></i>';
+    document.body.appendChild(whatsappButton);
+
+    // Route all previous contact, quote and enquiry links to WhatsApp.
+    document.querySelectorAll('a[href$="#contact"], a[href^="mailto:info@akint.co.in?subject=Product"]').forEach((link) => {
+        link.href = WHATSAPP_URL;
+        link.target = '_blank';
+        link.rel = 'noopener';
+        link.setAttribute('aria-label', `${(link.textContent || 'Contact us').trim()} on WhatsApp`);
+    });
+
+    return;
+
     // 1. Create and inject dynamic styles
     const styles = `
         /* Back to Top Button */
