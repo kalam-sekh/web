@@ -1455,4 +1455,80 @@ serviceCards.forEach(card => {
 })();
 
 // ===== CONSOLE MESSAGE =====
+// Compact, keyboard-accessible footer groups on phones.
+(function () {
+    const mobileFooter = window.matchMedia('(max-width: 600px)');
+    const groups = [...document.querySelectorAll('.footer-col:not(.footer-col--brand)')];
+    if (!groups.length) return;
+
+    groups.forEach((group) => {
+        const heading = group.querySelector('h4');
+        if (!heading) return;
+        group.classList.add('is-collapsible');
+        heading.setAttribute('role', 'button');
+        heading.setAttribute('tabindex', '0');
+
+        const toggle = () => {
+            if (!mobileFooter.matches) return;
+            const expanded = group.classList.toggle('is-expanded');
+            heading.setAttribute('aria-expanded', String(expanded));
+        };
+        heading.addEventListener('click', toggle);
+        heading.addEventListener('keydown', (event) => {
+            if (event.key === 'Enter' || event.key === ' ') {
+                event.preventDefault();
+                toggle();
+            }
+        });
+    });
+
+    const sync = () => groups.forEach((group) => {
+        if (mobileFooter.matches) group.classList.remove('is-expanded');
+        else group.classList.add('is-expanded');
+        const heading = group.querySelector('h4');
+        if (heading) heading.setAttribute('aria-expanded', String(group.classList.contains('is-expanded')));
+    });
+    sync();
+    mobileFooter.addEventListener('change', sync);
+})();
+
+// Foundation navigation uses a dedicated mobile trigger rather than wrapping desktop links.
+(function () {
+    const nav = document.querySelector('.foundation-nav');
+    const menu = nav?.querySelector('.foundation-nav__menu');
+    const brand = nav?.querySelector('.foundation-nav__brand');
+    if (!nav || !menu || !brand || nav.querySelector('.foundation-nav__toggle')) return;
+
+    const toggle = document.createElement('button');
+    toggle.className = 'foundation-nav__toggle';
+    toggle.type = 'button';
+    toggle.setAttribute('aria-label', 'Open navigation menu');
+    toggle.setAttribute('aria-expanded', 'false');
+    toggle.innerHTML = '<i class="fas fa-bars" aria-hidden="true"></i>';
+    brand.insertAdjacentElement('afterend', toggle);
+
+    const close = () => {
+        menu.classList.remove('is-open');
+        toggle.setAttribute('aria-expanded', 'false');
+        toggle.setAttribute('aria-label', 'Open navigation menu');
+        toggle.innerHTML = '<i class="fas fa-bars" aria-hidden="true"></i>';
+    };
+    const open = () => {
+        menu.classList.add('is-open');
+        toggle.setAttribute('aria-expanded', 'true');
+        toggle.setAttribute('aria-label', 'Close navigation menu');
+        toggle.innerHTML = '<i class="fas fa-xmark" aria-hidden="true"></i>';
+    };
+
+    toggle.addEventListener('click', () => menu.classList.contains('is-open') ? close() : open());
+    menu.addEventListener('click', (event) => {
+        const link = event.target.closest('a');
+        if (link && !link.closest('.nav-item--dropdown')) close();
+    });
+    document.addEventListener('click', (event) => {
+        if (window.innerWidth <= 768 && menu.classList.contains('is-open') && !nav.contains(event.target)) close();
+    });
+    window.addEventListener('resize', () => { if (window.innerWidth > 768) close(); });
+})();
+
 console.log('%c🚀 Welcome to AK International! ', 'background: linear-gradient(135deg, #6366f1 0%, #a855f7 100%); color: white; font-size: 20px; padding: 10px; border-radius: 5px;');
