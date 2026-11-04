@@ -1,0 +1,419 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Expense Management - AK International</title>
+    <meta name="description" content="Expense Management by AK International — capture, approve, reimburse and analyse business expenses with complete control.">
+    <link rel="shortcut icon" type="image/png" href="logo.png?v=20251110">
+    <link rel="icon" type="image/png" sizes="32x32" href="logo.png?v=20251110">
+    <link rel="icon" type="image/png" sizes="16x16" href="logo.png?v=20251110">
+    <link rel="apple-touch-icon" href="logo.png?v=20251110">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=JetBrains+Mono:wght@400;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+    <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="products.css">
+    <!-- Google tag (gtag.js) -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-WEW70GGLH3"></script>
+    <script>
+        window.dataLayer = window.dataLayer || [];
+        function gtag(){dataLayer.push(arguments);}
+        gtag('js', new Date());
+        gtag('config', 'G-WEW70GGLH3');
+    </script>
+</head>
+
+<body class="page-with-home-bg expense-management-page">
+    <div class="site-bg-media" aria-hidden="true">
+        <video
+            id="siteBgVideo"
+            class="site-bg-media__video"
+            src="https://d8j0ntlcm91z4.cloudfront.net/user_38xzZboKViGWJOttwIXH07lWA1P/hf_20260328_065045_c44942da-53c6-4804-b734-f9e07fc22e08.mp4"
+            muted
+            playsinline
+            autoplay
+        ></video>
+    </div>
+
+    <!-- Particle Canvas -->
+    <canvas id="particleCanvas"></canvas>
+
+    <!-- Custom Cursor -->
+    <div class="cursor-dot" id="cursorDot"></div>
+    <div class="cursor-ring" id="cursorRing"></div>
+
+    <!-- Navigation -->
+    <nav class="navbar" id="navbar">
+        <div class="container">
+            <a href="index.html" class="logo">
+                <img src="company-logo.png" alt="AK International Logo" class="logo-img">
+                <span class="logo-text">AK<span class="logo-accent">Int</span></span>
+            </a>
+            <ul class="nav-menu" id="navMenu">
+                <li><a href="index.html" class="nav-link" data-text="Home">Home</a></li>
+                <li><a href="index.html#about" class="nav-link" data-text="About">About</a></li>
+                <li class="nav-item--dropdown">
+                    <a href="#" class="nav-link" data-text="Products" aria-haspopup="true" aria-expanded="false">Products <i class="fas fa-chevron-down nav-dropdown-arrow"></i></a>
+                    <ul class="nav-dropdown">
+                        <li><a href="ibm.html" class="nav-dropdown__link"><i class="fas fa-building"></i>Integrated Business Management (IBM)</a></li>
+                        <li class="nav-dropdown__divider"></li>
+                        <li><a href="web-development.html" class="nav-dropdown__link"><i class="fas fa-code"></i>Web Development</a></li>
+                        <li class="nav-dropdown__divider"></li>
+                        <li><a href="vehicle-equipment-management.html" class="nav-dropdown__link"><i class="fas fa-truck"></i>Advance Vehicle &amp; Heavy Equipment Management</a></li>
+                        <li class="nav-dropdown__divider"></li>
+                        <li><a href="business-management-light.html" class="nav-dropdown__link"><i class="fas fa-briefcase"></i>Business Management Light</a></li>
+                        <li class="nav-dropdown__divider"></li>
+                        <li><a href="invoice-creation.html" class="nav-dropdown__link"><i class="fas fa-file-invoice"></i>Invoice Creation</a></li>
+                        <li class="nav-dropdown__divider"></li>
+                        <li><a href="inventory-management.html" class="nav-dropdown__link"><i class="fas fa-boxes-stacked"></i>Inventory Management</a></li>
+                        <li class="nav-dropdown__divider"></li>
+                        <li><a href="odoo.html" class="nav-dropdown__link"><i class="fas fa-cubes"></i>Odoo Solutions</a></li>
+                        <li class="nav-dropdown__divider"></li>
+                        <li><a href="expense-management.html" class="nav-dropdown__link active"><i class="fas fa-receipt"></i>Expense Management</a></li>
+                        <li class="nav-dropdown__divider"></li>
+                        <li><span class="nav-dropdown__link" aria-disabled="true"><i class="fas fa-globe"></i>Global Import Export Management</span></li>
+                    </ul>
+                </li>
+                <li class="nav-item--dropdown">
+                    <a href="#" class="nav-link" data-text="Our Businesses" aria-haspopup="true" aria-expanded="false">Our Businesses <i class="fas fa-chevron-down nav-dropdown-arrow"></i></a>
+                    <ul class="nav-dropdown">
+                        <li><a href="https://store.akint.co.in/" class="nav-dropdown__link" target="_blank" rel="noopener"><i class="fas fa-cart-shopping"></i>AKI Ecom</a></li>
+                        <li class="nav-dropdown__divider"></li>
+                        <li><a href="https://export.akint.co.in/" target="_blank" rel="noopener" class="nav-dropdown__link"><i class="fas fa-ship"></i>AKI Export</a></li>
+                        <li class="nav-dropdown__divider"></li>
+                        <li><a href="https://tech.akint.co.in/" class="nav-dropdown__link" target="_blank" rel="noopener"><i class="fas fa-laptop-code"></i>AKI IT</a></li>
+                    </ul>
+                </li>
+                <li><a href="index.html#contact" class="nav-link" data-text="Contact">Contact</a></li>
+                <li><a href="index.html#contact" class="nav-link nav-link--cta">Get a Quote</a></li>
+            </ul>
+            <div class="hamburger" id="hamburger">
+                <span></span>
+                <span></span>
+                <span></span>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <section class="product-hero" id="hero">
+        <div class="hero-grid-bg"></div>
+        <div class="hero-glow hero-glow--1"></div>
+        <div class="hero-glow hero-glow--2"></div>
+        <div class="hero-glow hero-glow--3"></div>
+        <div class="product-hero__content">
+            <div class="hero-badge reveal">
+                <span class="hero-badge__dot"></span>
+                Financial Operations Suite
+            </div>
+            <h1 class="hero-title reveal">
+                <span class="hero-line">Expense</span>
+                <span class="hero-line hero-line--gradient">Management</span>
+            </h1>
+            <p class="hero-subtitle reveal">
+                Capture &bull; Approve &bull; Reimburse &bull; Analyse &bull; <span class="text-gradient">One Clear Expense Flow</span>
+            </p>
+            <p class="product-hero__desc reveal">
+                Give every employee a simple way to submit expenses while finance keeps policy, approvals, budgets and reimbursements under precise control — from receipt to ledger.
+            </p>
+            <div class="hero-buttons reveal">
+                <a href="#features" class="btn btn--primary magnetic-btn">
+                    <span>Explore Features</span>
+                    <i class="fas fa-arrow-down"></i>
+                </a>
+                <a href="index.html#contact" class="btn btn--outline magnetic-btn">
+                    <span>Request a Demo</span>
+                    <i class="fas fa-rocket"></i>
+                </a>
+            </div>
+            <div class="hero-stats reveal">
+                <div class="hero-stat">
+                    <span class="hero-stat__number" data-count="3">0</span><span class="hero-stat__plus">-Step</span>
+                    <span class="hero-stat__label">Submission</span>
+                </div>
+                <div class="hero-stat__divider"></div>
+                <div class="hero-stat">
+                    <span class="hero-stat__number" data-count="100">0</span><span class="hero-stat__plus">%</span>
+                    <span class="hero-stat__label">Policy Control</span>
+                </div>
+                <div class="hero-stat__divider"></div>
+                <div class="hero-stat">
+                    <span class="hero-stat__number" data-count="1">0</span><span class="hero-stat__plus"></span>
+                    <span class="hero-stat__label">Expense Ledger</span>
+                </div>
+            </div>
+        </div>
+        <div class="hero-scroll">
+            <span>Scroll</span>
+            <div class="hero-scroll__line"></div>
+        </div>
+    </section>
+
+    <!-- Product Showcase Section -->
+    <section class="section" id="showcase">
+        <div class="container">
+            <div class="section-header reveal">
+                <span class="section-tag"><i class="fas fa-display"></i> See It In Action</span>
+                <h2 class="section-title">A Look Inside <span class="text-gradient">Expense Management</span></h2>
+                <p class="section-desc">Real screens from the application — a calm, focused workspace for daily spending control.</p>
+            </div>
+            <div class="product-showcase-grid">
+                <div class="product-showcase-card reveal" data-tilt>
+                    <div class="product-showcase-card__img">
+                        <img src="assets/Expense/dashboard.png" alt="JS Enterprise Expense Management workspace dashboard" loading="lazy">
+                    </div>
+                    <div class="product-showcase-card__body">
+                        <h3>Clear Financial Workspace</h3>
+                        <p>Start from one polished workspace with Expense, Labour, Attendance, Sales, Accounting and Settings modules always within reach.</p>
+                    </div>
+                </div>
+                <div class="product-showcase-card reveal" data-tilt>
+                    <div class="product-showcase-card__img">
+                        <img src="assets/Expense/expense-entry.png" alt="Expense Management quick entry form" loading="lazy">
+                    </div>
+                    <div class="product-showcase-card__body">
+                        <h3>Fast Daily Logging</h3>
+                        <p>Choose an expense type and reveal only the fields you need, so everyday entries are clean, consistent and quick to submit.</p>
+                    </div>
+                </div>
+                <div class="product-showcase-card reveal" data-tilt>
+                    <div class="product-showcase-card__img">
+                        <img src="assets/Expense/expense-history.png" alt="Expense Management searchable expense history" loading="lazy">
+                    </div>
+                    <div class="product-showcase-card__body">
+                        <h3>Searchable Expense History</h3>
+                        <p>Filter spending by category and date, then review each transaction with its note, owner and amount in a clear chronological record.</p>
+                    </div>
+                </div>
+                <div class="product-showcase-card reveal" data-tilt>
+                    <div class="product-showcase-card__img">
+                        <img src="assets/Expense/expense-history.png" alt="Expense Management filtered spending summary" loading="lazy">
+                    </div>
+                    <div class="product-showcase-card__body">
+                        <h3>Spending at a Glance</h3>
+                        <p>See filtered spend instantly and identify where money is going before exceptions become a surprise.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Key Features Section -->
+    <section class="section section--dark" id="features">
+        <div class="container">
+            <div class="section-header reveal">
+                <span class="section-tag"><i class="fas fa-cubes"></i> Key Features</span>
+                <h2 class="section-title">Every Expense, <span class="text-gradient">Accounted For</span></h2>
+                <p class="section-desc">A modern workflow that gives employees speed and finance complete control.</p>
+            </div>
+            <div class="product-details-grid">
+                <div class="product-detail-card reveal" data-tilt>
+                    <div class="product-detail-card__icon"><i class="fas fa-calculator"></i></div>
+                    <h3>Receipt Capture</h3>
+                    <p>Submit expenses with receipts, category and business purpose in a clean, guided flow.</p>
+                </div>
+                <div class="product-detail-card reveal" data-tilt>
+                    <div class="product-detail-card__icon"><i class="fas fa-boxes-stacked"></i></div>
+                    <h3>Policy &amp; Budget Controls</h3>
+                    <p>Set category limits, spending rules and budget guardrails before costs reach finance.</p>
+                </div>
+                <div class="product-detail-card reveal" data-tilt>
+                    <div class="product-detail-card__icon"><i class="fas fa-chart-line"></i></div>
+                    <h3>Smart Approvals</h3>
+                    <p>Route each claim to the right approver with clear status, reminders and full context.</p>
+                </div>
+                <div class="product-detail-card reveal" data-tilt>
+                    <div class="product-detail-card__icon"><i class="fas fa-users"></i></div>
+                    <h3>Employee Reimbursements</h3>
+                    <p>Turn approved claims into timely, traceable reimbursements your people can trust.</p>
+                </div>
+                <div class="product-detail-card reveal" data-tilt>
+                    <div class="product-detail-card__icon"><i class="fas fa-file-invoice-dollar"></i></div>
+                    <h3>Corporate Spend</h3>
+                    <p>Keep card, travel and out-of-pocket spend visible in one reconciled expense record.</p>
+                </div>
+                <div class="product-detail-card reveal" data-tilt>
+                    <div class="product-detail-card__icon"><i class="fas fa-chart-pie"></i></div>
+                    <h3>Expense Intelligence</h3>
+                    <p>Spot trends, exceptions and budget pressure early with real-time reporting.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Why Choose Section -->
+    <section class="section" id="why">
+        <div class="container">
+            <div class="section-header reveal">
+                <span class="section-tag"><i class="fas fa-gem"></i> Why Expense Management</span>
+                <h2 class="section-title">Control Spend Without <span class="text-gradient">Slowing Teams Down</span></h2>
+                <p class="section-desc">A simple experience for employees and a dependable control layer for finance.</p>
+            </div>
+            <div class="features-grid">
+                <div class="feature-card reveal" data-tilt>
+                    <div class="feature-card__glow"></div>
+                    <div class="feature-card__icon">
+                        <i class="fas fa-link"></i>
+                    </div>
+                    <h3>Fully Integrated</h3>
+                    <p>Every module shares the same database — no duplicate entries, no sync issues.</p>
+                    <div class="feature-card__number">01</div>
+                </div>
+                <div class="feature-card reveal" data-tilt>
+                    <div class="feature-card__glow"></div>
+                    <div class="feature-card__icon">
+                        <i class="fas fa-sliders"></i>
+                    </div>
+                    <h3>Fully Customizable</h3>
+                    <p>Tailor workflows, fields, and permissions to match exactly how your business operates.</p>
+                    <div class="feature-card__number">02</div>
+                </div>
+                <div class="feature-card reveal" data-tilt>
+                    <div class="feature-card__glow"></div>
+                    <div class="feature-card__icon">
+                        <i class="fas fa-cloud"></i>
+                    </div>
+                    <h3>Cloud or On-Premise</h3>
+                    <p>Deploy on our secure cloud or your own servers — your data, your choice.</p>
+                    <div class="feature-card__number">03</div>
+                </div>
+                <div class="feature-card reveal" data-tilt>
+                    <div class="feature-card__glow"></div>
+                    <div class="feature-card__icon">
+                        <i class="fas fa-shield-halved"></i>
+                    </div>
+                    <h3>Secure by Design</h3>
+                    <p>Role-based access control and audit logs keep your business data protected.</p>
+                    <div class="feature-card__number">04</div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Process Section -->
+    <section class="section section--dark">
+        <div class="container">
+            <div class="section-header reveal">
+                <span class="section-tag"><i class="fas fa-route"></i> Getting Started</span>
+                <h2 class="section-title">From Setup to <span class="text-gradient">Go-Live</span></h2>
+                <p class="section-desc">We handle the full rollout so your team can focus on running the business.</p>
+            </div>
+            <div class="product-process-grid">
+                <div class="product-process-step reveal">
+                    <div class="product-process-step__num">01</div>
+                    <div class="product-process-step__icon"><i class="fas fa-comments"></i></div>
+                    <h3>Discovery</h3>
+                    <p>We map your current processes and identify the modules you need most.</p>
+                </div>
+                <div class="product-process-step reveal">
+                    <div class="product-process-step__num">02</div>
+                    <div class="product-process-step__icon"><i class="fas fa-gears"></i></div>
+                    <h3>Configuration</h3>
+                    <p>We set up and customize IBM to match your chart of accounts, roles, and workflows.</p>
+                </div>
+                <div class="product-process-step reveal">
+                    <div class="product-process-step__num">03</div>
+                    <div class="product-process-step__icon"><i class="fas fa-database"></i></div>
+                    <h3>Data Migration</h3>
+                    <p>We import your existing records securely with zero disruption to daily operations.</p>
+                </div>
+                <div class="product-process-step reveal">
+                    <div class="product-process-step__num">04</div>
+                    <div class="product-process-step__icon"><i class="fas fa-rocket"></i></div>
+                    <h3>Go-Live &amp; Support</h3>
+                    <p>Your team is trained and live, backed by ongoing support from our team.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- CTA Section -->
+    <section class="section-cta">
+        <div class="container">
+            <div class="cta-box reveal">
+                <div class="cta-box__glow"></div>
+                <h2>Ready to Bring Clarity to <span class="text-gradient">Every Expense</span>?</h2>
+                <p>Talk to our team about an Expense Management rollout tailored to your policies and approval structure.</p>
+                <div class="cta-box__buttons">
+                    <a href="index.html#contact" class="btn btn--primary magnetic-btn">
+                        <span>Get a Free Consultation</span>
+                        <i class="fas fa-arrow-right"></i>
+                    </a>
+                    <a href="index.html" class="btn btn--outline magnetic-btn">
+                        <span>Back to Home</span>
+                        <i class="fas fa-home"></i>
+                    </a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-grid">
+                <div class="footer-col footer-col--brand">
+                    <div class="footer-logo">
+                        <img src="company-logo.png" alt="AK International Logo" class="logo-img">
+                        <span class="logo-text">AK<span class="logo-accent">Int</span></span>
+                    </div>
+                    <p>Integrated Business Management — one connected platform for accounting, sales, inventory, and HR.</p>
+                    <div class="social-links">
+                        <a href="#" aria-label="Facebook"><i class="fab fa-facebook-f"></i></a>
+                        <a href="https://www.instagram.com/ak_int_office/?hl=en" aria-label="Instagram" target="_blank" rel="noopener"><i class="fab fa-instagram"></i></a>
+                        <a href="https://www.linkedin.com/in/ak-international-9188b13ab" aria-label="LinkedIn"><i class="fab fa-linkedin-in"></i></a>
+                        <a href="https://wa.me/919051867095?text=Hello%20AK%20International%2C%20I%20would%20like%20to%20discuss%20my%20requirements." aria-label="Chat with us on WhatsApp" target="_blank" rel="noopener"><i class="fab fa-whatsapp"></i></a>
+                    </div>
+                </div>
+                <div class="footer-col">
+                    <h4>Quick Links</h4>
+                    <ul>
+                        <li><a href="index.html">Home</a></li>
+                        <li><a href="index.html#about">About Us</a></li>
+                        <li><a href="index.html#services">Tech Services</a></li>
+                        <li><a href="index.html#portfolio">Portfolio</a></li>
+                        <li><a href="https://store.akint.co.in/" target="_blank" rel="noopener">AKI Ecom</a></li>
+                        <li><a href="index.html#contact">Contact</a></li>
+                    </ul>
+                </div>
+                <div class="footer-col">
+                    <h4>Products</h4>
+                    <ul>
+                        <li><a href="ibm.html">Integrated Business Management</a></li>
+                        <li><a href="web-development.html">Web Development</a></li>
+                        <li><a href="vehicle-equipment-management.html">Vehicle &amp; Equipment Management</a></li>
+                        <li><a href="business-management-light.html">Business Management Light</a></li>
+                        <li><a href="invoice-creation.html">Invoice Creation</a></li>
+                        <li><a href="inventory-management.html">Inventory Management</a></li>
+                    </ul>
+                </div>
+                <div class="footer-col">
+                    <h4>Our Businesses</h4>
+                    <ul>
+                        <li><a href="https://store.akint.co.in/" target="_blank" rel="noopener">AKI Ecom</a></li>
+                        <li><a href="https://export.akint.co.in/" target="_blank" rel="noopener">AKI Export</a></li>
+                        <li><a href="https://tech.akint.co.in/" target="_blank" rel="noopener">AKI IT</a></li>
+                    </ul>
+                </div>
+                <div class="footer-col">
+                    <h4>Contact Info</h4>
+                    <ul class="footer-contact">
+                        <li><i class="fas fa-location-dot"></i> Kolkata, India</li>
+                        <li><i class="fas fa-envelope"></i> info@akint.co.in</li>
+                        <li><i class="fas fa-phone"></i> +91 90518 67095</li>
+                    </ul>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>&copy; 2025 AK International. All rights reserved.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script src="script.js"></script>
+</body>
+
+</html>

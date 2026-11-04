@@ -1543,6 +1543,13 @@ document.querySelectorAll('.nav-dropdown__link[aria-disabled="true"]').forEach((
     item.replaceWith(link);
 });
 
+// Make Expense Management available beside the other product offerings.
+document.querySelectorAll('.nav-dropdown').forEach((menu) => {
+    if (menu.querySelector('a[href="expense-management.html"]')) return;
+    const globalLink = menu.querySelector('a[href="global-import-export-management.html"]');
+    if (globalLink) globalLink.closest('li').insertAdjacentHTML('beforebegin', '<li><a href="expense-management.html" class="nav-dropdown__link"><i class="fas fa-receipt"></i>Expense Management</a></li><li class="nav-dropdown__divider"></li>');
+});
+
 // Add the verified D-U-N-S registration mark once to every site footer.
 document.querySelectorAll('.footer').forEach((footer) => {
     if (footer.querySelector('.duns-registration')) return;

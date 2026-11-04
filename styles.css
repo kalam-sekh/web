@@ -3807,6 +3807,7 @@ html, body {
 .msme-registration span { font-size: 0.69rem; letter-spacing: 0.04em; text-transform: uppercase; color: #9a5a3a; }
 .msme-registration strong { margin-top: 2px; font-size: 0.82rem; color: #9a3412; }
 
+
 @media (max-width: 560px) {
     .footer-registrations { justify-content: center; }
 }
