@@ -3685,7 +3685,15 @@ html, body {
     }
 
     .foundation-nav__logo { height: 56px !important; }
-    .foundation-nav__actions { display: none !important; }
+    .foundation-nav__actions {
+        display: flex !important;
+        align-items: center !important;
+        justify-content: flex-end !important;
+        margin-left: auto !important;
+    }
+    .foundation-nav__actions .btn--hero-secondary {
+        display: none !important;
+    }
 
     .foundation-nav__toggle {
         width: 44px;
@@ -3851,24 +3859,26 @@ html, body {
 
 /* ===== MATCHING ACTION BUTTONS (SAME SIZE & SHAPE) ===== */
 .foundation-nav__actions {
-    display: flex;
-    align-items: center;
-    justify-content: flex-end;
-    gap: 12px;
+    display: flex !important;
+    align-items: center !important;
+    justify-content: flex-end !important;
+    gap: 12px !important;
 }
 
 .language-switcher,
 .foundation-nav__actions .btn,
 .foundation-nav__actions .btn--hero-secondary,
+.navbar .language-switcher,
 .navbar .nav-link--cta {
     display: inline-flex !important;
     align-items: center !important;
     justify-content: center !important;
     height: 42px !important;
     min-height: 42px !important;
+    max-height: 42px !important;
     padding: 0 20px !important;
     border-radius: 9999px !important;
-    font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif !important;
+    font-family: 'Inter', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif !important;
     font-size: 0.92rem !important;
     font-weight: 600 !important;
     line-height: 1 !important;
@@ -3876,29 +3886,30 @@ html, body {
     white-space: nowrap !important;
     text-decoration: none !important;
     cursor: pointer !important;
-    transition: all 0.25s cubic-bezier(0.16, 1, 0.3, 1) !important;
     user-select: none !important;
-}
-
-/* Light Theme Styling - Perfectly Matching */
-.language-switcher {
+    transition: all 0.25s cubic-bezier(0.16, 1, 0.3, 1) !important;
     border: 1px solid rgba(15, 23, 42, 0.16) !important;
-    background: rgba(255, 255, 255, 0.82) !important;
-    backdrop-filter: blur(12px) !important;
-    -webkit-backdrop-filter: blur(12px) !important;
+    background: #ffffff !important;
     color: #0f172a !important;
-    box-shadow: 0 4px 16px rgba(15, 23, 42, 0.06) !important;
+    box-shadow: 0 2px 8px rgba(15, 23, 42, 0.06) !important;
     margin: 0 !important;
-    gap: 8px !important;
-    z-index: 100;
 }
 
-.language-switcher:hover {
-    background: #ffffff !important;
+.language-switcher:hover,
+.foundation-nav__actions .btn:hover,
+.foundation-nav__actions .btn--hero-secondary:hover,
+.navbar .language-switcher:hover,
+.navbar .nav-link--cta:hover {
+    background: #f8fafc !important;
     border-color: rgba(15, 23, 42, 0.28) !important;
     color: #0f172a !important;
-    box-shadow: 0 6px 20px rgba(15, 23, 42, 0.1) !important;
+    box-shadow: 0 4px 14px rgba(15, 23, 42, 0.1) !important;
     transform: translateY(-1px) !important;
+}
+
+.language-switcher {
+    gap: 8px !important;
+    z-index: 100;
 }
 
 .language-switcher .lang-globe {
@@ -3916,8 +3927,17 @@ html, body {
 
 /* Dark Theme / Export Site Styling */
 .page-with-home-bg .language-switcher,
+.page-with-home-bg .foundation-nav__actions .btn,
+.page-with-home-bg .foundation-nav__actions .btn--hero-secondary,
+.page-with-home-bg .nav-link--cta,
 [data-theme="dark"] .language-switcher,
-body.dark-mode .language-switcher {
+[data-theme="dark"] .foundation-nav__actions .btn,
+[data-theme="dark"] .foundation-nav__actions .btn--hero-secondary,
+[data-theme="dark"] .nav-link--cta,
+body.dark-mode .language-switcher,
+body.dark-mode .foundation-nav__actions .btn,
+body.dark-mode .foundation-nav__actions .btn--hero-secondary,
+body.dark-mode .nav-link--cta {
     background: rgba(255, 255, 255, 0.08) !important;
     border: 1px solid rgba(255, 255, 255, 0.18) !important;
     color: #f8fafc !important;
@@ -3925,8 +3945,17 @@ body.dark-mode .language-switcher {
 }
 
 .page-with-home-bg .language-switcher:hover,
+.page-with-home-bg .foundation-nav__actions .btn:hover,
+.page-with-home-bg .foundation-nav__actions .btn--hero-secondary:hover,
+.page-with-home-bg .nav-link--cta:hover,
 [data-theme="dark"] .language-switcher:hover,
-body.dark-mode .language-switcher:hover {
+[data-theme="dark"] .foundation-nav__actions .btn:hover,
+[data-theme="dark"] .foundation-nav__actions .btn--hero-secondary:hover,
+[data-theme="dark"] .nav-link--cta:hover,
+body.dark-mode .language-switcher:hover,
+body.dark-mode .foundation-nav__actions .btn:hover,
+body.dark-mode .foundation-nav__actions .btn--hero-secondary:hover,
+body.dark-mode .nav-link--cta:hover {
     background: rgba(255, 255, 255, 0.15) !important;
     border-color: rgba(255, 255, 255, 0.35) !important;
     color: #ffffff !important;
@@ -4018,6 +4047,17 @@ html[dir="rtl"] .fa-angle-left {
 }
 
 /* Fix telephone numbers in RTL */
+.phone-link,
+a[href^="tel:"],
+a[href*="wa.me"],
+[dir="ltr"] {
+    direction: ltr !important;
+    unicode-bidi: isolate !important;
+    display: inline-block !important;
+    text-align: left !important;
+}
+
+html[dir="rtl"] .phone-link,
 html[dir="rtl"] a[href^="tel:"],
 html[dir="rtl"] a[href*="wa.me"],
 html[dir="rtl"] .footer-contact li a,
@@ -4025,6 +4065,7 @@ html[dir="rtl"] .footer-col ul li a[href^="tel:"] {
     direction: ltr !important;
     display: inline-block !important;
     unicode-bidi: isolate !important;
+    text-align: left !important;
 }
 
 html[dir="rtl"] .footer-col ul li,
