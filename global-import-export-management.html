@@ -1,0 +1,417 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Global Import Export Management - AK International</title>
+    <meta name="description" content="Global Import Export Management by AK International — an enterprise trade platform for multi-currency, multi-region imports, exports, customs, logistics, landed costs and GST.">
+    <link rel="shortcut icon" type="image/png" href="logo.png?v=20251110">
+    <link rel="icon" type="image/png" sizes="32x32" href="logo.png?v=20251110">
+    <link rel="icon" type="image/png" sizes="16x16" href="logo.png?v=20251110">
+    <link rel="apple-touch-icon" href="logo.png?v=20251110">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=JetBrains+Mono:wght@400;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+    <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="products.css">
+    <!-- Google tag (gtag.js) -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-WEW70GGLH3"></script>
+    <script>
+        window.dataLayer = window.dataLayer || [];
+        function gtag(){dataLayer.push(arguments);}
+        gtag('js', new Date());
+        gtag('config', 'G-WEW70GGLH3');
+    </script>
+</head>
+
+<body class="page-with-home-bg">
+    <div class="site-bg-media" aria-hidden="true">
+        <video
+            id="siteBgVideo"
+            class="site-bg-media__video"
+            src="https://d8j0ntlcm91z4.cloudfront.net/user_38xzZboKViGWJOttwIXH07lWA1P/hf_20260328_065045_c44942da-53c6-4804-b734-f9e07fc22e08.mp4"
+            muted
+            playsinline
+            autoplay
+        ></video>
+    </div>
+
+    <!-- Particle Canvas -->
+    <canvas id="particleCanvas"></canvas>
+
+    <!-- Custom Cursor -->
+    <div class="cursor-dot" id="cursorDot"></div>
+    <div class="cursor-ring" id="cursorRing"></div>
+
+    <!-- Navigation -->
+    <nav class="navbar" id="navbar">
+        <div class="container">
+            <a href="index.html" class="logo">
+                <img src="company-logo.png" alt="AK International Logo" class="logo-img">
+                <span class="logo-text">AK<span class="logo-accent">Int</span></span>
+            </a>
+            <ul class="nav-menu" id="navMenu">
+                <li><a href="index.html" class="nav-link" data-text="Home">Home</a></li>
+                <li><a href="index.html#about" class="nav-link" data-text="About">About</a></li>
+                <li class="nav-item--dropdown">
+                    <a href="#" class="nav-link" data-text="Products" aria-haspopup="true" aria-expanded="false">Products <i class="fas fa-chevron-down nav-dropdown-arrow"></i></a>
+                    <ul class="nav-dropdown">
+                        <li><a href="ibm.html" class="nav-dropdown__link"><i class="fas fa-building"></i>Integrated Business Management (IBM)</a></li>
+                        <li class="nav-dropdown__divider"></li>
+                        <li><a href="web-development.html" class="nav-dropdown__link"><i class="fas fa-code"></i>Web Development</a></li>
+                        <li class="nav-dropdown__divider"></li>
+                        <li><a href="vehicle-equipment-management.html" class="nav-dropdown__link"><i class="fas fa-truck"></i>Advance Vehicle &amp; Heavy Equipment Management</a></li>
+                        <li class="nav-dropdown__divider"></li>
+                        <li><a href="business-management-light.html" class="nav-dropdown__link"><i class="fas fa-briefcase"></i>Business Management Light</a></li>
+                        <li class="nav-dropdown__divider"></li>
+                        <li><a href="invoice-creation.html" class="nav-dropdown__link"><i class="fas fa-file-invoice"></i>Invoice Creation</a></li>
+                        <li class="nav-dropdown__divider"></li>
+                        <li><a href="inventory-management.html" class="nav-dropdown__link"><i class="fas fa-boxes-stacked"></i>Inventory Management</a></li>
+                        <li class="nav-dropdown__divider"></li>
+                        <li><a href="odoo.html" class="nav-dropdown__link"><i class="fas fa-cubes"></i>Odoo Solutions</a></li>
+                        <li class="nav-dropdown__divider"></li>
+                        <li><a href="global-import-export-management.html" class="nav-dropdown__link active"><i class="fas fa-globe"></i>Global Import Export Management</a></li>
+                    </ul>
+                </li>
+                <li class="nav-item--dropdown">
+                    <a href="#" class="nav-link" data-text="Our Businesses" aria-haspopup="true" aria-expanded="false">Our Businesses <i class="fas fa-chevron-down nav-dropdown-arrow"></i></a>
+                    <ul class="nav-dropdown">
+                        <li><a href="https://store.akint.co.in/" class="nav-dropdown__link" target="_blank" rel="noopener"><i class="fas fa-cart-shopping"></i>AKI Ecom</a></li>
+                        <li class="nav-dropdown__divider"></li>
+                        <li><a href="https://export.akint.co.in/" target="_blank" rel="noopener" class="nav-dropdown__link"><i class="fas fa-ship"></i>AKI Export</a></li>
+                        <li class="nav-dropdown__divider"></li>
+                        <li><a href="https://tech.akint.co.in/" class="nav-dropdown__link" target="_blank" rel="noopener"><i class="fas fa-laptop-code"></i>AKI IT</a></li>
+                    </ul>
+                </li>
+                <li><a href="index.html#contact" class="nav-link" data-text="Contact">Contact</a></li>
+                <li><a href="index.html#contact" class="nav-link nav-link--cta">Get a Quote</a></li>
+            </ul>
+            <div class="hamburger" id="hamburger">
+                <span></span>
+                <span></span>
+                <span></span>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <section class="product-hero" id="hero">
+        <div class="hero-grid-bg"></div>
+        <div class="hero-glow hero-glow--1"></div>
+        <div class="hero-glow hero-glow--2"></div>
+        <div class="hero-glow hero-glow--3"></div>
+        <div class="product-hero__content">
+            <div class="hero-badge reveal">
+                <span class="hero-badge__dot"></span>
+                International Trade ERP
+            </div>
+            <h1 class="hero-title reveal">
+                <span class="hero-line">Global Import &amp; Export</span>
+                <span class="hero-line hero-line--gradient">Management</span>
+            </h1>
+            <p class="hero-subtitle reveal">
+                Imports &bull; Exports &bull; Customs &bull; Multi-Currency &bull; <span class="text-gradient">One Global Control Tower</span>
+            </p>
+            <p class="product-hero__desc reveal">
+                A sophisticated international trade platform that connects every import, export, shipment, currency exposure and landed-cost decision — from overseas order to warehouse receipt — across regions, entities and compliance workflows.
+            </p>
+            <div class="hero-buttons reveal">
+                <a href="#features" class="btn btn--primary magnetic-btn">
+                    <span>Explore Features</span>
+                    <i class="fas fa-arrow-down"></i>
+                </a>
+                <a href="index.html#contact" class="btn btn--outline magnetic-btn">
+                    <span>Request a Demo</span>
+                    <i class="fas fa-rocket"></i>
+                </a>
+            </div>
+            <div class="hero-stats reveal">
+                <div class="hero-stat">
+                    <span class="hero-stat__number" data-count="5">0</span><span class="hero-stat__plus">+</span>
+                    <span class="hero-stat__label">Currencies</span>
+                </div>
+                <div class="hero-stat__divider"></div>
+                <div class="hero-stat">
+                    <span class="hero-stat__number" data-count="40">0</span><span class="hero-stat__plus">+</span>
+                    <span class="hero-stat__label">Trade Controls</span>
+                </div>
+                <div class="hero-stat__divider"></div>
+                <div class="hero-stat">
+                    <span class="hero-stat__number" data-count="100">0</span><span class="hero-stat__plus">%</span>
+                    <span class="hero-stat__label">Audit Ready</span>
+                </div>
+            </div>
+        </div>
+        <div class="hero-scroll">
+            <span>Scroll</span>
+            <div class="hero-scroll__line"></div>
+        </div>
+    </section>
+
+    <!-- Product Showcase Section -->
+    <section class="section" id="showcase">
+        <div class="container">
+            <div class="section-header reveal">
+                <span class="section-tag"><i class="fas fa-display"></i> See It In Action</span>
+                <h2 class="section-title">A Look Inside Your <span class="text-gradient">Trade Command Centre</span></h2>
+                <p class="section-desc">Real screens from the platform — a single, intelligent workspace for international trade operations.</p>
+            </div>
+            <div class="product-showcase-grid">
+                <div class="product-showcase-card reveal" data-tilt>
+                    <div class="product-showcase-card__img">
+                        <img src="assets/GlobalIE/dashboard.png" alt="Global Import Export Management executive trade operations cockpit dashboard" loading="lazy">
+                    </div>
+                    <div class="product-showcase-card__body">
+                        <h3>Executive Trade Operations Cockpit</h3>
+                        <p>See active imports, exports, fleet transit, trade surplus and live currency exposure in one board. Leadership gets a clear, multi-region view while teams work from a shared source of truth.</p>
+                    </div>
+                </div>
+                <div class="product-showcase-card reveal" data-tilt>
+                    <div class="product-showcase-card__img">
+                        <img src="assets/GlobalIE/import-cases.png" alt="Import operations and customs gateway showing import cases and clearance documents" loading="lazy">
+                    </div>
+                    <div class="product-showcase-card__body">
+                        <h3>Import Operations &amp; Customs Gateway</h3>
+                        <p>Manage overseas suppliers, ports, Bills of Entry, customs duty, ICEGATE documents and Out-of-Charge milestones in one controlled import workflow — with every decision traceable.</p>
+                    </div>
+                </div>
+                <div class="product-showcase-card reveal" data-tilt>
+                    <div class="product-showcase-card__img">
+                        <img src="assets/GlobalIE/landed-costs.png" alt="Landed cost apportionment engine allocating freight, customs duty and handling costs" loading="lazy">
+                    </div>
+                    <div class="product-showcase-card__body">
+                        <h3>Precision Landed Cost Engine</h3>
+                        <p>Allocate freight, customs duty, brokerage, insurance and taxes by value, quantity or weight. Capitalize costs accurately into inventory with reconciled, zero-discrepancy records.</p>
+                    </div>
+                </div>
+                <div class="product-showcase-card reveal" data-tilt>
+                    <div class="product-showcase-card__img">
+                        <img src="assets/GlobalIE/dashboard.png" alt="Multi-currency exposure and international trade performance dashboard" loading="lazy">
+                    </div>
+                    <div class="product-showcase-card__body">
+                        <h3>Multi-Currency Intelligence</h3>
+                        <p>Monitor USD, EUR, GBP, AED, JPY and more in real time, view base-currency equivalents and manage hedging exposure alongside import and export performance.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Key Features Section -->
+    <section class="section section--dark" id="features">
+        <div class="container">
+            <div class="section-header reveal">
+                <span class="section-tag"><i class="fas fa-cubes"></i> Key Features</span>
+                <h2 class="section-title">Everything Global Trade <span class="text-gradient">Demands</span></h2>
+                <p class="section-desc">Purpose-built controls for the complexity of international buying, selling, shipping and settlement.</p>
+            </div>
+            <div class="product-details-grid">
+                <div class="product-detail-card reveal" data-tilt>
+                    <div class="product-detail-card__icon"><i class="fas fa-money-bill-transfer"></i></div>
+                    <h3>Multi-Currency &amp; Hedging</h3>
+                    <p>Price, settle and analyse foreign-currency exposure in your base currency, with live FX visibility across every trade.</p>
+                </div>
+                <div class="product-detail-card reveal" data-tilt>
+                    <div class="product-detail-card__icon"><i class="fas fa-globe-americas"></i></div>
+                    <h3>Multi-Region Operations</h3>
+                    <p>Operate across ports, countries, legal entities and warehouses while retaining a consistent, consolidated trade view.</p>
+                </div>
+                <div class="product-detail-card reveal" data-tilt>
+                    <div class="product-detail-card__icon"><i class="fas fa-ship"></i></div>
+                    <h3>Import, Export &amp; Fleet</h3>
+                    <p>Run purchase orders, export cases, shipments, vessel movement and delivery milestones from one operational timeline.</p>
+                </div>
+                <div class="product-detail-card reveal" data-tilt>
+                    <div class="product-detail-card__icon"><i class="fas fa-scale-balanced"></i></div>
+                    <h3>Customs &amp; Compliance</h3>
+                    <p>Control Bills of Entry, ICEGATE documentation, duty assessment, GST and clearance gates with a defensible audit trail.</p>
+                </div>
+                <div class="product-detail-card reveal" data-tilt>
+                    <div class="product-detail-card__icon"><i class="fas fa-calculator"></i></div>
+                    <h3>Landed Cost Allocation</h3>
+                    <p>Allocate duties, freight, insurance and handling by value, quantity or weight — then post precise costs to inventory.</p>
+                </div>
+                <div class="product-detail-card reveal" data-tilt>
+                    <div class="product-detail-card__icon"><i class="fas fa-chart-line"></i></div>
+                    <h3>Trade Intelligence</h3>
+                    <p>Turn import/export trajectories, profit, FX and logistics data into executive-ready insights for faster decisions.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Why Choose Section -->
+    <section class="section" id="why">
+        <div class="container">
+            <div class="section-header reveal">
+                <span class="section-tag"><i class="fas fa-gem"></i> Why Global IE Management</span>
+                <h2 class="section-title">Built for Trade Without <span class="text-gradient">Blind Spots</span></h2>
+                <p class="section-desc">A calm, controlled operating layer for high-value, multi-party international transactions.</p>
+            </div>
+            <div class="features-grid">
+                <div class="feature-card reveal" data-tilt>
+                    <div class="feature-card__glow"></div>
+                    <div class="feature-card__icon">
+                        <i class="fas fa-link"></i>
+                    </div>
+                    <h3>One Trade Record</h3>
+                    <p>Commercial, logistics, customs, inventory and finance teams work from the same case — no duplicate data or broken handoffs.</p>
+                    <div class="feature-card__number">01</div>
+                </div>
+                <div class="feature-card reveal" data-tilt>
+                    <div class="feature-card__glow"></div>
+                    <div class="feature-card__icon">
+                        <i class="fas fa-sliders"></i>
+                    </div>
+                    <h3>Configurable by Region</h3>
+                    <p>Adapt ports, trade lanes, approval rules, local duties and entity-level processes without losing governance.</p>
+                    <div class="feature-card__number">02</div>
+                </div>
+                <div class="feature-card reveal" data-tilt>
+                    <div class="feature-card__glow"></div>
+                    <div class="feature-card__icon">
+                        <i class="fas fa-cloud"></i>
+                    </div>
+                    <h3>Built for Scale</h3>
+                    <p>Start with one route or entity, then extend to regions, currencies, teams and warehouses as your trade footprint grows.</p>
+                    <div class="feature-card__number">03</div>
+                </div>
+                <div class="feature-card reveal" data-tilt>
+                    <div class="feature-card__glow"></div>
+                    <div class="feature-card__icon">
+                        <i class="fas fa-shield-halved"></i>
+                    </div>
+                    <h3>Audit-Ready by Design</h3>
+                    <p>Role-based controls, reconciled amounts and documented milestones make every trade decision easier to validate.</p>
+                    <div class="feature-card__number">04</div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Process Section -->
+    <section class="section section--dark">
+        <div class="container">
+            <div class="section-header reveal">
+                <span class="section-tag"><i class="fas fa-route"></i> Getting Started</span>
+                <h2 class="section-title">From Setup to <span class="text-gradient">Go-Live</span></h2>
+                <p class="section-desc">We structure the rollout around your routes, entities, currencies, warehouses and compliance controls.</p>
+            </div>
+            <div class="product-process-grid">
+                <div class="product-process-step reveal">
+                    <div class="product-process-step__num">01</div>
+                    <div class="product-process-step__icon"><i class="fas fa-comments"></i></div>
+                    <h3>Discovery</h3>
+                    <p>We map trade lanes, entities, currencies, document flows and operating controls.</p>
+                </div>
+                <div class="product-process-step reveal">
+                    <div class="product-process-step__num">02</div>
+                    <div class="product-process-step__icon"><i class="fas fa-gears"></i></div>
+                    <h3>Configuration</h3>
+                    <p>We configure roles, customs workflows, master data, cost rules and regional approvals.</p>
+                </div>
+                <div class="product-process-step reveal">
+                    <div class="product-process-step__num">03</div>
+                    <div class="product-process-step__icon"><i class="fas fa-database"></i></div>
+                    <h3>Data Migration</h3>
+                    <p>We migrate counterparties, products, orders, opening stock and relevant trade history securely.</p>
+                </div>
+                <div class="product-process-step reveal">
+                    <div class="product-process-step__num">04</div>
+                    <div class="product-process-step__icon"><i class="fas fa-rocket"></i></div>
+                    <h3>Go-Live &amp; Support</h3>
+                    <p>Your teams go live with hands-on training and responsive support for continuous improvement.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- CTA Section -->
+    <section class="section-cta">
+        <div class="container">
+            <div class="cta-box reveal">
+                <div class="cta-box__glow"></div>
+                <h2>Ready to Command Your <span class="text-gradient">Global Trade</span>?</h2>
+                <p>Talk to our team about a Global Import Export Management rollout tailored to your trade network.</p>
+                <div class="cta-box__buttons">
+                    <a href="index.html#contact" class="btn btn--primary magnetic-btn">
+                        <span>Get a Free Consultation</span>
+                        <i class="fas fa-arrow-right"></i>
+                    </a>
+                    <a href="index.html" class="btn btn--outline magnetic-btn">
+                        <span>Back to Home</span>
+                        <i class="fas fa-home"></i>
+                    </a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-grid">
+                <div class="footer-col footer-col--brand">
+                    <div class="footer-logo">
+                        <img src="company-logo.png" alt="AK International Logo" class="logo-img">
+                        <span class="logo-text">AK<span class="logo-accent">Int</span></span>
+                    </div>
+                    <p>Global Import Export Management — one connected platform for cross-border commerce, logistics and compliance.</p>
+                    <div class="social-links">
+                        <a href="#" aria-label="Facebook"><i class="fab fa-facebook-f"></i></a>
+                        <a href="https://www.instagram.com/ak_int_office/?hl=en" aria-label="Instagram" target="_blank" rel="noopener"><i class="fab fa-instagram"></i></a>
+                        <a href="https://www.linkedin.com/in/ak-international-9188b13ab" aria-label="LinkedIn"><i class="fab fa-linkedin-in"></i></a>
+                        <a href="https://wa.me/919051867095?text=Hello%20AK%20International%2C%20I%20would%20like%20to%20discuss%20my%20requirements." aria-label="Chat with us on WhatsApp" target="_blank" rel="noopener"><i class="fab fa-whatsapp"></i></a>
+                    </div>
+                </div>
+                <div class="footer-col">
+                    <h4>Quick Links</h4>
+                    <ul>
+                        <li><a href="index.html">Home</a></li>
+                        <li><a href="index.html#about">About Us</a></li>
+                        <li><a href="index.html#services">Tech Services</a></li>
+                        <li><a href="index.html#portfolio">Portfolio</a></li>
+                        <li><a href="https://store.akint.co.in/" target="_blank" rel="noopener">AKI Ecom</a></li>
+                        <li><a href="index.html#contact">Contact</a></li>
+                    </ul>
+                </div>
+                <div class="footer-col">
+                    <h4>Products</h4>
+                    <ul>
+                        <li><a href="ibm.html">Integrated Business Management</a></li>
+                        <li><a href="web-development.html">Web Development</a></li>
+                        <li><a href="vehicle-equipment-management.html">Vehicle &amp; Equipment Management</a></li>
+                        <li><a href="business-management-light.html">Business Management Light</a></li>
+                        <li><a href="invoice-creation.html">Invoice Creation</a></li>
+                        <li><a href="inventory-management.html">Inventory Management</a></li>
+                    </ul>
+                </div>
+                <div class="footer-col">
+                    <h4>Our Businesses</h4>
+                    <ul>
+                        <li><a href="https://store.akint.co.in/" target="_blank" rel="noopener">AKI Ecom</a></li>
+                        <li><a href="https://export.akint.co.in/" target="_blank" rel="noopener">AKI Export</a></li>
+                        <li><a href="https://tech.akint.co.in/" target="_blank" rel="noopener">AKI IT</a></li>
+                    </ul>
+                </div>
+                <div class="footer-col">
+                    <h4>Contact Info</h4>
+                    <ul class="footer-contact">
+                        <li><i class="fas fa-location-dot"></i> Kolkata, India</li>
+                        <li><i class="fas fa-envelope"></i> info@akint.co.in</li>
+                        <li><i class="fas fa-phone"></i> +91 90518 67095</li>
+                    </ul>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>&copy; 2025 AK International. All rights reserved.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script src="script.js"></script>
+</body>
+
+</html>

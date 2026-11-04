@@ -1532,3 +1532,38 @@ serviceCards.forEach(card => {
 })();
 
 console.log('%c🚀 Welcome to AK International! ', 'background: linear-gradient(135deg, #6366f1 0%, #a855f7 100%); color: white; font-size: 20px; padding: 10px; border-radius: 5px;');
+
+// Make the Global Import Export Management product available consistently from every product menu.
+document.querySelectorAll('.nav-dropdown__link[aria-disabled="true"]').forEach((item) => {
+    if (!item.textContent.includes('Global Import Export Management')) return;
+    const link = document.createElement('a');
+    link.href = 'global-import-export-management.html';
+    link.className = item.className;
+    link.innerHTML = item.innerHTML;
+    item.replaceWith(link);
+});
+
+// Add the verified D-U-N-S registration mark once to every site footer.
+document.querySelectorAll('.footer').forEach((footer) => {
+    if (footer.querySelector('.duns-registration')) return;
+    const registrations = document.createElement('div');
+    registrations.className = 'footer-registrations';
+    const registration = document.createElement('div');
+    registration.className = 'duns-registration';
+    registration.innerHTML = `
+        <img src="assets/duns-registered.png" alt="Dun & Bradstreet D-U-N-S Registered" loading="lazy">
+        <div>
+            <span>Dun &amp; Bradstreet</span>
+            <strong>D-U-N-S<sup>®</sup> Registered<sup>™</sup></strong>
+        </div>`;
+    const msmeRegistration = document.createElement('div');
+    msmeRegistration.className = 'msme-registration';
+    msmeRegistration.innerHTML = `
+        <i class="fas fa-building-columns" aria-hidden="true"></i>
+        <div>
+            <span>Government of India</span>
+            <strong>MSME Registered</strong>
+        </div>`;
+    registrations.append(registration, msmeRegistration);
+    footer.querySelector('.footer-grid')?.insertAdjacentElement('afterend', registrations);
+});
